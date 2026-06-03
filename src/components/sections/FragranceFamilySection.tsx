@@ -10,54 +10,48 @@ const families = [
     label: 'Floral',
     desc: 'Delicado, elegante e envolvente',
     href: '/produtos?familia=floral',
-    // White roses, editorial, soft tones
-    image: 'https://images.unsplash.com/photo-1490750967868-88df5691cc62?auto=format&fit=crop&w=800&q=80',
-    fallback: '#F2E8E9',
+    image: 'https://images.unsplash.com/photo-1708265500552-c256df13d3ca?auto=format&fit=crop&w=800&q=80',
+    fallback: '#F0E4E6',
   },
   {
     key: 'amadeirado',
     label: 'Amadeirado',
     desc: 'Sofisticado, quente e marcante',
     href: '/produtos?familia=amadeirado',
-    // Dark warm wood, atmospheric
-    image: 'https://images.unsplash.com/photo-1542621334-a254cf47733d?auto=format&fit=crop&w=800&q=80',
-    fallback: '#2C1A0E',
+    image: 'https://images.unsplash.com/photo-1702001145743-094b0b7ead51?auto=format&fit=crop&w=800&q=80',
+    fallback: '#3A200A',
   },
   {
     key: 'citrico',
     label: 'Cítrico',
     desc: 'Fresco, leve e vibrante',
     href: '/produtos?familia=citrico',
-    // Clean citrus, sunlit editorial
-    image: 'https://images.unsplash.com/photo-1476611338391-6f395a0ebc7b?auto=format&fit=crop&w=800&q=80',
-    fallback: '#E8E0B0',
+    image: 'https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?auto=format&fit=crop&w=800&q=80',
+    fallback: '#E8CC80',
   },
   {
     key: 'oriental',
     label: 'Oriental',
     desc: 'Intenso, sensual e memorável',
     href: '/produtos?familia=oriental',
-    // Amber warmth, spice atmosphere
-    image: 'https://images.unsplash.com/photo-1534361960057-19f4434a9f04?auto=format&fit=crop&w=800&q=80',
-    fallback: '#3A1A08',
+    image: 'https://images.unsplash.com/photo-1551690935-a9e6f0a7e788?auto=format&fit=crop&w=800&q=80',
+    fallback: '#2A1205',
   },
   {
     key: 'frutal',
     label: 'Frutal',
     desc: 'Doce, jovem e luminoso',
     href: '/produtos?familia=frutal',
-    // Elegant fruit composition, soft tones
-    image: 'https://images.unsplash.com/photo-1519996529931-28324d5a630e?auto=format&fit=crop&w=800&q=80',
-    fallback: '#D4826A',
+    image: 'https://images.unsplash.com/photo-1585939268339-886c9643ee98?auto=format&fit=crop&w=800&q=80',
+    fallback: '#E07840',
   },
   {
     key: 'aromatico',
     label: 'Aromático',
     desc: 'Limpo, versátil e moderno',
     href: '/produtos?familia=aromatico',
-    // Lavender field, clean aerial
-    image: 'https://images.unsplash.com/photo-1465799522200-8c2c9c6f7c05?auto=format&fit=crop&w=800&q=80',
-    fallback: '#6B6A8A',
+    image: 'https://images.unsplash.com/photo-1712178435871-48d630f15969?auto=format&fit=crop&w=800&q=80',
+    fallback: '#5A4A7A',
   },
 ]
 
