@@ -24,7 +24,7 @@ export default function AnnouncementBar() {
   }, [])
 
   return (
-    <div className="bg-white border-b border-[#E8E0D4] py-2.5 text-center overflow-hidden">
+    <div className="bg-white border-b border-[#E8E0D4] h-10 flex items-center justify-center text-center overflow-hidden px-4">
       <p
         className="text-[10px] tracking-[0.35em] uppercase font-medium transition-all duration-300 ease-in-out"
         style={{

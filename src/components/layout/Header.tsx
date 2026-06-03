@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ShoppingBag, Menu, X, Search, ChevronDown } from 'lucide-react'
@@ -179,88 +179,122 @@ export default function Header() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1" aria-label="Principal">
-              {megaNav.map((item) => {
+            <nav className="hidden md:flex items-center" aria-label="Principal">
+              {megaNav.map((item, index) => {
                 const hasDropdown = 'columns' in item
+                const isEditorial = !hasDropdown
+                const prevHadDropdown = index > 0 && 'columns' in megaNav[index - 1]
+                const isNovidades = item.key === 'novidades'
+                const isSobre = item.key === 'sobre'
+
                 return (
-                  <div
-                    key={item.key}
-                    className="relative"
-                    onMouseEnter={() => hasDropdown ? openMenu(item.key) : undefined}
-                    onMouseLeave={hasDropdown ? scheduleClose : undefined}
-                  >
-                    {!item.columns ? (
-                      <Link
-                        href={(item as NavItemLink).href}
-                        className="nav-link cursor-pointer flex items-center gap-1 px-3 py-2 text-[11px] tracking-[0.18em] uppercase text-white hover:text-[#C4A55C] transition-colors duration-200"
-                        style={{ fontFamily: bodyFont, fontWeight: 500 }}
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <button
-                        className={`cursor-pointer flex items-center gap-1 px-3 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 ${
-                          activeMenu === item.key ? 'text-[#C4A55C]' : 'text-white hover:text-[#C4A55C]'
-                        }`}
-                        style={{ fontFamily: bodyFont, fontWeight: 500 }}
-                        aria-expanded={activeMenu === item.key}
-                      >
-                        {item.label}
-                        <ChevronDown
-                          size={11}
-                          strokeWidth={2}
-                          className={`transition-transform duration-200 ${activeMenu === item.key ? 'rotate-180' : ''}`}
-                        />
-                      </button>
+                  <Fragment key={item.key}>
+                    {/* Separator between shopping group and editorial group */}
+                    {isEditorial && prevHadDropdown && (
+                      <div className="w-px h-4 bg-white/12 mx-1" aria-hidden />
                     )}
 
-                    {/* Dropdown */}
-                    {item.columns && activeMenu === item.key && (
-                      <div
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
-                        onMouseEnter={cancelClose}
-                        onMouseLeave={scheduleClose}
-                      >
-                        <div
-                          className="bg-[#0A0A0A] border border-white/[0.10] shadow-[0_16px_48px_rgba(0,0,0,0.5)] py-7 px-8"
-                          style={{
-                            minWidth: item.columns.length === 3 ? '520px' : item.columns.length === 2 ? '360px' : '220px',
-                          }}
+                    <div
+                      className="relative group"
+                      onMouseEnter={() => hasDropdown ? openMenu(item.key) : undefined}
+                      onMouseLeave={hasDropdown ? scheduleClose : undefined}
+                    >
+                      {!hasDropdown ? (
+                        <Link
+                          href={(item as NavItemLink).href}
+                          className={`cursor-pointer flex items-center px-3 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 ${
+                            isNovidades
+                              ? 'text-[#C4A55C]/85 hover:text-[#C4A55C]'
+                              : isSobre
+                              ? 'text-white/50 hover:text-white/80'
+                              : 'text-white hover:text-[#C4A55C]'
+                          }`}
+                          style={{ fontFamily: bodyFont, fontWeight: 500 }}
                         >
-                          <div className={`grid gap-10 ${item.columns.length === 1 ? 'grid-cols-1' : item.columns.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
-                            {item.columns.map((col, ci) => (
-                              <div key={ci}>
-                                {col.heading && (
-                                  <p
-                                    className="text-[9px] tracking-[0.3em] uppercase text-[#C4A55C]/70 mb-3 font-semibold"
-                                    style={{ fontFamily: bodyFont }}
-                                  >
-                                    {col.heading}
-                                  </p>
-                                )}
-                                <ul className="flex flex-col gap-2">
-                                  {col.links.map((link) => (
-                                    <li key={link.href}>
-                                      <Link
-                                        href={link.href}
-                                        onClick={() => setActiveMenu(null)}
-                                        className="text-[12px] text-white/65 hover:text-white transition-colors whitespace-nowrap"
-                                        style={{ fontFamily: bodyFont }}
-                                      >
-                                        {link.label}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
+                          {isNovidades && (
+                            <span className="mr-1.5 w-1 h-1 rounded-full bg-[#C4A55C] flex-shrink-0" aria-hidden />
+                          )}
+                          <span className="relative">
+                            {item.label}
+                            <span
+                              className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#C4A55C] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                              aria-hidden
+                            />
+                          </span>
+                        </Link>
+                      ) : (
+                        <button
+                          className={`cursor-pointer flex items-center gap-1 px-3 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 ${
+                            activeMenu === item.key ? 'text-[#C4A55C]' : 'text-white hover:text-[#C4A55C]'
+                          }`}
+                          style={{ fontFamily: bodyFont, fontWeight: 500 }}
+                          aria-expanded={activeMenu === item.key}
+                        >
+                          <span className="relative">
+                            {item.label}
+                            <span
+                              className={`absolute -bottom-0.5 left-0 right-0 h-px bg-[#C4A55C] origin-left transition-transform duration-300 ${
+                                activeMenu === item.key ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                              }`}
+                              aria-hidden
+                            />
+                          </span>
+                          <ChevronDown
+                            size={11}
+                            strokeWidth={2}
+                            className={`transition-transform duration-200 flex-shrink-0 ${activeMenu === item.key ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+                      )}
+
+                      {/* Dropdown */}
+                      {item.columns && activeMenu === item.key && (
+                        <div
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
+                          onMouseEnter={cancelClose}
+                          onMouseLeave={scheduleClose}
+                        >
+                          <div
+                            className="bg-[#0A0A0A] border border-white/[0.10] shadow-[0_16px_48px_rgba(0,0,0,0.5)] py-7 px-8"
+                            style={{
+                              minWidth: item.columns.length === 3 ? '520px' : item.columns.length === 2 ? '360px' : '220px',
+                            }}
+                          >
+                            <div className={`grid gap-10 ${item.columns.length === 1 ? 'grid-cols-1' : item.columns.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                              {item.columns.map((col, ci) => (
+                                <div key={ci}>
+                                  {col.heading && (
+                                    <p
+                                      className="text-[9px] tracking-[0.3em] uppercase text-[#C4A55C]/70 mb-3 font-semibold"
+                                      style={{ fontFamily: bodyFont }}
+                                    >
+                                      {col.heading}
+                                    </p>
+                                  )}
+                                  <ul className="flex flex-col gap-2">
+                                    {col.links.map((link) => (
+                                      <li key={link.href}>
+                                        <Link
+                                          href={link.href}
+                                          onClick={() => setActiveMenu(null)}
+                                          className="text-[12px] text-white/65 hover:text-white transition-colors whitespace-nowrap"
+                                          style={{ fontFamily: bodyFont }}
+                                        >
+                                          {link.label}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
+                            </div>
                           </div>
+                          {/* Arrow */}
+                          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45 bg-[#0A0A0A] border-l border-t border-white/[0.10] -mt-1.5" />
                         </div>
-                        {/* Arrow */}
-                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45 bg-[#0A0A0A] border-l border-t border-white/[0.10] -mt-1.5" />
-                      </div>
-                    )}
-                  </div>
+                      )}
+                    </div>
+                  </Fragment>
                 )
               })}
             </nav>

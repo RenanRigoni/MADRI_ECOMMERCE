@@ -104,7 +104,7 @@ export default function ProductCard({
         className="cursor-pointer group flex flex-col md:flex-row bg-white border border-[#E8E0D4] hover:border-[#C4A55C]/40 hover:shadow-[0_12px_48px_rgba(196,165,92,0.10)] transition-all duration-500"
       >
         {/* Image */}
-        <div className="relative aspect-[4/3] md:aspect-auto md:w-[42%] overflow-hidden bg-[#FAF6F0]">
+        <div className="relative aspect-[16/9] md:aspect-auto md:w-[42%] overflow-hidden bg-[#FAF6F0]">
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -117,10 +117,10 @@ export default function ProductCard({
             <CardPlaceholder large />
           )}
 
-          <div className="absolute top-4 left-4 flex flex-col gap-1.5">
+          <div className="absolute top-3 left-3 md:top-4 md:left-4 flex flex-col gap-1">
             {isBestSeller && (
               <span
-                className="bg-[#0A0A0A] text-[#C4A55C] text-[9px] tracking-[0.15em] uppercase px-3 py-1 font-semibold"
+                className="bg-[#0A0A0A] text-[#C4A55C] text-[8px] md:text-[9px] tracking-[0.15em] uppercase px-2.5 py-0.5 md:px-3 md:py-1 font-semibold"
                 style={{ fontFamily: bodyFont }}
               >
                 Mais Vendido
@@ -128,7 +128,7 @@ export default function ProductCard({
             )}
             {discount && (
               <span
-                className="bg-[#B5363A] text-white text-[9px] tracking-[0.12em] uppercase px-3 py-1 font-semibold"
+                className="bg-[#B5363A] text-white text-[8px] md:text-[9px] tracking-[0.12em] uppercase px-2.5 py-0.5 md:px-3 md:py-1 font-semibold"
                 style={{ fontFamily: bodyFont }}
               >
                 -{discount}%
@@ -138,12 +138,12 @@ export default function ProductCard({
         </div>
 
         {/* Info */}
-        <div className="flex-1 p-6 md:p-10 lg:p-12 flex flex-col justify-center gap-4">
+        <div className="flex-1 p-4 md:p-10 lg:p-12 flex flex-col justify-center gap-2 md:gap-4">
           {/* Family + intensity */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {fragranceFamily && (
               <span
-                className="text-[9px] tracking-[0.25em] uppercase font-semibold px-2.5 py-1"
+                className="text-[9px] tracking-[0.2em] uppercase font-semibold px-2 py-0.5 md:px-2.5 md:py-1"
                 style={{
                   fontFamily: bodyFont,
                   color: familyColors[fragranceFamily],
@@ -158,31 +158,34 @@ export default function ProductCard({
           </div>
 
           <p
-            className="text-[10px] tracking-[0.3em] uppercase text-[#9CA3AF]"
+            className="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#9CA3AF]"
             style={{ fontFamily: bodyFont, fontWeight: 500 }}
           >
             {volume}
           </p>
           <h3
-            className="text-3xl md:text-4xl leading-tight text-[#0A0A0A]"
+            className="text-2xl md:text-4xl leading-tight text-[#0A0A0A]"
             style={{ fontFamily: displayFont, fontWeight: 500 }}
           >
             {name}
           </h3>
 
           {shortDescription && (
-            <p className="text-sm text-[#6B7280] leading-relaxed max-w-sm" style={{ fontFamily: bodyFont }}>
+            <p
+              className="text-xs md:text-sm text-[#6B7280] leading-relaxed max-w-sm line-clamp-2 md:line-clamp-none"
+              style={{ fontFamily: bodyFont }}
+            >
               {shortDescription}
             </p>
           )}
 
           {/* Notes */}
           {notesTop && notesTop.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {notesTop.slice(0, 3).map((note) => (
                 <span
                   key={note}
-                  className="text-[10px] px-2.5 py-1 bg-[#FAF6F0] text-[#6B7280] border border-[#E8E0D4]"
+                  className="text-[9px] md:text-[10px] px-2 py-0.5 md:px-2.5 md:py-1 bg-[#FAF6F0] text-[#6B7280] border border-[#E8E0D4]"
                   style={{ fontFamily: bodyFont }}
                 >
                   {note}
@@ -191,16 +194,16 @@ export default function ProductCard({
             </div>
           )}
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-0.5 md:gap-1">
             {discount && (
-              <p className="text-xs text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
+              <p className="text-[11px] text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
                 {formatPrice(price)}
               </p>
             )}
-            <p className="text-2xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
+            <p className="text-xl md:text-2xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
               {formatPrice(finalPrice)}
             </p>
-            <p className="text-xs text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
+            <p className="text-[11px] md:text-xs text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
               Pix: {formatPrice(pixPrice)}
             </p>
           </div>
@@ -208,7 +211,7 @@ export default function ProductCard({
           {!outOfStock && (
             <button
               onClick={handleAddToCart}
-              className="cursor-pointer mt-1 w-full md:w-auto md:px-10 py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+              className="cursor-pointer mt-1 w-full md:w-auto md:px-10 py-3 md:py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
               style={{ fontFamily: bodyFont }}
             >
               Adicionar ao carrinho

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Truck, ShieldCheck, Gift, MessageCircle } from 'lucide-react'
 import ProductCard from '@/components/produto/ProductCard'
 import CategorySection from '@/components/sections/CategorySection'
@@ -33,34 +34,50 @@ const momentos = [
   {
     key: 'dia',
     titulo: 'Para o dia',
-    descricao: 'Fragrâncias leves, frescas e vibrantes para o cotidiano',
+    descricao: 'Fragrâncias leves, frescas e vibrantes para a rotina.',
     href: '/produtos?momento=dia',
-    bg: 'linear-gradient(150deg, #FFFBF5 0%, #F5EDD8 60%, #E8D5A8 100%)',
-    textDark: true,
+    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80',
+    fallback: '#E8DEC8',
   },
   {
     key: 'noite',
     titulo: 'Para a noite',
-    descricao: 'Intensos, sensuais e inesquecíveis para momentos especiais',
+    descricao: 'Perfumes intensos, sensuais e marcantes.',
     href: '/produtos?momento=noite',
-    bg: 'linear-gradient(150deg, #1C1814 0%, #110E0B 60%, #0A0A0A 100%)',
-    textDark: false,
+    image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80',
+    fallback: '#0A0808',
+  },
+  {
+    key: 'trabalho',
+    titulo: 'Para o trabalho',
+    descricao: 'Essências elegantes, discretas e sofisticadas.',
+    href: '/produtos?momento=trabalho',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    fallback: '#C8C4BC',
   },
   {
     key: 'encontros',
     titulo: 'Para encontros',
-    descricao: 'Marcantes e sedutores para deixar uma presença duradoura',
+    descricao: 'Notas envolventes para momentos de presença.',
     href: '/produtos?momento=encontros',
-    bg: 'linear-gradient(150deg, #1A1018 0%, #120C10 60%, #0A0A0A 100%)',
-    textDark: false,
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+    fallback: '#1C1008',
   },
   {
     key: 'presente',
     titulo: 'Para presentear',
-    descricao: 'Embalagem especial, impacto duradouro e memória afetiva',
+    descricao: 'Escolhas especiais com embalagem premium.',
     href: '/produtos?filter=giftable',
-    bg: 'linear-gradient(150deg, #FDF4EC 0%, #F5DEBB 60%, #E8C48A 100%)',
-    textDark: true,
+    image: 'https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80',
+    fallback: '#C4A878',
+  },
+  {
+    key: 'especial',
+    titulo: 'Ocasiões especiais',
+    descricao: 'Fragrâncias memoráveis para momentos únicos.',
+    href: '/produtos?momento=especial',
+    image: 'https://images.unsplash.com/photo-1543168256-0a9e0a2e23de?auto=format&fit=crop&w=800&q=80',
+    fallback: '#1A1428',
   },
 ]
 
@@ -167,7 +184,7 @@ export default function Home() {
       {/* ━━━ 2. BENEFITS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-y border-[#E8E0D4] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#E8E0D4]">
+          <div className="grid grid-cols-2 md:grid-cols-4 md:divide-x divide-[#E8E0D4]">
             {benefits.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
@@ -194,10 +211,10 @@ export default function Home() {
       <CategorySection />
 
       {/* ━━━ 4. MAIS VENDIDOS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-white py-10 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="mb-10 md:mb-12">
+          <div className="mb-6 md:mb-12">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
               <p
@@ -209,7 +226,7 @@ export default function Home() {
             </div>
             <div className="flex items-end justify-between">
               <h2
-                className="text-4xl md:text-5xl text-[#0A0A0A]"
+                className="text-3xl md:text-5xl text-[#0A0A0A]"
                 style={{ fontFamily: displayFont, fontWeight: 500 }}
               >
                 Mais vendidos
@@ -268,76 +285,79 @@ export default function Home() {
       </div>
 
       {/* ━━━ 7. ESCOLHA PELO SEU MOMENTO ━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="bg-[#FAF6F0] py-20 md:py-28">
+      <section className="bg-[#FAF6F0] py-12 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-12 md:mb-14">
-            <p
-              className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium mb-3"
-              style={{ fontFamily: bodyFont }}
-            >
-              Navegue por ocasião
-            </p>
+          <div className="mb-8 md:mb-12">
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
+              <p
+                className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                style={{ fontFamily: bodyFont }}
+              >
+                Navegue por ocasião
+              </p>
+            </div>
             <h2
-              className="text-4xl md:text-5xl text-[#0A0A0A]"
+              className="text-3xl md:text-5xl text-[#0A0A0A]"
               style={{ fontFamily: displayFont, fontWeight: 500 }}
             >
               Escolha pelo seu momento
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {/* Editorial grid — 1 col mobile, 3 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
             {momentos.map((m) => (
               <Link
                 key={m.key}
                 href={m.href}
-                className="cursor-pointer group relative overflow-hidden block"
-                style={{ height: '320px' }}
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[5/3] md:aspect-[4/5] block"
               >
-                <div
-                  className="absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
-                  style={{ background: m.bg }}
-                  aria-hidden
+                {/* Fallback bg */}
+                <div className="absolute inset-0" style={{ background: m.fallback }} />
+
+                {/* Editorial image */}
+                <Image
+                  src={m.image}
+                  alt={m.titulo}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                 />
-                <div
-                  aria-hidden
-                  className="absolute bottom-0 left-0 right-0 h-3/5"
-                  style={{
-                    background: m.textDark
-                      ? 'linear-gradient(to top, rgba(240,232,220,0.8) 0%, transparent 100%)'
-                      : 'linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 100%)',
-                  }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5 group-hover:from-black/88 transition-all duration-500" />
+
+                {/* Gold top shimmer on hover */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A55C]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Content — bottom-left */}
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 translate-y-1 group-hover:translate-y-0 transition-transform duration-400">
                   <h3
-                    className="text-xl md:text-2xl leading-tight mb-1.5"
-                    style={{
-                      fontFamily: displayFont,
-                      fontWeight: 500,
-                      color: m.textDark ? '#0A0A0A' : 'white',
-                    }}
+                    className="text-xl md:text-2xl text-white leading-tight mb-1"
+                    style={{ fontFamily: displayFont, fontWeight: 500 }}
                   >
                     {m.titulo}
                   </h3>
                   <p
-                    className="text-[11px] mb-4 leading-snug"
-                    style={{
-                      fontFamily: bodyFont,
-                      color: m.textDark ? 'rgba(10,10,10,0.55)' : 'rgba(255,255,255,0.65)',
-                    }}
+                    className="text-[10px] md:text-[11px] text-white/60 leading-snug mb-3 md:mb-4"
+                    style={{ fontFamily: bodyFont }}
                   >
                     {m.descricao}
                   </p>
-                  <span
-                    className="text-[9px] tracking-[0.25em] uppercase font-semibold border-b pb-0.5 transition-colors group-hover:border-opacity-100"
-                    style={{
-                      fontFamily: bodyFont,
-                      color: '#C4A55C',
-                      borderColor: 'rgba(196,165,92,0.5)',
-                    }}
-                  >
-                    Ver fragrâncias
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="text-[9px] tracking-[0.3em] uppercase text-[#C4A55C] font-medium"
+                      style={{ fontFamily: bodyFont }}
+                    >
+                      Ver fragrâncias
+                    </span>
+                    <span
+                      className="inline-block w-4 h-px bg-[#C4A55C] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400"
+                      aria-hidden
+                    />
+                  </div>
                 </div>
               </Link>
             ))}
@@ -346,10 +366,10 @@ export default function Home() {
       </section>
 
       {/* ━━━ 8. NOVIDADES — horizontal scroll carousel ━━━━━━━━ */}
-      <section className="bg-white py-20 md:py-28 overflow-hidden">
+      <section className="bg-white py-10 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="flex items-end justify-between mb-10 md:mb-12">
+          <div className="flex items-end justify-between mb-7 md:mb-12">
             <div>
               <p
                 className="text-[10px] tracking-[0.35em] uppercase text-[#C4A55C] font-medium mb-2"
@@ -358,7 +378,7 @@ export default function Home() {
                 Acabou de chegar
               </p>
               <h2
-                className="text-4xl md:text-5xl text-[#0A0A0A]"
+                className="text-3xl md:text-5xl text-[#0A0A0A]"
                 style={{ fontFamily: displayFont, fontWeight: 500 }}
               >
                 Novidades
@@ -366,36 +386,60 @@ export default function Home() {
             </div>
             <Link
               href="/produtos?filter=novo"
-              className="cursor-pointer hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#C4A55C] hover:border-[#C4A55C] transition-colors flex-shrink-0 ml-4"
+              className="cursor-pointer text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#C4A55C] hover:border-[#C4A55C] transition-colors flex-shrink-0 ml-4"
               style={{ fontFamily: bodyFont, fontWeight: 500 }}
             >
               Ver todas
             </Link>
           </div>
 
-          {/* Horizontal scroll on mobile, grid on desktop */}
-          <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-4 md:overflow-visible md:pb-0">
+          {/* ── Mobile: real swipeable carousel (breakout) ─────── */}
+          <div className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4">
+            <div className="flex gap-3 w-max">
+              {novidades.map((p) => (
+                <div key={p.id} className="snap-start w-[76vw] max-w-[280px] flex-shrink-0">
+                  <ProductCard
+                    id={p.id}
+                    slug={p.slug}
+                    name={p.name}
+                    volume={p.volume}
+                    price={p.price}
+                    discount={p.discount}
+                    stock={p.stock}
+                    isNew={p.isNew}
+                    fragranceFamily={p.fragranceFamily}
+                    notesTop={p.notesTop}
+                    intensity={p.intensity}
+                  />
+                </div>
+              ))}
+              {/* trailing spacer so last card doesn't hug the edge */}
+              <div className="w-4 flex-shrink-0" aria-hidden />
+            </div>
+          </div>
+
+          {/* ── Desktop: 4-col grid ────────────────────────────── */}
+          <div className="hidden md:grid md:grid-cols-4 gap-4">
             {novidades.map((p) => (
-              <div key={p.id} className="flex-shrink-0 w-[260px] snap-start md:w-auto">
-                <ProductCard
-                  id={p.id}
-                  slug={p.slug}
-                  name={p.name}
-                  volume={p.volume}
-                  price={p.price}
-                  discount={p.discount}
-                  stock={p.stock}
-                  isNew={p.isNew}
-                  fragranceFamily={p.fragranceFamily}
-                  notesTop={p.notesTop}
-                  intensity={p.intensity}
-                />
-              </div>
+              <ProductCard
+                key={p.id}
+                id={p.id}
+                slug={p.slug}
+                name={p.name}
+                volume={p.volume}
+                price={p.price}
+                discount={p.discount}
+                stock={p.stock}
+                isNew={p.isNew}
+                fragranceFamily={p.fragranceFamily}
+                notesTop={p.notesTop}
+                intensity={p.intensity}
+              />
             ))}
           </div>
 
           {/* Mobile see-all */}
-          <div className="mt-6 text-center sm:hidden">
+          <div className="mt-5 text-center md:hidden">
             <Link
               href="/produtos?filter=novo"
               className="cursor-pointer inline-flex items-center justify-center px-8 py-3 border border-[#E8E0D4] text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] hover:border-[#0A0A0A] hover:text-[#0A0A0A] transition-colors"
