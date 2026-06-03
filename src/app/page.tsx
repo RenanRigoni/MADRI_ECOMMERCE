@@ -36,7 +36,7 @@ const momentos = [
     titulo: 'Para o dia',
     descricao: 'Fragrâncias leves, frescas e vibrantes para a rotina.',
     href: '/produtos?momento=dia',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/para_dia.png',
     fallback: '#E8DEC8',
   },
   {
@@ -44,7 +44,7 @@ const momentos = [
     titulo: 'Para a noite',
     descricao: 'Perfumes intensos, sensuais e marcantes.',
     href: '/produtos?momento=noite',
-    image: 'https://images.unsplash.com/photo-1602950630157-b00e787fefa3?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/para_noite.png',
     fallback: '#1A0808',
   },
   {
@@ -52,7 +52,7 @@ const momentos = [
     titulo: 'Para o trabalho',
     descricao: 'Essências elegantes, discretas e sofisticadas.',
     href: '/produtos?momento=trabalho',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/para_trabalho.png',
     fallback: '#C8C4BC',
   },
   {
@@ -60,7 +60,7 @@ const momentos = [
     titulo: 'Para encontros',
     descricao: 'Notas envolventes para momentos de presença.',
     href: '/produtos?momento=encontros',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/para_encontros.png',
     fallback: '#1C1008',
   },
   {
@@ -68,7 +68,7 @@ const momentos = [
     titulo: 'Para presentear',
     descricao: 'Escolhas especiais com embalagem premium.',
     href: '/produtos?filter=giftable',
-    image: 'https://images.unsplash.com/photo-1625552186152-668cd2f0b707?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/para_presentear.png',
     fallback: '#D4A8A0',
   },
   {
@@ -76,7 +76,7 @@ const momentos = [
     titulo: 'Ocasiões especiais',
     descricao: 'Fragrâncias memoráveis para momentos únicos.',
     href: '/produtos?momento=especial',
-    image: 'https://images.unsplash.com/photo-1580657274234-7339717f4541?auto=format&fit=crop&w=800&q=80',
+    image: '/momentos/ocasioes_especiais.png',
     fallback: '#1A1428',
   },
 ]

@@ -10,7 +10,7 @@ const families = [
     label: 'Floral',
     desc: 'Delicado, elegante e envolvente',
     href: '/produtos?familia=floral',
-    image: 'https://images.unsplash.com/photo-1708265500552-c256df13d3ca?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/Floral.png',
     fallback: '#F0E4E6',
   },
   {
@@ -18,7 +18,7 @@ const families = [
     label: 'Amadeirado',
     desc: 'Sofisticado, quente e marcante',
     href: '/produtos?familia=amadeirado',
-    image: 'https://images.unsplash.com/photo-1702001145743-094b0b7ead51?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/Amadeirado.png',
     fallback: '#3A200A',
   },
   {
@@ -26,7 +26,7 @@ const families = [
     label: 'Cítrico',
     desc: 'Fresco, leve e vibrante',
     href: '/produtos?familia=citrico',
-    image: 'https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/C%C3%ADtrico.png',
     fallback: '#E8CC80',
   },
   {
@@ -34,7 +34,7 @@ const families = [
     label: 'Oriental',
     desc: 'Intenso, sensual e memorável',
     href: '/produtos?familia=oriental',
-    image: 'https://images.unsplash.com/photo-1551690935-a9e6f0a7e788?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/Oriental.png',
     fallback: '#2A1205',
   },
   {
@@ -42,7 +42,7 @@ const families = [
     label: 'Frutal',
     desc: 'Doce, jovem e luminoso',
     href: '/produtos?familia=frutal',
-    image: 'https://images.unsplash.com/photo-1585939268339-886c9643ee98?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/Frutal.png',
     fallback: '#E07840',
   },
   {
@@ -50,7 +50,7 @@ const families = [
     label: 'Aromático',
     desc: 'Limpo, versátil e moderno',
     href: '/produtos?familia=aromatico',
-    image: 'https://images.unsplash.com/photo-1712178435871-48d630f15969?auto=format&fit=crop&w=800&q=80',
+    image: '/familias/Arom%C3%A1tico.png',
     fallback: '#5A4A7A',
   },
 ]
