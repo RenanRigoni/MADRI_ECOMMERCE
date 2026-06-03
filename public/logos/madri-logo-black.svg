@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900" role="img" aria-label="Madri Perfumaria — Logo Master">
+  <title>Madri Perfumaria — Logo Master</title>
+  <desc>Identidade visual recriada: emblema oval em verde esmeralda escuro com elementos dourados.</desc>
+
+  <defs>
+    <!-- Paleta -->
+    <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8CB7A"/>
+      <stop offset="45%" stop-color="#C9A24A"/>
+      <stop offset="100%" stop-color="#8C6B2C"/>
+    </linearGradient>
+    <linearGradient id="goldSoft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D9B763"/>
+      <stop offset="100%" stop-color="#A07F36"/>
+    </linearGradient>
+
+    <!-- Folha base reutilizável -->
+    <symbol id="leaf" viewBox="-10 -22 20 44" overflow="visible">
+      <path d="M 0,-22 C 9,-15 9,15 0,22 C -9,15 -9,-15 0,-22 Z" fill="#0A0A0A"/>
+      <path d="M 0,-20 L 0,20" stroke="#0A0A0A" stroke-width="0.6" fill="none" opacity="0.6"/>
+    </symbol>
+
+    <!-- Pequena baga -->
+    <symbol id="berry" viewBox="-3 -3 6 6" overflow="visible">
+      <circle r="2.4" fill="#0A0A0A"/>
+    </symbol>
+  </defs>
+
+  <!-- ============== background ============== -->
+  <g id="background">
+    <rect x="0" y="0" width="800" height="900" fill="none"/>
+  </g>
+
+  <!-- ============== oval_border ============== -->
+  <g id="oval_border" fill="none" stroke="#0A0A0A">
+    <ellipse cx="400" cy="460" rx="295" ry="380" stroke-width="3"/>
+    <ellipse cx="400" cy="460" rx="278" ry="362" stroke-width="1.2"/>
+  </g>
+
+  <!-- ============== ornaments (cantos do oval) ============== -->
+  <g id="ornaments" fill="#0A0A0A">
+    <!-- topo -->
+    <g transform="translate(400,82)">
+      <path d="M 0,0 L -14,8 L 0,4 L 14,8 Z"/>
+      <circle r="2.6" cy="-3"/>
+    </g>
+    <!-- base -->
+    <g transform="translate(400,838) rotate(180)">
+      <path d="M 0,0 L -14,8 L 0,4 L 14,8 Z"/>
+      <circle r="2.6" cy="-3"/>
+    </g>
+    <!-- divisor entre nome e descritor -->
+    <g transform="translate(400,720)">
+      <circle r="2" fill="#0A0A0A"/>
+      <path d="M -32,0 L -8,0" stroke="#0A0A0A" stroke-width="0.8" fill="none"/>
+      <path d="M 8,0 L 32,0" stroke="#0A0A0A" stroke-width="0.8" fill="none"/>
+    </g>
+  </g>
+
+  <!-- ============== botanical_left ============== -->
+  <g id="botanical_left" transform="translate(0,0)">
+    <path d="M 195,540 C 215,455 245,375 295,300" stroke="#0A0A0A" stroke-width="1.6" fill="none"/>
+    <use href="#leaf" x="210" y="500" transform="rotate(-55 210 500) scale(0.85)"/>
+    <use href="#leaf" x="218" y="475" transform="rotate(70 218 475) scale(0.8)"/>
+    <use href="#leaf" x="225" y="445" transform="rotate(-50 225 445) scale(0.9)"/>
+    <use href="#leaf" x="235" y="415" transform="rotate(75 235 415) scale(0.85)"/>
+    <use href="#leaf" x="247" y="385" transform="rotate(-45 247 385) scale(0.95)"/>
+    <use href="#leaf" x="262" y="355" transform="rotate(80 262 355) scale(0.85)"/>
+    <use href="#leaf" x="278" y="328" transform="rotate(-40 278 328) scale(0.9)"/>
+    <use href="#leaf" x="293" y="305" transform="rotate(85 293 305) scale(0.75)"/>
+    <use href="#berry" x="208" y="520"/>
+    <use href="#berry" x="240" y="430"/>
+    <use href="#berry" x="270" y="365"/>
+  </g>
+
+  <!-- ============== botanical_right ============== -->
+  <g id="botanical_right" transform="translate(800,0) scale(-1,1)">
+    <path d="M 195,540 C 215,455 245,375 295,300" stroke="#0A0A0A" stroke-width="1.6" fill="none"/>
+    <use href="#leaf" x="210" y="500" transform="rotate(-55 210 500) scale(0.85)"/>
+    <use href="#leaf" x="218" y="475" transform="rotate(70 218 475) scale(0.8)"/>
+    <use href="#leaf" x="225" y="445" transform="rotate(-50 225 445) scale(0.9)"/>
+    <use href="#leaf" x="235" y="415" transform="rotate(75 235 415) scale(0.85)"/>
+    <use href="#leaf" x="247" y="385" transform="rotate(-45 247 385) scale(0.95)"/>
+    <use href="#leaf" x="262" y="355" transform="rotate(80 262 355) scale(0.85)"/>
+    <use href="#leaf" x="278" y="328" transform="rotate(-40 278 328) scale(0.9)"/>
+    <use href="#leaf" x="293" y="305" transform="rotate(85 293 305) scale(0.75)"/>
+    <use href="#berry" x="208" y="520"/>
+    <use href="#berry" x="240" y="430"/>
+    <use href="#berry" x="270" y="365"/>
+  </g>
+
+  <!-- ============== perfume_bottle ============== -->
+  <g id="perfume_bottle">
+    <!-- finial / topo do stopper -->
+    <circle cx="400" cy="172" r="4.5" fill="#0A0A0A"/>
+    <path d="M 392,178 L 408,178 L 404,196 L 396,196 Z" fill="#0A0A0A"/>
+    <!-- cap (parte superior) -->
+    <path d="M 374,196 L 426,196 L 426,210 L 422,214 L 422,254 L 378,254 L 378,214 L 374,210 Z" fill="#0A0A0A"/>
+    <!-- step / pescoço alto -->
+    <rect x="384" y="254" width="32" height="12" fill="#0A0A0A"/>
+    <!-- neck ribbon (laço) -->
+    <g id="neck_ribbon">
+      <rect x="356" y="266" width="88" height="10" fill="#0A0A0A"/>
+      <path d="M 356,266 L 340,260 L 340,282 L 356,276 Z" fill="#0A0A0A"/>
+      <path d="M 444,266 L 460,260 L 460,282 L 444,276 Z" fill="#0A0A0A"/>
+      <circle cx="400" cy="271" r="3" fill="none"/>
+    </g>
+    <!-- corpo (silhueta dourada) -->
+    <path d="M 380,278
+             L 420,278
+             L 420,290
+             C 466,300 492,332 492,378
+             L 492,488
+             C 492,524 458,548 400,548
+             C 342,548 308,524 308,488
+             L 308,378
+             C 308,332 334,300 380,290 Z" fill="#0A0A0A"/>
+    <!-- recorte interno verde (vidro) -->
+    <path d="M 386,295
+             L 414,295
+             L 414,302
+             C 458,312 480,340 480,380
+             L 480,486
+             C 480,514 452,534 400,534
+             C 348,534 320,514 320,486
+             L 320,380
+             C 320,340 342,312 386,302 Z" fill="none"/>
+    <!-- brilho sutil esquerdo no vidro -->
+    <path d="M 332,380 C 332,348 346,326 372,316 L 372,510 C 348,500 332,480 332,460 Z" fill="none" opacity="0"/>
+  </g>
+
+  <!-- ============== monogram_M ============== -->
+  <g id="monogram_M">
+    <text x="400" y="445"
+          text-anchor="middle"
+          font-family="'Cormorant Garamond','Playfair Display','EB Garamond',Georgia,serif"
+          font-weight="600"
+          font-size="120"
+          fill="#0A0A0A"
+          letter-spacing="-2">M</text>
+  </g>
+
+  <!-- ============== brand_name ============== -->
+  <g id="brand_name">
+    <text x="400" y="690"
+          text-anchor="middle"
+          font-family="'Cormorant Garamond','Playfair Display','EB Garamond',Georgia,serif"
+          font-weight="600"
+          font-size="98"
+          fill="#0A0A0A"
+          letter-spacing="6">MADRI</text>
+  </g>
+
+  <!-- ============== descriptor ============== -->
+  <g id="descriptor">
+    <text x="400" y="752"
+          text-anchor="middle"
+          font-family="'Cormorant Garamond','Playfair Display','EB Garamond',Georgia,serif"
+          font-weight="400"
+          font-size="26"
+          fill="#0A0A0A"
+          letter-spacing="14">PERFUMARIA</text>
+  </g>
+
+  <!-- pequena botânica inferior (assinatura) -->
+  <g id="bottom_sprig" transform="translate(400,790)">
+    <path d="M 0,-6 L 0,14" stroke="#0A0A0A" stroke-width="1.2" fill="none"/>
+    <use href="#leaf" x="-6" y="0" transform="rotate(-50 -6 0) scale(0.35)"/>
+    <use href="#leaf" x="6" y="0" transform="rotate(50 6 0) scale(0.35)"/>
+    <use href="#leaf" x="-4" y="10" transform="rotate(-40 -4 10) scale(0.3)"/>
+    <use href="#leaf" x="4" y="10" transform="rotate(40 4 10) scale(0.3)"/>
+    <use href="#berry" x="0" y="-6"/>
+  </g>
+</svg>

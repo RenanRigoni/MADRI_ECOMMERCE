@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
+/* ── Design tokens ──────────────────────────────────── */
+@theme inline {
+  --font-display: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  --font-body:    var(--font-body), 'Montserrat', system-ui, sans-serif;
+
+  --color-gold:        #C4A55C;
+  --color-gold-light:  #E1C880;
+  --color-cream:       #FAF6F0;
+  --color-cream-dark:  #F0E8DC;
+  --color-charcoal:    #0A0A0A;
+  --color-dark:        #1A1A1A;
+  --color-muted:       #4A4A4A;
+  --color-border:      #E8E0D4;
+  --color-pix-green:   #2D6A4F;
+  --color-off-red:     #B5363A;
+}
+
+/* ── Base ───────────────────────────────────────────── */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0A0A0A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), 'Montserrat', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ── Nav underline hover ────────────────────────────── */
+.nav-link {
+  position: relative;
+  padding-bottom: 1px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C4A55C;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── Fade-up animations ─────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease forwards;
+}
+
+.animate-fade-up-delay-1 { opacity: 0; animation: fade-up 0.7s ease 0.10s forwards; }
+.animate-fade-up-delay-2 { opacity: 0; animation: fade-up 0.7s ease 0.20s forwards; }
+.animate-fade-up-delay-3 { opacity: 0; animation: fade-up 0.7s ease 0.35s forwards; }
+.animate-fade-up-delay-4 { opacity: 0; animation: fade-up 0.7s ease 0.50s forwards; }
+
+/* ── Horizontal scroll (novidades carousel) ─────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-fade-up-delay-4 {
+    animation: none;
+    opacity: 1;
+  }
+
+  .nav-link::after {
+    transition: none;
+  }
 }
