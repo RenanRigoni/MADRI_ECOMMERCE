@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import ProductCard from '@/components/produto/ProductCard'
-import { getAllPerfumes, filterPerfumes, volumeLabel } from '@/lib/perfumes'
+import { getAllPerfumes, filterPerfumes, volumeLabel, cardTitle } from '@/lib/perfumes'
 import { familyLabels, type FragranceFamily } from '@/lib/products'
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default async function ProdutosPage({
                 key={p.id}
                 id={p.id}
                 slug={p.slug}
-                name={p.name}
+                name={cardTitle(p)}
                 volume={volumeLabel(p)}
                 price={p.price}
                 discount={p.discount ?? undefined}

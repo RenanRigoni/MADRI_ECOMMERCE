@@ -53,6 +53,11 @@ export function volumeLabel(p: Perfume): string {
   return p.volumeMl ? `${p.volumeMl}ml` : ''
 }
 
+/** Nome curto pra card (marca + nome + versão) — o titulo_site completo (SEO) é longo demais pra caber legível num card. */
+export function cardTitle(p: Perfume): string {
+  return `${p.marca} ${p.nome}${p.versao ? ' ' + p.versao : ''}`
+}
+
 /**
  * Sem dados reais de venda/lançamento ainda (loja não abriu). Estas funções
  * fazem uma curadoria determinística (não randômica) para preencher as

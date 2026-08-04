@@ -143,7 +143,7 @@ export default function ProductCard({
           <div className="flex items-center gap-2.5">
             {fragranceFamily && (
               <span
-                className="text-[9px] tracking-[0.2em] uppercase font-semibold px-2 py-0.5 md:px-2.5 md:py-1"
+                className="text-[10px] md:text-[11px] tracking-[0.15em] uppercase font-bold px-2 py-0.5 md:px-2.5 md:py-1"
                 style={{
                   fontFamily: bodyFont,
                   color: familyColors[fragranceFamily],
@@ -158,21 +158,21 @@ export default function ProductCard({
           </div>
 
           <p
-            className="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#9CA3AF]"
-            style={{ fontFamily: bodyFont, fontWeight: 500 }}
+            className="text-[10px] md:text-[11px] tracking-[0.25em] uppercase text-[#6B7280]"
+            style={{ fontFamily: bodyFont, fontWeight: 600 }}
           >
             {volume}
           </p>
           <h3
-            className="text-2xl md:text-4xl leading-tight text-[#0A0A0A]"
-            style={{ fontFamily: displayFont, fontWeight: 500 }}
+            className="text-2xl md:text-4xl leading-[1.15] text-[#0A0A0A]"
+            style={{ fontFamily: displayFont, fontWeight: 700 }}
           >
             {name}
           </h3>
 
           {shortDescription && (
             <p
-              className="text-xs md:text-sm text-[#6B7280] leading-relaxed max-w-sm line-clamp-2 md:line-clamp-none"
+              className="text-xs md:text-sm text-[#4A4A4A] leading-relaxed max-w-sm line-clamp-2 md:line-clamp-none"
               style={{ fontFamily: bodyFont }}
             >
               {shortDescription}
@@ -185,8 +185,8 @@ export default function ProductCard({
               {notesTop.slice(0, 3).map((note) => (
                 <span
                   key={note}
-                  className="text-[9px] md:text-[10px] px-2 py-0.5 md:px-2.5 md:py-1 bg-[#FAF6F0] text-[#6B7280] border border-[#E8E0D4]"
-                  style={{ fontFamily: bodyFont }}
+                  className="text-[10px] md:text-[11px] px-2 py-0.5 md:px-2.5 md:py-1 bg-[#FAF6F0] text-[#4A4A4A] border border-[#E8E0D4]"
+                  style={{ fontFamily: bodyFont, fontWeight: 600 }}
                 >
                   {note}
                 </span>
@@ -309,7 +309,7 @@ export default function ProductCard({
           <div className="flex items-center justify-between mb-0.5">
             {fragranceFamily && (
               <span
-                className="text-[9px] tracking-[0.2em] uppercase font-semibold"
+                className="text-[10px] tracking-[0.15em] uppercase font-bold"
                 style={{
                   fontFamily: bodyFont,
                   color: familyColors[fragranceFamily],
@@ -323,14 +323,14 @@ export default function ProductCard({
         )}
 
         <p
-          className="text-[10px] tracking-[0.25em] uppercase text-[#9CA3AF]"
-          style={{ fontFamily: bodyFont, fontWeight: 500 }}
+          className="text-[11px] tracking-[0.2em] uppercase text-[#6B7280]"
+          style={{ fontFamily: bodyFont, fontWeight: 600 }}
         >
           {volume}
         </p>
         <h3
-          className="text-base leading-tight text-[#0A0A0A] line-clamp-2"
-          style={{ fontFamily: displayFont, fontWeight: 500 }}
+          className="text-lg leading-[1.2] text-[#0A0A0A] line-clamp-2"
+          style={{ fontFamily: displayFont, fontWeight: 700 }}
         >
           {name}
         </h3>
@@ -341,8 +341,8 @@ export default function ProductCard({
             {notesTop.slice(0, 2).map((note) => (
               <span
                 key={note}
-                className="text-[9px] px-2 py-0.5 bg-[#FAF6F0] text-[#9CA3AF] border border-[#E8E0D4]"
-                style={{ fontFamily: bodyFont }}
+                className="text-[11px] px-2 py-0.5 bg-[#FAF6F0] text-[#4A4A4A] border border-[#E8E0D4]"
+                style={{ fontFamily: bodyFont, fontWeight: 600 }}
               >
                 {note}
               </span>

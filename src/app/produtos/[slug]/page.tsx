@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react'
 import ProductGallery from '@/components/produto/ProductGallery'
 import ProductInfo from '@/components/produto/ProductInfo'
 import ProductCard from '@/components/produto/ProductCard'
-import { getAllPerfumes, getPerfumeBySlug, volumeLabel } from '@/lib/perfumes'
+import { getAllPerfumes, getPerfumeBySlug, volumeLabel, cardTitle } from '@/lib/perfumes'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 
@@ -91,7 +91,7 @@ export default async function ProdutoPage({
                   key={p.id}
                   id={p.id}
                   slug={p.slug}
-                  name={p.name}
+                  name={cardTitle(p)}
                   volume={volumeLabel(p)}
                   price={p.price}
                   stock={p.stock}

@@ -8,7 +8,7 @@ import FragranceFinderSection from '@/components/sections/FragranceFinderSection
 import GiftSection from '@/components/sections/GiftSection'
 import HeroSearchTrigger from '@/components/hero/HeroSearchTrigger'
 import HeroCarousel from '@/components/hero/HeroCarousel'
-import { getHomepageBestSellers, getHomepageNewArrivals, volumeLabel } from '@/lib/perfumes'
+import { getHomepageBestSellers, getHomepageNewArrivals, volumeLabel, cardTitle } from '@/lib/perfumes'
 
 /* ── Hero images — mantenha 4-6 imagens para ritmo ideal ── */
 const heroImages: string[] = [
@@ -252,7 +252,7 @@ export default function Home() {
                 <ProductCard
                   id={maisVendidos[0].id}
                   slug={maisVendidos[0].slug}
-                  name={maisVendidos[0].name}
+                  name={cardTitle(maisVendidos[0])}
                   volume={volumeLabel(maisVendidos[0])}
                   price={maisVendidos[0].price}
                   discount={maisVendidos[0].discount ?? undefined}
@@ -271,7 +271,7 @@ export default function Home() {
                     key={p.id}
                     id={p.id}
                     slug={p.slug}
-                    name={p.name}
+                    name={cardTitle(p)}
                     volume={volumeLabel(p)}
                     price={p.price}
                     discount={p.discount ?? undefined}
@@ -412,7 +412,7 @@ export default function Home() {
                   <ProductCard
                     id={p.id}
                     slug={p.slug}
-                    name={p.name}
+                    name={cardTitle(p)}
                     volume={volumeLabel(p)}
                     price={p.price}
                     discount={p.discount ?? undefined}
@@ -435,7 +435,7 @@ export default function Home() {
                 key={p.id}
                 id={p.id}
                 slug={p.slug}
-                name={p.name}
+                name={cardTitle(p)}
                 volume={volumeLabel(p)}
                 price={p.price}
                 discount={p.discount ?? undefined}

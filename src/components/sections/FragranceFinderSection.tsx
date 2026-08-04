@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { familyLabels, type FragranceFamily, type Intensity } from '@/lib/products'
-import { perfumes, volumeLabel } from '@/lib/perfumes'
+import { perfumes, volumeLabel, cardTitle } from '@/lib/perfumes'
 import ProductCard from '@/components/produto/ProductCard'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
@@ -223,7 +223,7 @@ export default function FragranceFinderSection() {
                     key={p.id}
                     id={p.id}
                     slug={p.slug}
-                    name={p.name}
+                    name={cardTitle(p)}
                     volume={volumeLabel(p)}
                     price={p.price}
                     discount={p.discount ?? undefined}
