@@ -36,6 +36,7 @@ export interface Perfume {
   confiancaIdentificacao: string | null
   pesquisaConfirmada: boolean
   observacoes: string | null
+  imagens: string[]
   imagePlaceholder: boolean
 }
 
@@ -56,6 +57,10 @@ export function volumeLabel(p: Perfume): string {
 /** Nome curto pra card (marca + nome + versão) — o titulo_site completo (SEO) é longo demais pra caber legível num card. */
 export function cardTitle(p: Perfume): string {
   return `${p.marca} ${p.nome}${p.versao ? ' ' + p.versao : ''}`
+}
+
+export function primaryImage(p: Perfume): string | undefined {
+  return p.imagens[0]
 }
 
 /**

@@ -53,7 +53,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-asad-elixir-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-asad-edp",
@@ -109,7 +112,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-asad-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-iconic-edp-105ml",
@@ -171,7 +177,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-iconic-edp-105ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-intense-man-edt-105ml",
@@ -230,7 +239,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-intense-man-edt-105ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-imperiale-edp-105ml",
@@ -288,7 +300,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-imperiale-edp-105ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "fragrance-world-monte-leone-legende-edp-100ml",
@@ -345,7 +360,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "marca na frente = MONTE LEONE, fabricante nao visivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/fragrance-world-monte-leone-legende-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "grandeur-my-life-edp-100ml",
@@ -398,7 +416,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/grandeur-my-life-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-salvo-edp-100ml",
@@ -452,7 +473,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "marca nao visivel na face frontal",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-salvo-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "dar-el-ward-ayman-edp-100ml",
@@ -507,7 +531,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/dar-el-ward-ayman-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "grandeur-la-vie-femme-edp-100ml",
@@ -564,7 +591,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/grandeur-la-vie-femme-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "grandeur-rose-explosion-edp-100ml",
@@ -623,7 +653,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/grandeur-rose-explosion-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-delilah-blanc-edp-100ml",
@@ -676,7 +709,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-delilah-blanc-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-la-rouge-baroque-edp-100ml",
@@ -729,7 +765,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-la-rouge-baroque-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-the-white-cloud-edp-100ml",
@@ -780,7 +819,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-the-white-cloud-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "amaran-uqab-rihla-edp",
@@ -835,7 +877,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "AMARAN EXCLUSIVE; nome em fonte pequena UQAB / RIHLA | linha Amaran Exclusive; Fragrantica lista Uqab e Uqab Rihla como produtos distintos - texto da caixa mostrava ambas palavras juntas",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/amaran-uqab-rihla-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-la-vivacite-edp-100ml",
@@ -889,7 +934,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-la-vivacite-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "ard-al-zaafaran-manaal",
@@ -942,7 +990,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "estojo cilindrico verde couro, arabe منال, marca nao visivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/ard-al-zaafaran-manaal-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-fakhar-black",
@@ -999,7 +1050,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa preta placa prata - confirmar se Black/Silver",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-fakhar-black-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "milestone-perfumes-she-fashion-edp-100ml",
@@ -1056,7 +1110,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/milestone-perfumes-she-fashion-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-fakhar-gold",
@@ -1108,7 +1165,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa dourada - confirmar Gold",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-fakhar-gold-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "french-avenue-liquid-brun",
@@ -1163,7 +1223,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha da Fragrance World",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/french-avenue-liquid-brun-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-fakhar-rose",
@@ -1224,7 +1287,10 @@
     "confiancaIdentificacao": "media",
     "pesquisaConfirmada": true,
     "observacoes": "caixa branca placa rose gold - confirmar Rose/Women | pode ser 'Fakhar' base feminino ou 'Fakhar Rose' - nome mais provavel dado placa rose gold",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-fakhar-rose-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-athena-edp",
@@ -1283,7 +1349,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-athena-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-oud-parfum",
@@ -1342,7 +1411,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-oud-parfum-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "amaran-fanoos-siraj-edp",
@@ -1402,7 +1474,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/amaran-fanoos-siraj-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-dalal-100ml",
@@ -1456,7 +1531,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-dalal-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "asdaaf-ameerat-al-arab-edp-100ml",
@@ -1509,7 +1587,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/asdaaf-ameerat-al-arab-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-ryan-turquoise-crescent-pour-femme-80ml",
@@ -1563,7 +1644,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha CRESCENT no topo; 2.7 fl.oz = 80ml",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-ryan-turquoise-crescent-pour-femme-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-intrude-edp-100ml",
@@ -1617,7 +1701,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-intrude-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-delilah-pour-femme-edp-100ml",
@@ -1666,7 +1753,11 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "brasao com leao, marca nao escrita - NAO confundir com Maison Alhambra Delilah Blanc | duplicata de 13.52.36 (1)",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-delilah-pour-femme-edp-100ml-1.jpeg",
+      "/produtos/maison-alhambra-delilah-pour-femme-edp-100ml-2.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-genius-blush-edp-100ml",
@@ -1719,7 +1810,11 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-genius-blush-edp-100ml-1.jpeg",
+      "/produtos/emper-genius-blush-edp-100ml-2.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "amaran-kings-queens-ethos-edp-100ml",
@@ -1774,7 +1869,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/amaran-kings-queens-ethos-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "grandeur-icon-edp-100ml",
@@ -1826,7 +1924,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/grandeur-icon-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-eclaire-edp-100ml",
@@ -1879,7 +1980,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-eclaire-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-angham-edp-100ml",
@@ -1937,7 +2041,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-angham-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-secrets-of-red-girl-edp-100ml",
@@ -1988,7 +2095,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha SECRET",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-secrets-of-red-girl-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "paris-corner-marshmallow-blush",
@@ -2042,7 +2152,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/paris-corner-marshmallow-blush-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "milestone-perfumes-her-bravery-elixir-edp-100ml",
@@ -2101,7 +2214,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "marca nao visivel na frente",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/milestone-perfumes-her-bravery-elixir-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "amaran-kings-queens-pure-aruba-edp-100ml",
@@ -2153,7 +2269,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/amaran-kings-queens-pure-aruba-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "milestone-perfumes-her-bravery-edp-100ml",
@@ -2212,7 +2331,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "logo Milestone confirma marca do Her Bravery Elixir",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/milestone-perfumes-her-bravery-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-layaan",
@@ -2265,7 +2387,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-layaan-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-maleeka-edp-105ml",
@@ -2318,7 +2443,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-maleeka-edp-105ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-divine-mystique-edp-100ml",
@@ -2353,7 +2481,10 @@
     "confiancaIdentificacao": "media",
     "pesquisaConfirmada": false,
     "observacoes": "REVISAR: pesquisa nao confirmou 'Divine Mystique' sob a marca Maison Alhambra; existe produto de mesmo nome sob a marca Le Chameau (Emper). Conferir embalagem fisica antes de publicar.",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-divine-mystique-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-chants-tenderina-edp-100ml",
@@ -2409,7 +2540,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-chants-tenderina-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "orientica-royal-amber-edp",
@@ -2463,7 +2597,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Luxury Collection",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/orientica-royal-amber-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "orientica-rose-eclat-edp",
@@ -2519,7 +2656,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Luxury Collection",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/orientica-rose-eclat-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-floretta-violeta-edp-100ml",
@@ -2567,7 +2707,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "Floretta pode ser linha e nao marca - validar | Floretta e linha da Emper, nao marca independente",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-floretta-violeta-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-so-candid-rouge-edp-85ml",
@@ -2617,7 +2760,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "2.87 FL.OZ = 85ml, texto ml ilegivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-so-candid-rouge-edp-85ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-floretta-fulla-edp-100ml",
@@ -2674,7 +2820,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-floretta-fulla-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "al-wataniah-sabah-al-ward-sugar",
@@ -2733,7 +2882,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa rosa, palavra Sugar no topo, marca nao visivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/al-wataniah-sabah-al-ward-sugar-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-so-candid-pour-femme-edp",
@@ -2782,7 +2934,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-so-candid-pour-femme-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-musamam",
@@ -2836,7 +2991,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "estojo cilindrico textura python",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-musamam-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "al-wataniah-sabah-al-ward-delilah",
@@ -2887,7 +3045,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa roxa, subtitulo Delilah; possivel mesma caixa de 13.52.54",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/al-wataniah-sabah-al-ward-delilah-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-atheeri",
@@ -2939,7 +3100,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-atheeri-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "emper-genius-rose-edp-100ml",
@@ -2991,7 +3155,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/emper-genius-rose-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "fragrance-world-vanilla-so-sweet-edp-100ml",
@@ -3046,7 +3213,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/fragrance-world-vanilla-so-sweet-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rasasi-jawaher-edp-100ml",
@@ -3100,7 +3270,10 @@
     "confiancaIdentificacao": "media",
     "pesquisaConfirmada": true,
     "observacoes": "caixa dourada, marca nao visivel | nome comum usado por varias marcas arabes - Rasasi mais provavel dado 100ml+tema dourado mas sem 100% certeza",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rasasi-jawaher-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-leonie-edp-100ml",
@@ -3157,7 +3330,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-leonie-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "maison-alhambra-rose-seduction-vip-pour-femme-edp-100ml",
@@ -3210,7 +3386,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/maison-alhambra-rose-seduction-vip-pour-femme-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-yara-edp-100ml",
@@ -3263,7 +3442,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa rosa claro",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-yara-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-yara-elixir-edp-100ml",
@@ -3315,7 +3497,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa rosa escuro",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-yara-elixir-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-yara-tous-edp-100ml",
@@ -3368,7 +3553,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa laranja",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-yara-tous-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-berry-on-top-give-me-gourmand-edp-75ml",
@@ -3420,7 +3608,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-berry-on-top-give-me-gourmand-edp-75ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mayar-natural-intense",
@@ -3475,7 +3666,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "estojo cilindrico turquesa",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mayar-natural-intense-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mallow-madness-give-me-gourmand-edp-75ml",
@@ -3528,7 +3722,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mallow-madness-give-me-gourmand-edp-75ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mayar-cherry-intense",
@@ -3579,7 +3776,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "estojo cilindrico bordo",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mayar-cherry-intense-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "aurora-scents-cherry-in-the-woods",
@@ -3638,7 +3838,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/aurora-scents-cherry-in-the-woods-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "mawwal-arabia-basir",
@@ -3692,7 +3895,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "selo dourado BASIR + mawwal",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/mawwal-arabia-basir-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "asdaaf-raneen",
@@ -3748,7 +3954,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/asdaaf-raneen-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mayar",
@@ -3801,7 +4010,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "estojo cilindrico rosa - versao original",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mayar-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "french-avenue-veneno-bianco",
@@ -3858,7 +4070,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/french-avenue-veneno-bianco-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "nasma-nisrine-edp-100ml",
@@ -3911,7 +4126,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa vermelha/dourada, marca nao visivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/nasma-nisrine-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-queen-of-arabia-edp-100ml",
@@ -3961,7 +4179,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Lattafa Pride",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-queen-of-arabia-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-her-confessions-edp",
@@ -4016,7 +4237,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "foto com sombra, volume ilegivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-her-confessions-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-infinity-edp",
@@ -4071,7 +4295,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-infinity-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-tharwah-gold-edp-100ml",
@@ -4123,7 +4350,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Lattafa Pride",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-tharwah-gold-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-nebras",
@@ -4176,7 +4406,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Lattafa Pride",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-nebras-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "l-affair-alora-extrait",
@@ -4227,7 +4460,10 @@
     "confiancaIdentificacao": "media",
     "pesquisaConfirmada": true,
     "observacoes": "ALORA em destaque + L'AFFAIR; definir qual e marca | CUIDADO: existe tambem Alora da Ard Al Zaafaran (produto diferente, notas diferentes). Visual (Extrait de Parfum, subtitulo L'AFFAIR) bate melhor com L'Affair, vendido como dupe de La Bomba (Carolina Herrera)",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/l-affair-alora-extrait-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-yara-candy-edp-100ml",
@@ -4279,7 +4515,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-yara-candy-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-afeef",
@@ -4334,7 +4573,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-afeef-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-dream-of-haze-edp-100ml",
@@ -4388,7 +4630,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "linha Lattafa Pride",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-dream-of-haze-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-velvet-petals-250ml-body-splash",
@@ -4439,7 +4684,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-velvet-petals-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-pure-seduction-shimmer-250ml-body-splash",
@@ -4487,7 +4735,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-pure-seduction-shimmer-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-pure-seduction-shimmer-236ml-hidratante",
@@ -4535,7 +4786,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-pure-seduction-shimmer-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-coconut-passion-shimmer-250ml-body-splash",
@@ -4587,7 +4841,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-coconut-passion-shimmer-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-temptation-236ml-hidratante",
@@ -4634,7 +4891,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-temptation-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-coconut-passion-shimmer-236ml-hidratante",
@@ -4686,7 +4946,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-coconut-passion-shimmer-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-coconut-passion-236ml-hidratante",
@@ -4737,7 +5000,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-coconut-passion-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-temptation-250ml-body-splash",
@@ -4784,7 +5050,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-temptation-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-temptation-shimmer-236ml-hidratante",
@@ -4830,7 +5099,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-temptation-shimmer-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-amber-romance-shimmer-250ml-body-splash",
@@ -4882,7 +5154,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-amber-romance-shimmer-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-coconut-passion-250ml-body-splash",
@@ -4933,7 +5208,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-coconut-passion-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-bare-vanilla-250ml-body-splash",
@@ -4983,7 +5261,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-bare-vanilla-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "v-s-secrets-of-romance-sexy-vanilla-shimmer-250ml-body-splash",
@@ -5024,7 +5305,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": false,
     "observacoes": "MARCA DIFERENTE de Victoria's Secret - rotulo V.S. Secrets of Romance",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/v-s-secrets-of-romance-sexy-vanilla-shimmer-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-bare-vanilla-236ml-hidratante",
@@ -5074,7 +5358,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-bare-vanilla-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "v-s-secrets-of-romance-velvet-flowers-shimmer-250ml-body-splash",
@@ -5115,7 +5402,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": false,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/v-s-secrets-of-romance-velvet-flowers-shimmer-250ml-body-splash-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-velvet-petals-236ml-hidratante",
@@ -5166,7 +5456,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-velvet-petals-236ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-eclaire-perfume-mist",
@@ -5219,7 +5512,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-eclaire-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-haya-perfume-mist",
@@ -5276,7 +5572,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-haya-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mayar-natural-intense-perfume-mist",
@@ -5331,7 +5630,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mayar-natural-intense-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-bade-e-al-oud-noble-blush-perfume-mist",
@@ -5383,7 +5685,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-bade-e-al-oud-noble-blush-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-angham-perfume-mist",
@@ -5441,7 +5746,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-angham-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-238-edp-25ml",
@@ -5497,7 +5805,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-238-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-027-edp-25ml",
@@ -5556,7 +5867,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-027-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-373-queen-edp-25ml",
@@ -5609,7 +5923,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-373-queen-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lattafa-mayar-cherry-intense-perfume-mist",
@@ -5660,7 +5977,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lattafa-mayar-cherry-intense-perfume-mist-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-235-edp-25ml",
@@ -5718,7 +6038,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-235-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-378-edp-25ml",
@@ -5769,7 +6092,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-378-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-342-miss-rose-edp-25ml",
@@ -5822,7 +6148,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-342-miss-rose-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-012-edp-25ml",
@@ -5877,7 +6206,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-012-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-246-edp-25ml",
@@ -5938,7 +6270,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-246-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-283-star-novae-edp-25ml",
@@ -5988,7 +6323,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-283-star-novae-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "brand-collection-no-080-angel-secret-edp-25ml",
@@ -6043,7 +6381,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/brand-collection-no-080-angel-secret-edp-25ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rabanne-1-million-edt",
@@ -6098,7 +6439,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rabanne-1-million-edt-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "valentino-uomo-born-in-roma-coral-fantasy-edt",
@@ -6153,7 +6497,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/valentino-uomo-born-in-roma-coral-fantasy-edt-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "sabrina-carpenter-sweet-tooth-caramel-dream-edp-75ml",
@@ -6213,7 +6560,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/sabrina-carpenter-sweet-tooth-caramel-dream-edp-75ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "giorgio-armani-acqua-di-gio-edt-100ml",
@@ -6272,7 +6622,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "refillable",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/giorgio-armani-acqua-di-gio-edt-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "sabrina-carpenter-sweet-tooth-cherry-baby-edp-75ml",
@@ -6332,7 +6685,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/sabrina-carpenter-sweet-tooth-cherry-baby-edp-75ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lancome-la-vie-est-belle-edp-100ml",
@@ -6388,7 +6744,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lancome-la-vie-est-belle-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "sabrina-carpenter-sweet-tooth-edp-75ml",
@@ -6448,7 +6807,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "caixa rosa claro - nome da variante nao visivel na face frontal | frasco rosa claro = versao original (2022) sem sufixo de flanker, distinto de Caramel Dream/Cherry Baby/Lemon Pie",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/sabrina-carpenter-sweet-tooth-edp-75ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-212-vip-rose-nyc-212-cab-limited-edition-edp-80ml",
@@ -6500,7 +6862,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-212-vip-rose-nyc-212-cab-limited-edition-edp-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-212-sexy-edp-100ml",
@@ -6555,7 +6920,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-212-sexy-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-good-girl-very-edp-80ml",
@@ -6606,7 +6974,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "nome comercial oficial: Very Good Girl",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-good-girl-very-edp-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-good-girl-jasmine-absolute-edp-absolute-80ml",
@@ -6659,7 +7030,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-good-girl-jasmine-absolute-edp-absolute-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-good-girl-blush-edp-80ml",
@@ -6710,7 +7084,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-good-girl-blush-edp-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "dior-j-adore-edp",
@@ -6775,7 +7152,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/dior-j-adore-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-good-girl-edp-50ml",
@@ -6841,7 +7221,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-good-girl-edp-50ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "princesse-marina-de-bourbon-classique-edp-100ml",
@@ -6896,7 +7279,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/princesse-marina-de-bourbon-classique-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "princesse-marina-de-bourbon-rouge-royal-edp-100ml",
@@ -6949,7 +7335,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/princesse-marina-de-bourbon-rouge-royal-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "dolce-gabbana-light-blue-edt",
@@ -7004,7 +7393,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "volume ilegivel",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/dolce-gabbana-light-blue-edt-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "jean-paul-gaultier-scandal-intense-edp-intense-50ml",
@@ -7053,7 +7445,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/jean-paul-gaultier-scandal-intense-edp-intense-50ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "nina-ricci-venus-edp-80ml",
@@ -7105,7 +7500,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "refillable",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/nina-ricci-venus-edp-80ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "jean-paul-gaultier-scandal-le-parfum-edp-intense-50ml",
@@ -7156,7 +7554,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/jean-paul-gaultier-scandal-le-parfum-edp-intense-50ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "lancome-idole-power-edp-intense",
@@ -7205,7 +7606,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/lancome-idole-power-edp-intense-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "paco-rabanne-fame-parfum",
@@ -7261,7 +7665,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "refillable",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/paco-rabanne-fame-parfum-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "yves-saint-laurent-libre-edp",
@@ -7318,7 +7725,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/yves-saint-laurent-libre-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "burberry-goddess-edp",
@@ -7370,7 +7780,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/burberry-goddess-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "dior-hypnotic-poison",
@@ -7429,7 +7842,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "concentracao ilegivel na foto",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/dior-hypnotic-poison-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rabanne-olympea-parfum-intense",
@@ -7484,7 +7900,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rabanne-olympea-parfum-intense-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rabanne-olympea-edp",
@@ -7539,7 +7958,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rabanne-olympea-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "calvin-klein-euphoria-edp-100ml",
@@ -7595,7 +8017,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/calvin-klein-euphoria-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "burberry-her-edp-intense-100ml",
@@ -7645,7 +8070,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/burberry-her-edp-intense-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "prada-paradoxe-edp-90ml",
@@ -7702,7 +8130,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/prada-paradoxe-edp-90ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "yves-saint-laurent-mon-paris-edp-90ml",
@@ -7760,7 +8191,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "3 fl.oz = 90ml",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/yves-saint-laurent-mon-paris-edp-90ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "valentino-donna-born-in-roma-edp-100ml",
@@ -7815,7 +8249,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/valentino-donna-born-in-roma-edp-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "valentino-donna-born-in-roma-intense-edp-intense-100ml",
@@ -7863,7 +8300,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/valentino-donna-born-in-roma-intense-edp-intense-100ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "montblanc-signature-edp",
@@ -7916,7 +8356,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/montblanc-signature-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "giorgio-armani-my-way-edp",
@@ -7969,7 +8412,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/giorgio-armani-my-way-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "dior-miss-dior-edp",
@@ -8026,7 +8472,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/dior-miss-dior-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "carolina-herrera-la-bomba-edp-50ml",
@@ -8077,7 +8526,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "refillable",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/carolina-herrera-la-bomba-edp-50ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-tease-250ml-hidratante",
@@ -8125,7 +8577,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "Fine Fragrance Lotion",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-tease-250ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-bombshell-intense-250ml-hidratante",
@@ -8175,7 +8630,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "Fine Fragrance Lotion",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-bombshell-intense-250ml-hidratante-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-tease-edp-50ml",
@@ -8223,7 +8681,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-tease-edp-50ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "victoria-s-secret-bombshell-intense-edp",
@@ -8273,7 +8734,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/victoria-s-secret-bombshell-intense-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "montblanc-signature-elixir-edp-90ml",
@@ -8321,7 +8785,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/montblanc-signature-elixir-edp-90ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "sistelle-sanderling-shine-blooming-edition-edp-95ml",
@@ -8377,7 +8844,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/sistelle-sanderling-shine-blooming-edition-edp-95ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rabanne-million-gold-for-her-edp",
@@ -8431,7 +8901,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": "refillable",
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rabanne-million-gold-for-her-edp-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "armaf-club-de-nuit-woman-edp-105ml",
@@ -8489,7 +8962,10 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/armaf-club-de-nuit-woman-edp-105ml-1.jpeg"
+    ],
+    "imagePlaceholder": false
   },
   {
     "id": "rabanne-1-million-elixir-parfum-intense",
@@ -8544,6 +9020,9 @@
     "confiancaIdentificacao": "alta",
     "pesquisaConfirmada": true,
     "observacoes": null,
-    "imagePlaceholder": true
+    "imagens": [
+      "/produtos/rabanne-1-million-elixir-parfum-intense-1.jpeg"
+    ],
+    "imagePlaceholder": false
   }
 ]

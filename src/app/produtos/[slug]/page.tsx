@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react'
 import ProductGallery from '@/components/produto/ProductGallery'
 import ProductInfo from '@/components/produto/ProductInfo'
 import ProductCard from '@/components/produto/ProductCard'
-import { getAllPerfumes, getPerfumeBySlug, volumeLabel, cardTitle } from '@/lib/perfumes'
+import { getAllPerfumes, getPerfumeBySlug, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 
@@ -70,7 +70,7 @@ export default async function ProdutoPage({
       {/* Main */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-          <ProductGallery name={perfume.name} />
+          <ProductGallery name={perfume.name} images={perfume.imagens} />
           <ProductInfo perfume={perfume} />
         </div>
       </section>
@@ -92,6 +92,7 @@ export default async function ProdutoPage({
                   id={p.id}
                   slug={p.slug}
                   name={cardTitle(p)}
+                  imageUrl={primaryImage(p)}
                   volume={volumeLabel(p)}
                   price={p.price}
                   stock={p.stock}
