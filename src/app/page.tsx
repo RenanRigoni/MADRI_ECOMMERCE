@@ -8,7 +8,7 @@ import FragranceFinderSection from '@/components/sections/FragranceFinderSection
 import GiftSection from '@/components/sections/GiftSection'
 import HeroSearchTrigger from '@/components/hero/HeroSearchTrigger'
 import HeroCarousel from '@/components/hero/HeroCarousel'
-import { maisVendidos, novidades } from '@/lib/products'
+import { getHomepageBestSellers, getHomepageNewArrivals, volumeLabel } from '@/lib/perfumes'
 
 /* ── Hero images — mantenha 4-6 imagens para ritmo ideal ── */
 const heroImages: string[] = [
@@ -83,6 +83,10 @@ const momentos = [
 
 /* ── Page ──────────────────────────────────────────────── */
 export default function Home() {
+  /* Curadoria automática (sem dado real de vendas/lançamento ainda) — ver getHomepageBestSellers/getHomepageNewArrivals em lib/perfumes.ts */
+  const maisVendidos = getHomepageBestSellers(4)
+  const novidades = getHomepageNewArrivals(8)
+
   return (
     <>
       {/* ━━━ 1. HERO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -241,38 +245,45 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Featured first */}
-          <div className="mb-4 md:mb-5">
-            <ProductCard
-              {...maisVendidos[0]}
-              featured
-              isBestSeller={maisVendidos[0].isBestSeller}
-              fragranceFamily={maisVendidos[0].fragranceFamily}
-              notesTop={maisVendidos[0].notesTop}
-              intensity={maisVendidos[0].intensity}
-              shortDescription={maisVendidos[0].shortDescription}
-            />
-          </div>
+          {maisVendidos.length > 0 && (
+            <>
+              {/* Featured first */}
+              <div className="mb-4 md:mb-5">
+                <ProductCard
+                  id={maisVendidos[0].id}
+                  slug={maisVendidos[0].slug}
+                  name={maisVendidos[0].name}
+                  volume={volumeLabel(maisVendidos[0])}
+                  price={maisVendidos[0].price}
+                  discount={maisVendidos[0].discount ?? undefined}
+                  stock={maisVendidos[0].stock}
+                  featured
+                  fragranceFamily={maisVendidos[0].fragranceFamily}
+                  notesTop={maisVendidos[0].notesTop}
+                  shortDescription={maisVendidos[0].shortDescription ?? undefined}
+                />
+              </div>
 
-          {/* Remaining 3 */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {maisVendidos.slice(1).map((p) => (
-              <ProductCard
-                key={p.id}
-                id={p.id}
-                slug={p.slug}
-                name={p.name}
-                volume={p.volume}
-                price={p.price}
-                discount={p.discount}
-                stock={p.stock}
-                fragranceFamily={p.fragranceFamily}
-                notesTop={p.notesTop}
-                intensity={p.intensity}
-                shortDescription={p.shortDescription}
-              />
-            ))}
-          </div>
+              {/* Remaining 3 */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+                {maisVendidos.slice(1).map((p) => (
+                  <ProductCard
+                    key={p.id}
+                    id={p.id}
+                    slug={p.slug}
+                    name={p.name}
+                    volume={volumeLabel(p)}
+                    price={p.price}
+                    discount={p.discount ?? undefined}
+                    stock={p.stock}
+                    fragranceFamily={p.fragranceFamily}
+                    notesTop={p.notesTop}
+                    shortDescription={p.shortDescription ?? undefined}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -402,14 +413,13 @@ export default function Home() {
                     id={p.id}
                     slug={p.slug}
                     name={p.name}
-                    volume={p.volume}
+                    volume={volumeLabel(p)}
                     price={p.price}
-                    discount={p.discount}
+                    discount={p.discount ?? undefined}
                     stock={p.stock}
-                    isNew={p.isNew}
+                    isNew
                     fragranceFamily={p.fragranceFamily}
                     notesTop={p.notesTop}
-                    intensity={p.intensity}
                   />
                 </div>
               ))}
@@ -426,14 +436,13 @@ export default function Home() {
                 id={p.id}
                 slug={p.slug}
                 name={p.name}
-                volume={p.volume}
+                volume={volumeLabel(p)}
                 price={p.price}
-                discount={p.discount}
+                discount={p.discount ?? undefined}
                 stock={p.stock}
-                isNew={p.isNew}
+                isNew
                 fragranceFamily={p.fragranceFamily}
                 notesTop={p.notesTop}
-                intensity={p.intensity}
               />
             ))}
           </div>

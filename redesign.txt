@@ -1,0 +1,1316 @@
+You are working on the MADRI Perfumaria e-commerce project.
+
+The current result is visually clean, but it still feels too simple, too generic, and too much like a beautiful landing page with products. It does not yet feel like a real premium perfume e-commerce storefront.
+
+I want you to rebuild the storefront experience with a much stronger UX/UI direction.
+
+This is not a simple visual polish.
+This is a complete premium storefront redesign focused on:
+
+* e-commerce usability
+* perfume discovery
+* navigation
+* filtering
+* product merchandising
+* premium visual design
+* brand storytelling
+* conversion
+* mobile experience
+* less generic layout decisions
+
+IMPORTANT LANGUAGE RULE:
+All instructions in this prompt are in English, but every visible text in the website must remain in Portuguese.
+Do not translate customer-facing copy to English.
+Navigation labels, filters, buttons, sections, product labels, cart texts, empty states, headings and microcopy must be in Portuguese.
+
+==================================================
+0. USE THE INSTALLED SKILLS DELIBERATELY
+========================================
+
+Before implementing, use the available Claude Code skills intentionally.
+
+Use these skills as part of the process:
+
+Research and references:
+
+* firecrawl-search
+* firecrawl-scrape
+* firecrawl-map, if useful
+
+UX and redesign:
+
+* redesign-existing-projects
+* critique
+* shape
+* frontend-design
+* high-end-visual-design
+* ui-ux-pro-max
+* impeccable
+* design-taste-frontend
+
+Visual refinement:
+
+* layout
+* typeset
+* bolder
+* minimalist-ui
+* polish
+* delight
+* animate
+
+Implementation quality:
+
+* adapt
+* optimize
+* audit
+* webapp-testing
+* verification-before-completion
+
+Copy and SEO:
+
+* copywriting
+* seo-local-business, only if relevant to metadata and structured data
+
+Use the skills to avoid generic AI output.
+Do not produce a safe, boring, template-like result.
+Make strong design decisions, but always preserve usability.
+
+==================================================
+
+1. FIRST: INSPECT THE CURRENT PROJECT
+   ==================================================
+
+Before changing anything:
+
+1. Inspect the project structure.
+2. Identify the stack, routing, components, styling system and product data source.
+3. Identify existing working logic:
+
+   * cart
+   * product data
+   * product cards
+   * filters if any
+   * checkout or WhatsApp flow
+   * responsive behavior
+4. Preserve business logic that works.
+5. Do not break the cart or product data.
+6. Do not delete important existing assets.
+7. Do not rewrite the project blindly if the existing structure can be improved safely.
+
+The goal is not to destroy the project.
+The goal is to transform the storefront experience.
+
+==================================================
+2. CURRENT PROBLEM
+==================
+
+The current website is visually elegant but too simple.
+
+It currently feels like:
+
+* a minimal landing page
+* a brand presentation
+* a simple product grid
+* a basic premium template
+
+It does NOT yet feel like:
+
+* a complete perfume e-commerce
+* a premium shopping experience
+* a product discovery system
+* a curated fragrance boutique
+* a modern storefront with useful navigation and filtering
+
+The main issue is not only aesthetics.
+The main issue is missing e-commerce architecture.
+
+The customer needs help choosing a perfume online.
+Since they cannot smell the product, the interface must guide them through:
+
+* fragrance families
+* occasions
+* intensity
+* gender/profile
+* volume
+* price
+* best sellers
+* new arrivals
+* gifts
+* product notes
+* recommendations
+
+==================================================
+3. BENCHMARK RESEARCH REQUIREMENT
+=================================
+
+Before redesigning, research modern perfume and beauty e-commerce references using Firecrawl.
+
+Analyze patterns from references such as:
+
+* Sephora fragrance category
+* O Boticário perfumaria
+* Época Cosméticos perfume category
+* Granado perfumaria
+* Jo Malone scent finder
+* Maison Francis Kurkdjian fragrance finder
+* Diptyque perfume category
+* Byredo discovery sets
+* Dior fragrance product pages
+* Chanel fragrance product pages
+
+Do not copy these brands visually.
+Extract useful UX and merchandising patterns.
+
+Look specifically for:
+
+* navigation structure
+* category grouping
+* fragrance family filters
+* gift navigation
+* product cards
+* product listing pages
+* discovery tools
+* quiz / finder patterns
+* mobile catalog behavior
+* product detail information architecture
+* trust elements
+* sorting and filtering
+* premium visual rhythm
+
+After research, apply what makes sense for MADRI Perfumaria.
+
+If external browsing is unavailable, proceed using best-practice knowledge, but still implement the e-commerce architecture described below.
+
+==================================================
+4. PRIMARY GOAL
+===============
+
+Rebuild the MADRI storefront as a premium perfume e-commerce experience.
+
+The result must feel like:
+
+* a modern digital perfume boutique
+* premium but usable
+* elegant but commercial
+* sophisticated but not empty
+* editorial but still easy to shop
+* brand-led but conversion-focused
+
+The final site must no longer feel generic.
+
+==================================================
+5. NON-NEGOTIABLE DESIGN RULES
+==============================
+
+Do not make the website predominantly dark.
+
+This is an e-commerce website.
+The dominant background must be white, off-white, warm neutral or very light beige.
+
+This is a UX requirement:
+
+* lower visual fatigue
+* better product scanning
+* easier reading
+* better perceived cleanliness
+* better shopping comfort
+* better conversion
+
+Black is allowed, but only as a strategic brand accent:
+
+* header, if appropriate
+* footer
+* primary buttons
+* selected editorial blocks
+* brand storytelling section
+* hover states
+* contrast details
+
+Do not turn the store into a dark conceptual landing page.
+
+The correct direction is:
+
+* predominantly light storefront
+* premium black/dark accents
+* subtle gold details
+* refined typography
+* strong product discovery
+* clean UX
+
+==================================================
+6. BRAND PERSONALITY
+====================
+
+MADRI Perfumaria should feel:
+
+* premium
+* intentional
+* sophisticated
+* intimate
+* elegant
+* modern
+* curated
+* feminine-neutral, not overly feminine
+* luxurious, but accessible
+
+Avoid:
+
+* generic Shopify-like layout
+* overly empty minimalist sections
+* random gradients
+* childish animations
+* excessive shadows
+* low-quality stock feel
+* too many dark sections
+* cheap-looking cards
+* fake luxury clichés
+
+Use:
+
+* editorial spacing
+* refined borders
+* subtle gold accents
+* clean product cards
+* premium typography
+* guided browsing
+* smooth microinteractions
+* structured e-commerce navigation
+
+==================================================
+7. INFORMATION ARCHITECTURE — NAVIGATION
+========================================
+
+The current navigation is too simple.
+
+Redesign the navigation system to help users browse and choose products.
+
+Suggested desktop navigation:
+
+Header main items:
+
+* Perfumes
+* Famílias Olfativas
+* Momentos
+* Presentes
+* Novidades
+* Sobre
+
+Add search access.
+Add cart access.
+If possible, add user-friendly icons without visual clutter.
+
+Perfumes menu can include:
+
+* Todos os perfumes
+* Femininos
+* Masculinos
+* Unissex
+* Mais vendidos
+* Lançamentos
+* Promoções
+* 50ml
+* 75ml
+* 100ml
+
+Famílias Olfativas can include:
+
+* Floral
+* Amadeirado
+* Cítrico
+* Oriental
+* Frutal
+* Aromático
+* Gourmand
+* Musk
+* Âmbar
+
+Momentos can include:
+
+* Dia a dia
+* Noite
+* Trabalho
+* Encontros
+* Ocasiões especiais
+* Para presentear
+
+Presentes can include:
+
+* Kits
+* Até R$ 150
+* Até R$ 250
+* Embalagem especial
+* Mais presenteáveis
+
+If the project does not support full pages yet, implement these as section anchors, filter chips or collection links that can be expanded later.
+
+The user should immediately feel that this is a real perfume store, not just a homepage.
+
+==================================================
+8. HOMEPAGE STRUCTURE TO IMPLEMENT
+==================================
+
+Rebuild the homepage structure using this commercial flow:
+
+1. Promo bar
+2. Premium sticky header with expanded navigation
+3. Hero with search/discovery CTA
+4. Benefit/trust bar
+5. Shop by category
+6. Fragrance finder / discovery guide
+7. Shop by fragrance family
+8. Best sellers with stronger merchandising
+9. Shop by moment
+10. New arrivals
+11. Gift / packaging section
+12. Brand storytelling section
+13. Newsletter or WhatsApp CTA
+14. Footer
+
+Each section must have a clear commercial purpose.
+
+Do not add decorative sections that do not help the customer shop or trust the brand.
+
+==================================================
+9. HERO SECTION
+===============
+
+The hero must stop feeling empty.
+
+It should be elegant, light, commercial and useful.
+
+Required elements:
+
+* small label: "Coleção exclusiva"
+* main headline: "A essência do seu momento."
+* supporting text: "Perfumes que contam histórias, criados para quem vive com intenção."
+* primary CTA: "Comprar agora"
+* secondary CTA: "Encontrar meu perfume"
+* optional search input or guided CTA:
+  placeholder: "Busque por nome, família ou ocasião"
+* right-side premium product/brand composition
+* subtle background monogram or visual element
+* light background, not dark
+* refined visual rhythm
+
+The hero should communicate brand and shopping utility at the same time.
+
+Avoid a huge empty hero with only text.
+Avoid a purely institutional first fold.
+
+==================================================
+10. SHOP BY CATEGORY SECTION
+============================
+
+Add a section after the benefit bar:
+
+Heading:
+"Compre por categoria"
+
+Categories:
+
+* Femininos
+* Masculinos
+* Unissex
+* Mais vendidos
+* Lançamentos
+* Presentes
+
+Design:
+
+* premium horizontal cards or elegant chips
+* light background
+* subtle border
+* hover state
+* icon or small visual cue
+* clear click/tap behavior
+
+This section should make browsing faster.
+
+==================================================
+11. FRAGRANCE FINDER SECTION
+============================
+
+Add a guided discovery section.
+
+Heading:
+"Encontre sua fragrância ideal"
+
+Subtext:
+"Responda pelo seu momento, intensidade e estilo preferido."
+
+Implement this as a simple interactive guide if possible.
+If full logic is too complex, implement a polished static version with filter chips and recommended product cards.
+
+Suggested steps or filters:
+
+1. "Para quem é?"
+
+   * Para mim
+   * Para presentear
+
+2. "Qual momento?"
+
+   * Dia a dia
+   * Noite
+   * Trabalho
+   * Encontros
+   * Ocasiões especiais
+
+3. "Qual intensidade?"
+
+   * Leve
+   * Moderada
+   * Marcante
+
+4. "Qual caminho olfativo?"
+
+   * Floral
+   * Cítrico
+   * Amadeirado
+   * Oriental
+   * Frutal
+   * Gourmand
+   * Musk
+
+Result:
+
+* show 3 recommended products
+* CTA: "Ver recomendações"
+
+Do not over-engineer it.
+But make it feel useful and premium.
+
+==================================================
+12. SHOP BY FRAGRANCE FAMILY
+============================
+
+Add a section:
+
+Heading:
+"Escolha pela família olfativa"
+
+Families:
+
+* Floral
+* Amadeirado
+* Cítrico
+* Oriental
+* Frutal
+* Aromático
+* Gourmand
+* Musk
+
+Each family card/chip should include:
+
+* name
+* short explanation
+* subtle visual treatment
+* CTA or clickable behavior
+
+Example Portuguese microcopy:
+
+* Floral: "Delicado, elegante e envolvente"
+* Amadeirado: "Sofisticado, quente e marcante"
+* Cítrico: "Fresco, leve e vibrante"
+* Oriental: "Intenso, sensual e memorável"
+* Frutal: "Doce, jovem e luminoso"
+* Aromático: "Limpo, versátil e moderno"
+* Gourmand: "Doce, cremoso e confortável"
+* Musk: "Íntimo, limpo e sofisticado"
+
+This section is essential for perfume e-commerce.
+
+==================================================
+13. FILTERING AND SORTING SYSTEM
+================================
+
+The product listing must have real browsing tools.
+
+Implement or improve filters for product sections.
+
+Desktop:
+
+* use a clean horizontal filter bar or left-side filter panel
+* filters must be easy to scan
+* avoid visual clutter
+
+Mobile:
+
+* use a filter drawer or bottom sheet
+* clear button: "Filtrar"
+* clear button: "Limpar filtros"
+* apply button: "Aplicar filtros"
+
+Required filters:
+
+* Família olfativa
+* Momento
+* Intensidade
+* Perfil
+* Volume
+* Preço
+* Disponibilidade
+* Lançamento
+* Promoção
+
+Suggested filter values:
+
+Família olfativa:
+
+* Floral
+* Amadeirado
+* Cítrico
+* Oriental
+* Frutal
+* Aromático
+* Gourmand
+* Musk
+
+Momento:
+
+* Dia a dia
+* Noite
+* Trabalho
+* Encontros
+* Presente
+* Ocasiões especiais
+
+Intensidade:
+
+* Leve
+* Moderada
+* Marcante
+
+Perfil:
+
+* Feminino
+* Masculino
+* Unissex
+
+Volume:
+
+* 50ml
+* 75ml
+* 100ml
+
+Preço:
+
+* Até R$ 150
+* R$ 150 a R$ 250
+* Acima de R$ 250
+
+Disponibilidade:
+
+* Em estoque
+* Esgotado
+
+Sorting:
+Add sorting options:
+
+* Mais vendidos
+* Novidades
+* Menor preço
+* Maior preço
+* Promoções
+
+If the product data does not currently have these fields, extend the product data model with sensible placeholder metadata without breaking the app.
+
+==================================================
+14. PRODUCT DATA MODEL
+======================
+
+Each product should support richer perfume metadata.
+
+Add or normalize fields such as:
+
+* name
+* slug
+* volume
+* price
+* oldPrice
+* pixPrice
+* installmentInfo
+* status
+* badges
+* fragranceFamily
+* notesTop
+* notesHeart
+* notesBase
+* intensity
+* occasion
+* profile
+* isBestSeller
+* isNew
+* isGiftable
+* stockStatus
+* shortDescription
+
+Use this metadata to power:
+
+* filters
+* sorting
+* cards
+* product details
+* fragrance finder
+* category sections
+
+Do not hardcode UI labels in a messy way.
+Keep product metadata organized and maintainable.
+
+==================================================
+15. PRODUCT CARD REDESIGN
+=========================
+
+Redesign product cards to feel premium and more useful.
+
+Current cards are too empty and too simple.
+
+Each product card should include:
+
+* product image or placeholder with better visual presence
+* product name
+* volume
+* fragrance family
+* 2 or 3 main notes as small chips
+* intensity indicator
+* current price
+* old price if applicable
+* Pix price
+* installment info if available
+* commercial badge
+* stock status
+* favorite icon if appropriate
+* "Adicionar ao carrinho"
+* secondary "Ver detalhes" or quick view
+
+Desktop behavior:
+
+* show essential info by default
+* reveal quick actions on hover if appropriate
+* hover should be smooth and subtle
+
+Mobile behavior:
+
+* do not hide the main CTA
+* cards must remain easy to tap
+* avoid tiny text
+
+The card must help the customer understand the product quickly.
+
+==================================================
+16. BEST SELLERS SECTION
+========================
+
+Redesign "Mais Vendidos" as a stronger merchandising section.
+
+Do not use a generic 4-card grid only.
+
+Preferred structure:
+
+* one featured best seller card on the left or top
+* supporting product grid beside or below it
+* clear CTA: "Ver mais vendidos"
+* filters/chips if useful
+
+Featured product should show:
+
+* why it is a favorite
+* fragrance family
+* notes
+* intensity
+* price
+* add to cart
+
+This section should feel important.
+
+==================================================
+17. NEW ARRIVALS SECTION
+========================
+
+"Novidades" should not look identical to "Mais Vendidos".
+
+Give it a different rhythm:
+
+* horizontal scroll carousel
+* or editorial product rail
+* or compact grid with launch badges
+
+Use:
+
+* "Novo"
+* "Acabou de chegar"
+* "Lançamento"
+* "Conheça primeiro"
+
+Keep it clean but more dynamic.
+
+==================================================
+18. SHOP BY MOMENT SECTION
+==========================
+
+Improve the current "Escolha pelo seu momento" section.
+
+Keep the concept, but make it more useful and integrated with shopping.
+
+Cards:
+
+* Para o dia
+* Para a noite
+* Para presentear
+* Para ocasiões especiais
+
+Each card should:
+
+* include short copy
+* link to matching filtered products
+* have premium visual treatment
+* not be too dark overall
+* have clear CTA: "Ver fragrâncias"
+
+The design can use dark accents, but the overall page must remain light.
+
+==================================================
+19. GIFT AND PACKAGING SECTION
+==============================
+
+Add a commercial section for gifting and premium packaging.
+
+Heading:
+"Presenteie com intenção"
+
+Subtext:
+"Fragrâncias com embalagem especial para transformar o momento da entrega."
+
+Elements:
+
+* packaging highlight
+* giftable products
+* CTA: "Ver opções para presente"
+* mention premium packaging if true
+* do not make false claims
+
+This section is important because perfume is highly giftable.
+
+==================================================
+20. BRAND STORYTELLING SECTION
+==============================
+
+Keep one refined brand section.
+
+Heading:
+"Cada frasco carrega uma intenção."
+
+Subtext:
+"A MADRI cria fragrâncias exclusivas para transformar momentos em presença, memória e identidade."
+
+This section may use black or near-black background.
+But it must be a single intentional brand moment, not the dominant look of the site.
+
+Add:
+
+* refined typography
+* subtle gold details
+* elegant lines
+* CTA: "Conheça a MADRI"
+
+==================================================
+21. HEADER REQUIREMENTS
+=======================
+
+The header needs to feel like a real e-commerce header.
+
+Required:
+
+* logo
+* main navigation
+* category/discovery structure
+* search access
+* cart icon
+* cart count
+* sticky behavior
+* refined hover states
+* mobile menu
+* mobile search
+* mobile cart access
+
+Desktop:
+
+* clean but functional
+* possible dropdown/mega menu for categories
+* do not overcrowd
+
+Mobile:
+
+* hamburger menu
+* search visible or accessible
+* filter and cart easy to access
+
+Top promo bar:
+
+* keep it elegant
+* example: "Frete grátis para compras acima de R$ 300"
+* do not let it look like a cheap banner
+
+==================================================
+22. SEARCH EXPERIENCE
+=====================
+
+Add or improve product search.
+
+Search should allow users to search by:
+
+* product name
+* fragrance family
+* note
+* occasion
+* profile
+
+Placeholder:
+"Busque por perfume, nota ou ocasião"
+
+If search logic already exists, improve UI.
+If not, implement a simple client-side search using product metadata.
+
+Show:
+
+* empty state
+* no-results state
+* clear search button
+
+No-results copy:
+"Nenhuma fragrância encontrada."
+"Experimente buscar por família olfativa, ocasião ou intensidade."
+
+==================================================
+23. CART EXPERIENCE
+===================
+
+If the cart already exists, improve its UI without breaking logic.
+
+Cart drawer should feel premium and clear.
+
+Include:
+
+* product image
+* product name
+* volume
+* price
+* quantity controls
+* subtotal
+* shipping/free shipping message if applicable
+* checkout/WhatsApp CTA depending on existing flow
+* remove item
+* empty cart state
+
+Empty cart copy:
+"Sua sacola está vazia."
+"Explore as fragrâncias MADRI e escolha a essência do seu momento."
+
+==================================================
+24. PRODUCT DETAIL EXPERIENCE
+=============================
+
+If product detail pages exist, improve them.
+If not, create a quick-view modal or product detail component if technically reasonable.
+
+A perfume product detail should include:
+
+* product name
+* volume
+* price
+* Pix price
+* installment info
+* add to cart
+* fragrance family
+* intensity
+* occasion
+* profile
+* olfactory notes:
+
+  * Notas de saída
+  * Notas de coração
+  * Notas de fundo
+* description
+* recommended usage
+* related products
+* trust information
+
+Do not make product detail pages look empty.
+
+==================================================
+25. VISUAL DESIGN SYSTEM
+========================
+
+Create a consistent design system.
+
+Colors:
+
+* background: white / off-white / warm ivory
+* text: near black
+* secondary text: muted warm gray
+* accent: muted gold
+* border: soft warm beige
+* primary button: black
+* primary button hover: refined dark/gold interaction
+* dark section: near black only in strategic areas
+
+Typography:
+
+* elegant serif for major headings
+* clean sans-serif for UI, body, product info
+* better hierarchy
+* avoid excessive letter spacing in normal text
+* use letter spacing only for small labels
+
+Spacing:
+
+* use consistent section padding
+* reduce giant empty areas
+* create rhythm
+* desktop max-width must feel intentional
+* mobile spacing must be compact but breathable
+
+Cards:
+
+* subtle border
+* refined background
+* little or no heavy shadow
+* premium hover
+* not oversized and empty
+
+Buttons:
+
+* consistent sizing
+* clear hierarchy
+* high contrast
+* no generic default style
+
+==================================================
+26. MOTION AND MICROINTERACTIONS
+================================
+
+Add motion carefully.
+
+Use animate / gpt-taste / high-end-visual-design, but do not overdo it.
+
+Allowed:
+
+* subtle section reveal
+* smooth card hover
+* nav underline transitions
+* filter drawer animation
+* cart drawer animation
+* quick add feedback
+* button hover refinement
+* search overlay animation
+* smooth carousel drag/scroll
+* subtle product image lift
+
+Avoid:
+
+* heavy parallax everywhere
+* distracting scroll hijacking
+* animation that reduces performance
+* excessive delays
+* gimmicky effects
+
+Motion should make the store feel expensive, not noisy.
+
+==================================================
+27. MOBILE UX
+=============
+
+Mobile must be treated as a primary experience.
+
+Required:
+
+* compact premium header
+* easy search
+* easy cart
+* clear category access
+* filter drawer/bottom sheet
+* product cards readable
+* CTA buttons large enough
+* no overlapping WhatsApp button over CTAs
+* product grids must not feel cramped
+* horizontal sections must be swipe-friendly
+* no tiny filter chips
+* no broken spacing
+
+Test common widths:
+
+* 375px
+* 390px
+* 430px
+* 768px
+* desktop
+
+==================================================
+28. ACCESSIBILITY AND PERFORMANCE
+=================================
+
+Apply accessibility and performance quality.
+
+Required:
+
+* semantic HTML where applicable
+* keyboard-accessible filters/search/cart
+* readable contrast
+* visible focus states
+* correct button/link semantics
+* accessible labels for icons
+* optimized images
+* no unnecessary heavy JS
+* no layout shift
+* smooth 60fps animations where possible
+* avoid huge bundle growth
+
+Use audit and optimize skills before finishing.
+
+==================================================
+29. SEO AND METADATA
+====================
+
+Improve basic SEO if the project structure allows it.
+
+Use Portuguese metadata.
+
+Suggested title:
+"MADRI Perfumaria | Fragrâncias exclusivas para cada momento"
+
+Suggested description:
+"Conheça os perfumes MADRI: fragrâncias exclusivas, embalagem premium e envio para todo o Brasil."
+
+Add structured data only if appropriate and safe:
+
+* Organization
+* WebSite
+* Product, if product pages exist
+
+Do not invent false business information.
+
+==================================================
+30. COPYWRITING RULES
+=====================
+
+All copy must be in Portuguese.
+
+Tone:
+
+* premium
+* clear
+* elegant
+* concise
+* not exaggerated
+* not too poetic
+* not generic
+
+Avoid phrases like:
+
+* "experiência única" repeated everywhere
+* "luxo incomparável"
+* "o melhor perfume"
+* fake superlatives
+* exaggerated claims
+
+Use practical and elegant copy.
+
+Examples:
+
+* "Escolha pela família olfativa"
+* "Encontre sua fragrância ideal"
+* "Presenteie com intenção"
+* "Mais vendidos"
+* "Novidades"
+* "Para o dia"
+* "Para a noite"
+* "Para presentear"
+* "Adicionar à sacola"
+* "Ver detalhes"
+* "Filtrar"
+* "Aplicar filtros"
+* "Limpar filtros"
+* "Ordenar por"
+
+==================================================
+31. DO NOT DO THIS
+==================
+
+Do not deliver another simple hero + product grid + dark section.
+
+Do not only change colors and spacing.
+
+Do not make the website look like a generic template.
+
+Do not create a purely aesthetic landing page.
+
+Do not hide important shopping tools.
+
+Do not make filters decorative only.
+
+Do not create fake UI that does not work.
+
+Do not break cart logic.
+
+Do not make the site mostly black.
+
+Do not use excessive animations.
+
+Do not create visual clutter.
+
+Do not ignore mobile.
+
+==================================================
+32. EXPECTED RESULT
+===================
+
+The final result should feel like a complete premium perfume e-commerce storefront.
+
+When someone opens the site, they should immediately understand:
+
+* this is a real perfume store
+* they can browse by category
+* they can filter products
+* they can discover fragrances by family, moment and intensity
+* they can search
+* they can buy easily
+* the brand feels premium
+* the experience is polished and trustworthy
+
+The site should look substantially better than the current version.
+
+It should feel:
+
+* less generic
+* more commercial
+* more useful
+* more premium
+* more complete
+* more memorable
+* more like a real curated fragrance boutique
+
+==================================================
+33. IMPLEMENTATION PLAN
+=======================
+
+Execute in phases:
+
+Phase 1 — Audit and research:
+
+* inspect current codebase
+* identify what works
+* research references with Firecrawl
+* summarize the UX patterns to apply
+
+Phase 2 — Architecture:
+
+* define improved storefront structure
+* define product metadata model
+* define navigation, filters and sorting
+* define responsive behavior
+
+Phase 3 — Design system:
+
+* refine colors, typography, spacing, cards, buttons and layout rules
+
+Phase 4 — Build:
+
+* implement header/navigation
+* implement search
+* implement category browsing
+* implement fragrance finder
+* implement filters and sorting
+* implement improved product cards
+* implement best sellers
+* implement new arrivals
+* implement shop by moment
+* implement gift section
+* implement brand storytelling
+* refine footer
+* improve cart drawer if applicable
+* improve product detail / quick view if applicable
+
+Phase 5 — Motion and polish:
+
+* add subtle premium microinteractions
+* refine hover states
+* refine mobile behavior
+* remove generic-looking elements
+
+Phase 6 — QA:
+
+* run local project
+* test interactions
+* test filters/search/cart
+* test responsive breakpoints
+* test accessibility basics
+* test performance basics
+* capture screenshots if possible
+* fix issues before finishing
+
+==================================================
+34. FINAL ACCEPTANCE CHECKLIST
+==============================
+
+Before saying the task is complete, verify:
+
+Storefront:
+
+* The site feels like a real e-commerce, not a landing page
+* There is useful category navigation
+* There is search
+* There are filters
+* There is sorting
+* Product discovery is stronger
+* Products are easier to compare
+
+Visual design:
+
+* The site is predominantly light
+* Black is used strategically
+* The design feels premium
+* The layout no longer feels generic
+* Product cards are richer and more useful
+* Sections have different rhythms
+* Typography feels refined
+* Spacing feels intentional
+
+UX:
+
+* Users can browse by category
+* Users can browse by fragrance family
+* Users can browse by moment
+* Users can find gifts
+* Users can filter products
+* Users can understand each product faster
+* CTAs are clear
+
+Mobile:
+
+* Navigation works well
+* Search works well
+* Filters work well
+* Cards are readable
+* CTAs are tappable
+* WhatsApp does not block important content
+
+Technical:
+
+* No broken cart logic
+* No broken product data
+* No console errors
+* No obvious layout bugs
+* No excessive animation cost
+* Reasonable accessibility
+* Reasonable performance
+
+Copy:
+
+* All visible text is in Portuguese
+* Copy is elegant and clear
+* No exaggerated claims
+* No generic filler
+
+Proceed with the redesign now.
+Be bold, but keep the shopping experience clean, comfortable and usable.
+The goal is a premium perfume e-commerce that feels intentional, complete and much less generic.

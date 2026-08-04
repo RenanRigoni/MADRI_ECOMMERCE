@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { products, familyLabels, type FragranceFamily, type Intensity } from '@/lib/products'
+import { familyLabels, type FragranceFamily, type Intensity } from '@/lib/products'
+import { perfumes, volumeLabel } from '@/lib/perfumes'
 import ProductCard from '@/components/produto/ProductCard'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
@@ -70,9 +71,8 @@ export default function FragranceFinderSection() {
 
   const step = !recipient ? 1 : !moment ? 2 : !intensity ? 3 : !family ? 4 : 5
 
-  const recommendations = products
+  const recommendations = perfumes
     .filter((p) => {
-      if (recipient === 'presentear' && !p.isGiftable) return false
       if (moment && !p.occasion.includes(moment as never)) return false
       if (intensity && p.intensity !== intensity) return false
       if (family && p.fragranceFamily !== family) return false
@@ -224,15 +224,15 @@ export default function FragranceFinderSection() {
                     id={p.id}
                     slug={p.slug}
                     name={p.name}
-                    volume={p.volume}
+                    volume={volumeLabel(p)}
                     price={p.price}
-                    discount={p.discount}
+                    discount={p.discount ?? undefined}
                     stock={p.stock}
                     isNew={p.isNew}
                     fragranceFamily={p.fragranceFamily}
                     notesTop={p.notesTop}
                     intensity={p.intensity}
-                    shortDescription={p.shortDescription}
+                    shortDescription={p.shortDescription ?? undefined}
                   />
                 ))}
               </div>

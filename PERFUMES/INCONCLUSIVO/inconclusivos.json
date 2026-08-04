@@ -1,0 +1,37 @@
+[
+  {
+    "arquivo": "WhatsApp Image 2026-06-16 at 13.46.46.jpeg",
+    "marca_possivel": "?",
+    "produto_possivel": "Bellissima",
+    "motivo": "Marca nao confirmada apos pesquisa - nenhum perfume arabe 'Bellissima' com esse padrao encontrado; existe Bellissima da Blumarine mas perfil incompativel",
+    "confianca": "baixa"
+  },
+  {
+    "arquivo": "WhatsApp Image 2026-06-16 at 13.46.57.jpeg",
+    "marca_possivel": "?",
+    "produto_possivel": "Kronos",
+    "motivo": "Existem 2 perfumes reais chamados Kronos (Fragrance World masculino e Giardino Benessere nicho) - sem detalhes suficientes na foto pra distinguir qual",
+    "confianca": "baixa"
+  },
+  {
+    "arquivo": "WhatsApp Image 2026-06-16 at 13.52.37.jpeg",
+    "marca_possivel": "?",
+    "produto_possivel": "Dunya",
+    "motivo": "'Dunya by Naseem' encontrado mas sem confirmacao de caixa rosa/dourada nem versao feminina especifica - correspondencia fraca",
+    "confianca": "baixa"
+  },
+  {
+    "arquivo": "WhatsApp Image 2026-06-16 at 13.52.39 (1).jpeg",
+    "marca_possivel": null,
+    "produto_possivel": null,
+    "motivo": "Foto borrada/ilegivel",
+    "confianca": "baixa"
+  },
+  {
+    "arquivo": "WhatsApp Image 2026-06-16 at 13.52.54.jpeg",
+    "marca_possivel": "Al Wataniah",
+    "produto_possivel": "Sabah Al Ward",
+    "motivo": "marca/linha confirmada mas variante roxa especifica nao identificada com seguranca - risco de confundir com Delilah",
+    "confianca": "baixa"
+  }
+]
