@@ -59,6 +59,20 @@ describe('productFormSchema', () => {
     expect(productFormSchema.safeParse({ ...validInput, discountPercent: '150' }).success).toBe(false)
   })
 
+  it('accepts both legacy relative image paths and Supabase Storage URLs in keepImages', () => {
+    const result = productFormSchema.safeParse({
+      ...validInput,
+      keepImages: ['/produtos/lattafa-asad-elixir-edp-1.jpeg', 'https://xyz.supabase.co/storage/v1/object/public/product-photos/a.jpg'],
+    })
+    expect(result.success).toBe(true)
+  })
+
+  it('rejects unsafe schemes in keepImages', () => {
+    expect(
+      productFormSchema.safeParse({ ...validInput, keepImages: ['javascript:alert(1)'] }).success,
+    ).toBe(false)
+  })
+
   it('treats optional empty fields as undefined instead of failing validation', () => {
     const result = productFormSchema.safeParse({ ...validInput, version: '', volumeMl: '', discountPercent: '' })
     expect(result.success).toBe(true)

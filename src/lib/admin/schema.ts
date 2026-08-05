@@ -35,7 +35,12 @@ export const productFormSchema = z.object({
   shortDescription: z.preprocess(emptyToUndefined, z.string().trim().max(300).optional()),
   description: z.preprocess(emptyToUndefined, z.string().trim().max(4000).optional()),
   fragranceFamily: z.preprocess(emptyToUndefined, z.enum(FRAGRANCE_FAMILIES).optional()),
-  keepImages: z.array(z.string().url()).default([]),
+  keepImages: z.array(
+    z.string().max(2048).refine(
+      (value) => value.startsWith('/') || /^https:\/\//.test(value),
+      'URL de imagem inválida',
+    ),
+  ).default([]),
 })
 
 export type ProductFormInput = z.infer<typeof productFormSchema>
