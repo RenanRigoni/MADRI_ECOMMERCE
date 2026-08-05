@@ -30,7 +30,6 @@ function formatPrice(value: number) {
 }
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
-const displayFont = 'var(--font-display), Cormorant Garamond, Georgia, serif'
 
 const familyColors: Record<FragranceFamily, string> = {
   floral: '#E8B4B8',
@@ -170,7 +169,7 @@ export default function ProductCard({
           </p>
           <h3
             className="text-2xl md:text-4xl leading-[1.15] text-[#0A0A0A]"
-            style={{ fontFamily: displayFont, fontWeight: 700 }}
+            style={{ fontFamily: bodyFont, fontWeight: 600 }}
           >
             {name}
           </h3>
@@ -337,7 +336,7 @@ export default function ProductCard({
         </p>
         <h3
           className="text-lg leading-[1.2] text-[#0A0A0A] line-clamp-2"
-          style={{ fontFamily: displayFont, fontWeight: 700 }}
+          style={{ fontFamily: bodyFont, fontWeight: 600 }}
         >
           {name}
         </h3>
