@@ -6,7 +6,13 @@ import { requireAdminUser } from '@/lib/admin/auth'
 import { readCommerceConfig } from '@/lib/payments/env'
 import { createSupabaseAdmin } from '@/lib/server/supabase-admin'
 import { productFormSchema, slugify } from '@/lib/admin/schema'
-import { createAdminProduct, getAdminProduct, setAdminProductActive, updateAdminProduct } from '@/lib/admin/products'
+import {
+  createAdminProduct,
+  getAdminProduct,
+  setAdminProductActive,
+  setAdminProductFeatured,
+  updateAdminProduct,
+} from '@/lib/admin/products'
 import { uploadProductPhoto } from '@/lib/admin/storage'
 
 function revalidateStorefront(slug?: string) {
@@ -95,5 +101,13 @@ export async function toggleProductActive(id: string, nextActive: boolean): Prom
   const supabase = createSupabaseAdmin(readCommerceConfig())
   const product = await getAdminProduct(supabase, id)
   await setAdminProductActive(supabase, id, nextActive)
+  revalidateStorefront(product?.slug ?? undefined)
+}
+
+export async function toggleProductFeatured(id: string, nextFeatured: boolean): Promise<void> {
+  await requireAdminUser()
+  const supabase = createSupabaseAdmin(readCommerceConfig())
+  const product = await getAdminProduct(supabase, id)
+  await setAdminProductFeatured(supabase, id, nextFeatured)
   revalidateStorefront(product?.slug ?? undefined)
 }

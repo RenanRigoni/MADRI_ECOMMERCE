@@ -139,3 +139,12 @@ export async function setAdminProductActive(client: SupabaseClient, id: string, 
   if (error) throw new AdminProductError('persistence_failure')
   if (!count) throw new AdminProductError('not_found')
 }
+
+export async function setAdminProductFeatured(client: SupabaseClient, id: string, featured: boolean): Promise<void> {
+  const { error, count } = await client
+    .from('products')
+    .update({ is_featured: featured }, { count: 'exact' })
+    .eq('id', id)
+  if (error) throw new AdminProductError('persistence_failure')
+  if (!count) throw new AdminProductError('not_found')
+}
