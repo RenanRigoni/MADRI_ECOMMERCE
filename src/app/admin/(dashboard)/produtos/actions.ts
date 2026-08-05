@@ -46,6 +46,9 @@ export async function saveProduct(_prevState: string | null, formData: FormData)
     shortDescription: formData.get('shortDescription'),
     description: formData.get('description'),
     fragranceFamily: formData.get('fragranceFamily'),
+    notesTop: formData.get('notesTop'),
+    notesHeart: formData.get('notesHeart'),
+    notesBase: formData.get('notesBase'),
     keepImages,
   })
 

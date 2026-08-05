@@ -8,6 +8,14 @@ export const FRAGRANCE_FAMILIES = [
 
 const emptyToUndefined = (value: unknown) => (value === '' ? undefined : value)
 
+function splitNotes(value: string | undefined): string[] {
+  if (!value) return []
+  return value.split(',').map((note) => note.trim()).filter(Boolean)
+}
+
+const notesField = z.preprocess(emptyToUndefined, z.string().trim().max(300).optional())
+  .transform(splitNotes)
+
 export const productFormSchema = z.object({
   id: z.string().trim().max(160).optional(),
   brand: z.string().trim().min(1, 'Informe a marca').max(80),
@@ -35,6 +43,9 @@ export const productFormSchema = z.object({
   shortDescription: z.preprocess(emptyToUndefined, z.string().trim().max(300).optional()),
   description: z.preprocess(emptyToUndefined, z.string().trim().max(4000).optional()),
   fragranceFamily: z.preprocess(emptyToUndefined, z.enum(FRAGRANCE_FAMILIES).optional()),
+  notesTop: notesField,
+  notesHeart: notesField,
+  notesBase: notesField,
   keepImages: z.array(
     z.string().max(2048).refine(
       (value) => value.startsWith('/') || /^https:\/\//.test(value),

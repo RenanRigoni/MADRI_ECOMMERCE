@@ -112,6 +112,22 @@ export default function ProductForm({ product }: { product?: AdminProductRow }) 
 
       <div className="grid sm:grid-cols-3 gap-4 mt-4">
         <label className={labelClass}>
+          Notas de topo (opcional)
+          <input name="notesTop" defaultValue={product?.notes_top?.join(', ') ?? ''} maxLength={300} className={inputClass} placeholder="Bergamota, Cardamomo" />
+        </label>
+        <label className={labelClass}>
+          Notas de coração (opcional)
+          <input name="notesHeart" defaultValue={product?.notes_heart?.join(', ') ?? ''} maxLength={300} className={inputClass} placeholder="Oud, Rosa negra" />
+        </label>
+        <label className={labelClass}>
+          Notas de fundo (opcional)
+          <input name="notesBase" defaultValue={product?.notes_base?.join(', ') ?? ''} maxLength={300} className={inputClass} placeholder="Sândalo, Âmbar, Baunilha" />
+        </label>
+      </div>
+      <p className="text-xs text-[#6B7280] mt-1">Separe as notas por vírgula. Aparecem na página do produto em 3 fileiras.</p>
+
+      <div className="grid sm:grid-cols-3 gap-4 mt-4">
+        <label className={labelClass}>
           Preço (R$) *
           <input
             required

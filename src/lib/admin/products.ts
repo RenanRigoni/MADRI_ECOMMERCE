@@ -26,6 +26,9 @@ export interface AdminProductRow {
   short_description: string | null
   description: string | null
   fragrance_family: string | null
+  notes_top: string[]
+  notes_heart: string[]
+  notes_base: string[]
   images: string[]
   created_at: string
 }
@@ -34,7 +37,7 @@ const ADMIN_COLUMNS = `
   id, slug, brand, product_name, version, volume_ml, gender, product_type, name,
   price_cents, discount_percent, stock_on_hand, weight_grams, height_cm, width_cm,
   length_cm, active, is_featured, is_new, short_description, description, fragrance_family,
-  images, created_at
+  notes_top, notes_heart, notes_base, images, created_at
 `
 
 export class AdminProductError extends Error {
@@ -97,6 +100,9 @@ function toWriteRow(input: ProductFormInput, images: string[]) {
     short_description: input.shortDescription ?? null,
     description: input.description ?? null,
     fragrance_family: input.fragranceFamily ?? null,
+    notes_top: input.notesTop,
+    notes_heart: input.notesHeart,
+    notes_base: input.notesBase,
     images,
   }
 }
