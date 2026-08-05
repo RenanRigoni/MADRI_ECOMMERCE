@@ -83,7 +83,7 @@ export default function CheckoutFlow({ publicKey, paymentsEnabled }: { publicKey
               <label className="sm:col-span-2 text-sm">Nome completo<input required name="name" autoComplete="name" minLength={3} maxLength={120} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">E-mail<input required type="email" name="email" autoComplete="email" maxLength={254} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">Telefone<input required name="phone" autoComplete="tel" inputMode="tel" maxLength={20} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
-              <label className="text-sm">CEP<input required name="postalCode" autoComplete="postal-code" inputMode="numeric" pattern="[0-9. -]{8,10}" maxLength={10} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
+              <label className="text-sm">CEP<input required name="postalCode" autoComplete="postal-code" inputMode="numeric" pattern="[0-9.\- ]{8,10}" maxLength={10} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">Estado<input required name="state" autoComplete="address-level1" pattern="[A-Za-z]{2}" maxLength={2} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2 uppercase" /></label>
               <label className="sm:col-span-2 text-sm">Endereço<input required name="street" autoComplete="address-line1" maxLength={120} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">Número<input required name="number" maxLength={20} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
