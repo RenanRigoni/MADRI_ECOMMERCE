@@ -101,9 +101,23 @@ export default function CartPageClient() {
                   <div className="flex items-center gap-2 mt-4">
                     <button aria-label="Diminuir quantidade" onClick={() => item.quantity === 1 ? cart.remove(item.productId) : cart.setQuantity(item.productId, item.quantity - 1)} className="p-1 border border-[#E8E0D4]"><Minus size={14} /></button>
                     <span className="w-8 text-center text-sm" aria-label={`Quantidade ${item.quantity}`}>{item.quantity}</span>
-                    <button aria-label="Aumentar quantidade" onClick={() => cart.setQuantity(item.productId, item.quantity + 1)} disabled={item.quantity >= 10} className="p-1 border border-[#E8E0D4] disabled:opacity-40"><Plus size={14} /></button>
+                    <button
+                      aria-label="Aumentar quantidade"
+                      onClick={() => cart.setQuantity(item.productId, item.quantity + 1)}
+                      disabled={item.quantity >= 10 || (product ? item.quantity >= product.stock : false)}
+                      className="p-1 border border-[#E8E0D4] disabled:opacity-40"
+                    >
+                      <Plus size={14} />
+                    </button>
                     <button aria-label="Remover item" onClick={() => cart.remove(item.productId)} className="ml-3 p-1 text-[#B5363A]"><Trash2 size={15} /></button>
                   </div>
+                  {product && product.stock === 0 ? (
+                    <p role="alert" className="text-xs text-[#B5363A] mt-2">Sem estoque no momento.</p>
+                  ) : product && product.stock < item.quantity ? (
+                    <p role="alert" className="text-xs text-[#B5363A] mt-2">
+                      Só temos {product.stock} {product.stock === 1 ? 'unidade' : 'unidades'} disponíveis — ajuste a quantidade.
+                    </p>
+                  ) : null}
                 </div>
               </article>
             ))}
