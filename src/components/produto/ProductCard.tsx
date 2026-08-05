@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Heart } from 'lucide-react'
 import { familyLabels, intensityLabel, type FragranceFamily, type Intensity } from '@/lib/products'
 import { useCart } from '@/lib/cart/store'
 
@@ -268,15 +267,6 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* Favorite button */}
-        <button
-          className="cursor-pointer absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-[#C4A55C]/0 group-hover:text-[#C4A55C]/60 hover:!text-[#C4A55C] transition-all duration-300"
-          aria-label="Favoritar"
-          onClick={(e) => { e.preventDefault(); e.stopPropagation() }}
-        >
-          <Heart size={15} strokeWidth={1.5} />
-        </button>
-
         {/* Out of stock */}
         {outOfStock && (
           <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
@@ -289,14 +279,12 @@ export default function ProductCard({
           </div>
         )}
 
-        {/* Desktop hover CTA */}
+        {/* Desktop hover CTA — also reachable via keyboard (group-focus-within), not just mouse hover */}
         {!unavailable && (
-          <div
-            className="absolute bottom-0 left-0 right-0 hidden md:flex items-center justify-center bg-[#0A0A0A]/90 py-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+          <button
+            type="button"
             onClick={handleAddToCart}
-            role="button"
-            tabIndex={-1}
-            aria-hidden
+            className="cursor-pointer absolute bottom-0 left-0 right-0 hidden md:flex items-center justify-center bg-[#0A0A0A]/90 py-3 translate-y-full group-hover:translate-y-0 group-focus-within:translate-y-0 focus-visible:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:-outline-offset-2 transition-transform duration-300 ease-out"
           >
             <span
               className="text-[10px] tracking-[0.2em] uppercase text-white"
@@ -304,7 +292,7 @@ export default function ProductCard({
             >
               Adicionar ao carrinho
             </span>
-          </div>
+          </button>
         )}
       </div>
 
@@ -363,10 +351,10 @@ export default function ProductCard({
             </p>
           )}
           {finalPrice > 0 ? <>
-            <p className="text-sm font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
+            <p className="text-xl font-bold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
               {formatPrice(finalPrice)}
             </p>
-            <p className="text-[11px] text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
+            <p className="text-xs text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
               Pix: {formatPrice(pixPrice)}
             </p>
           </> : <p className="text-xs font-semibold text-[#6B7280]">Preço indisponível</p>}
