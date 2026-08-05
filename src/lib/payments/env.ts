@@ -38,10 +38,6 @@ function configured(value: string | undefined): value is string {
   return Boolean(value?.trim())
 }
 
-function tokenMatchesMode(accessToken: string, mode: MercadoPagoMode): boolean {
-  return mode === 'test' ? accessToken.startsWith('TEST-') : accessToken.startsWith('APP_USR-')
-}
-
 export function readMercadoPagoConfig(
   environment: Record<string, string | undefined> = process.env,
   operation: MercadoPagoOperation,
@@ -56,10 +52,17 @@ export function readMercadoPagoConfig(
   }
   const mode = environment.MERCADO_PAGO_MODE
 
+  // Checkout Transparente / Orders API test credentials are a real seller
+  // test-account's live-shaped credentials (APP_USR- prefix), auto-created
+  // per application — unlike the legacy Checkout Pro flow, there is no
+  // separate TEST- prefix here, so test vs. production can NOT be inferred
+  // from the access token's shape. MERCADO_PAGO_MODE is trusted as the
+  // sole source of truth; the double-flag lock below (MODE + explicit
+  // MERCADO_PAGO_ENABLE_PRODUCTION) is what actually guards against an
+  // accidental switch to production, not the credential string.
   const invalidBaseConfig =
     !configured(accessToken) ||
-    (mode !== 'test' && mode !== 'production') ||
-    (configured(accessToken) && (mode === 'test' || mode === 'production') && !tokenMatchesMode(accessToken, mode))
+    (mode !== 'test' && mode !== 'production')
 
   const productionNotExplicitlyEnabled =
     operation === 'payment' && mode === 'production' && environment.MERCADO_PAGO_ENABLE_PRODUCTION !== 'true'

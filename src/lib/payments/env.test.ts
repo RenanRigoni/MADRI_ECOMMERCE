@@ -66,19 +66,25 @@ describe('readMercadoPagoConfig', () => {
     expect(config.mode).toBe('test')
   })
 
-  it('fails closed when the declared mode does not match the credential class', () => {
+  it('trusts MERCADO_PAGO_MODE regardless of the access token prefix', () => {
+    // Checkout Transparente / Orders API test credentials are a real test
+    // seller account's live-shaped credentials — the access token starts
+    // with APP_USR- in BOTH test and production, unlike the legacy
+    // Checkout Pro flow's TEST- prefix. The token string must never be
+    // used to infer or validate the environment; MERCADO_PAGO_MODE (plus
+    // the production double-flag lock) is the only source of truth.
     const base = {
       NEXT_PUBLIC_SUPABASE_URL: 'https://project.supabase.co',
       SUPABASE_SERVICE_ROLE_KEY: 'server-service-role',
       MERCADO_PAGO_PAYMENTS_ENABLED: 'true',
     }
-    expect(() => readMercadoPagoConfig({
-      ...base, MERCADO_PAGO_ACCESS_TOKEN: 'APP_USR-production-token', MERCADO_PAGO_MODE: 'test',
-    }, 'payment')).toThrow(PaymentConfigurationError)
-    expect(() => readMercadoPagoConfig({
-      ...base, MERCADO_PAGO_ACCESS_TOKEN: 'TEST-sandbox-token', MERCADO_PAGO_MODE: 'production',
+    expect(readMercadoPagoConfig({
+      ...base, MERCADO_PAGO_ACCESS_TOKEN: 'APP_USR-test-seller-token', MERCADO_PAGO_MODE: 'test',
+    }, 'payment').mode).toBe('test')
+    expect(readMercadoPagoConfig({
+      ...base, MERCADO_PAGO_ACCESS_TOKEN: 'APP_USR-production-token', MERCADO_PAGO_MODE: 'production',
       MERCADO_PAGO_ENABLE_PRODUCTION: 'true',
-    }, 'payment')).toThrow(PaymentConfigurationError)
+    }, 'payment').mode).toBe('production')
   })
 
   it('requires both production activation flags for a production payment', () => {
