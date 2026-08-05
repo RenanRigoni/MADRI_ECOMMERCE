@@ -73,9 +73,8 @@ async function findAvailableSlug(client: SupabaseClient, baseSlug: string): Prom
 }
 
 function computeDisplayName(input: ProductFormInput): string {
-  const parts = [input.brand, input.productName, input.version].filter(Boolean)
-  const base = parts.join(' ')
-  return input.volumeMl ? `${base} ${input.volumeMl}ml` : base
+  const parts = [input.brand, input.productName, input.version, input.volumeMl ? `${input.volumeMl}ml` : null]
+  return parts.filter((part): part is string => Boolean(part)).join(' | ')
 }
 
 function toWriteRow(input: ProductFormInput, images: string[]) {

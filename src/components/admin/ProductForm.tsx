@@ -193,7 +193,21 @@ export default function ProductForm({ product }: { product?: AdminProductRow }) 
       </label>
       <label className={`${labelClass} mt-4`}>
         Descrição completa (aparece na página do produto)
-        <textarea name="description" defaultValue={product?.description ?? ''} maxLength={4000} rows={6} className={inputClass} />
+        <textarea
+          name="description"
+          defaultValue={product?.description ?? ''}
+          maxLength={4000}
+          rows={6}
+          className={`${inputClass} resize-none overflow-hidden`}
+          ref={(el) => {
+            if (el) el.style.height = `${el.scrollHeight}px`
+          }}
+          onInput={(e) => {
+            const el = e.currentTarget
+            el.style.height = 'auto'
+            el.style.height = `${el.scrollHeight}px`
+          }}
+        />
       </label>
 
       <div className="mt-4">
