@@ -30,6 +30,8 @@ export const productFormSchema = z.object({
   widthCm: z.coerce.number().int().positive('Largura precisa ser maior que zero'),
   lengthCm: z.coerce.number().int().positive('Profundidade precisa ser maior que zero'),
   active: z.coerce.boolean(),
+  isFeatured: z.coerce.boolean(),
+  isNewArrival: z.coerce.boolean(),
   shortDescription: z.preprocess(emptyToUndefined, z.string().trim().max(300).optional()),
   description: z.preprocess(emptyToUndefined, z.string().trim().max(4000).optional()),
   fragranceFamily: z.preprocess(emptyToUndefined, z.enum(FRAGRANCE_FAMILIES).optional()),

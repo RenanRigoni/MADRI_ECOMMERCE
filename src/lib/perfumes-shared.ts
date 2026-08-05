@@ -19,6 +19,7 @@ export interface Perfume {
   stock: number
   isNew: boolean
   isBestSeller: boolean
+  isFeatured: boolean
   isGiftable: boolean
   fragranceFamily: FragranceFamily
   fragranceFamilyLabel: string | null

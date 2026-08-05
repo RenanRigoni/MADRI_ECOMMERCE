@@ -3,6 +3,8 @@ import 'server-only'
 import { cache } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import { readSupabasePublicConfig } from '@/lib/supabase/env'
+import { readCommerceConfig } from '@/lib/payments/env'
+import { createSupabaseAdmin } from '@/lib/server/supabase-admin'
 import type { FragranceFamily, Profile, Intensity } from '@/lib/products'
 import { type Perfume, type TipoProduto } from '@/lib/perfumes-shared'
 
@@ -12,7 +14,7 @@ export { volumeLabel, cardTitle, primaryImage, filterPerfumes } from '@/lib/perf
 const CATALOG_COLUMNS = `
   id, slug, brand, product_name, product_line, version, concentration, volume_ml,
   gender, product_type, name, price_cents, discount_percent, stock_on_hand,
-  is_new, is_best_seller, is_giftable, fragrance_family, fragrance_family_label,
+  is_new, is_best_seller, is_featured, is_giftable, fragrance_family, fragrance_family_label,
   notes_top, notes_heart, notes_base, style_tags, intensity, occasion,
   short_description, description, meta_title, meta_description, images, research_verified
 `
@@ -34,6 +36,7 @@ interface ProductRow {
   stock_on_hand: number
   is_new: boolean
   is_best_seller: boolean
+  is_featured: boolean
   is_giftable: boolean
   fragrance_family: FragranceFamily | null
   fragrance_family_label: string | null
@@ -69,6 +72,7 @@ function toPerfume(row: ProductRow): Perfume {
     stock: row.stock_on_hand,
     isNew: row.is_new,
     isBestSeller: row.is_best_seller,
+    isFeatured: row.is_featured,
     isGiftable: row.is_giftable,
     fragranceFamily: row.fragrance_family ?? 'floral',
     fragranceFamilyLabel: row.fragrance_family_label,
@@ -138,12 +142,92 @@ function curatedDiverse(items: Perfume[], count: number, skipIds: Set<string>): 
   return picked
 }
 
-export async function getHomepageNewArrivals(count = 8): Promise<Perfume[]> {
-  return curatedDiverse(await getAllPerfumes(), count, new Set())
+function shuffled<T>(items: readonly T[]): T[] {
+  const copy = [...items]
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
 }
 
-export async function getHomepageBestSellers(count = 4): Promise<Perfume[]> {
-  const newArrivals = await getHomepageNewArrivals(8)
-  const skip = new Set(newArrivals.map((p) => p.id))
-  return curatedDiverse(await getAllPerfumes(), count, skip)
+/**
+ * Shared shape for the three home shelves: take the admin-tagged pool
+ * (capped at `count`, randomized if she tagged more than that), then fill
+ * any remaining slots from curatedDiverse so the shelf never looks sparse
+ * while she's still tagging the catalog.
+ */
+function pickWithFallback(
+  all: Perfume[],
+  pool: Perfume[],
+  count: number,
+  skipIds: Set<string>,
+): Perfume[] {
+  const picked = shuffled(pool.filter((p) => !skipIds.has(p.id))).slice(0, count)
+  if (picked.length === count) return picked
+
+  const pickedIds = new Set(picked.map((p) => p.id))
+  const fallback = curatedDiverse(all, count - picked.length, new Set([...skipIds, ...pickedIds]))
+  return [...picked, ...fallback]
 }
+
+/**
+ * "Destaque" — manual toggle on the admin product form. Memoized per request
+ * (React cache()): getHomepageNewArrivals/getHomepageBestSellers call this
+ * again internally to compute what to skip, and since the pick involves
+ * Math.random(), memoization is what keeps the section actually rendered
+ * in sync with the "already used" set the other shelves exclude.
+ */
+export const getHomepageFeatured = cache(async (count = 4): Promise<Perfume[]> => {
+  const all = await getAllPerfumes()
+  return pickWithFallback(all, all.filter((p) => p.isFeatured), count, new Set())
+})
+
+/** "Novidades" — manual toggle on the admin product form. Memoized per request, see getHomepageFeatured. */
+export const getHomepageNewArrivals = cache(async (count = 8): Promise<Perfume[]> => {
+  const all = await getAllPerfumes()
+  const featured = await getHomepageFeatured(4)
+  const skip = new Set(featured.map((p) => p.id))
+  return pickWithFallback(all, all.filter((p) => p.isNew), count, skip)
+})
+
+async function getTopSellingProductIds(limit: number): Promise<string[]> {
+  try {
+    const supabase = createSupabaseAdmin(readCommerceConfig())
+    const { data, error } = await supabase
+      .from('top_selling_products')
+      .select('product_id')
+      .order('total_quantity', { ascending: false })
+      .limit(limit)
+    if (error || !data) return []
+    return data.map((row: { product_id: string }) => row.product_id)
+  } catch {
+    return []
+  }
+}
+
+/**
+ * "Mais vendidos" — computed from real sales (top_selling_products, built
+ * from inventory_movements SALE rows), not a manual toggle: nobody can
+ * fake this from the admin panel. Empty until the store's first paid order;
+ * curatedDiverse fills the shelf until then.
+ */
+export const getHomepageBestSellers = cache(async (count = 4): Promise<Perfume[]> => {
+  const all = await getAllPerfumes()
+  const featured = await getHomepageFeatured(4)
+  const newArrivals = await getHomepageNewArrivals(8)
+  const skip = new Set([...featured.map((p) => p.id), ...newArrivals.map((p) => p.id)])
+
+  const topSellingIds = await getTopSellingProductIds(count + skip.size)
+  const byId = new Map(all.map((p) => [p.id, p]))
+  const bestSellers = topSellingIds
+    .map((id) => byId.get(id))
+    .filter((p): p is Perfume => p !== undefined && !skip.has(p.id))
+    .slice(0, count)
+
+  if (bestSellers.length === count) return bestSellers
+
+  const bestSellerIds = new Set(bestSellers.map((p) => p.id))
+  const fallback = curatedDiverse(all, count - bestSellers.length, new Set([...skip, ...bestSellerIds]))
+  return [...bestSellers, ...fallback]
+})

@@ -35,6 +35,8 @@ export async function saveProduct(_prevState: string | null, formData: FormData)
     widthCm: formData.get('widthCm'),
     lengthCm: formData.get('lengthCm'),
     active: formData.get('active') === 'on',
+    isFeatured: formData.get('isFeatured') === 'on',
+    isNewArrival: formData.get('isNewArrival') === 'on',
     shortDescription: formData.get('shortDescription'),
     description: formData.get('description'),
     fragranceFamily: formData.get('fragranceFamily'),

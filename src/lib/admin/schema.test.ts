@@ -16,6 +16,8 @@ const validInput = {
   widthCm: '10',
   lengthCm: '8',
   active: true,
+  isFeatured: false,
+  isNewArrival: false,
   shortDescription: 'Um oriental intenso.',
   description: '',
   fragranceFamily: 'oriental',

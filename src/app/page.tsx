@@ -8,7 +8,7 @@ import FragranceFinderSection from '@/components/sections/FragranceFinderSection
 import GiftSection from '@/components/sections/GiftSection'
 import HeroSearchTrigger from '@/components/hero/HeroSearchTrigger'
 import HeroCarousel from '@/components/hero/HeroCarousel'
-import { getAllPerfumes, getHomepageBestSellers, getHomepageNewArrivals, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
+import { getAllPerfumes, getHomepageBestSellers, getHomepageFeatured, getHomepageNewArrivals, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
 
 /* ── Hero images — mantenha 4-6 imagens para ritmo ideal ── */
 const heroImages: string[] = [
@@ -85,9 +85,10 @@ const momentos = [
 export const revalidate = 3600
 
 export default async function Home() {
-  /* Curadoria automática (sem dado real de vendas/lançamento ainda) — ver getHomepageBestSellers/getHomepageNewArrivals em lib/perfumes.ts */
-  const maisVendidos = await getHomepageBestSellers(4)
+  /* Destaque/Novidades = curadoria manual da dona da loja (painel admin); Mais vendidos = vendas reais. Fallback automático enquanto isso não existe — ver lib/perfumes.ts */
+  const destaque = await getHomepageFeatured(4)
   const novidades = await getHomepageNewArrivals(8)
+  const maisVendidos = await getHomepageBestSellers(4)
   const allPerfumes = await getAllPerfumes()
 
   return (
@@ -216,6 +217,49 @@ export default async function Home() {
 
       {/* ━━━ 3. SHOP BY CATEGORY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <CategorySection />
+
+      {/* ━━━ 3.5 DESTAQUE — curadoria manual da dona da loja ━━ */}
+      {destaque.length > 0 && (
+        <section className="bg-[#FAF6F0] py-10 md:py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-6 md:mb-12">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
+                <p
+                  className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                  style={{ fontFamily: bodyFont }}
+                >
+                  Seleção da loja
+                </p>
+              </div>
+              <h2
+                className="text-3xl md:text-5xl text-[#0A0A0A]"
+                style={{ fontFamily: displayFont, fontWeight: 500 }}
+              >
+                Destaque
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+              {destaque.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  id={p.id}
+                  slug={p.slug}
+                  name={cardTitle(p)}
+                  imageUrl={primaryImage(p)}
+                  volume={volumeLabel(p)}
+                  price={p.price}
+                  discount={p.discount ?? undefined}
+                  stock={p.stock}
+                  fragranceFamily={p.fragranceFamily}
+                  notesTop={p.notesTop}
+                  shortDescription={p.shortDescription ?? undefined}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ━━━ 4. MAIS VENDIDOS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="bg-white py-10 md:py-28">
