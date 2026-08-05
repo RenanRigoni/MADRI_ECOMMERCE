@@ -99,7 +99,11 @@ export default async function AdminProductsPage({
         </Link>
       </div>
 
-      <form method="get" className="mt-6 bg-white border border-[#E8E0D4] p-4 flex flex-wrap items-end gap-3">
+      <form
+        method="get"
+        key={`${params.q ?? ''}|${params.marca ?? ''}|${params.estoque ?? ''}|${params.foto ?? ''}|${params.promo ?? ''}|${params.ordenar ?? ''}`}
+        className="mt-6 bg-white border border-[#E8E0D4] p-4 flex flex-wrap items-end gap-3"
+      >
         <div className="flex flex-col gap-1">
           <label htmlFor="q" className="text-xs text-[#6B7280]">Buscar</label>
           <input
