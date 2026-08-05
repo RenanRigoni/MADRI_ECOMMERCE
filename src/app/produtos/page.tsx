@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: 'Explore toda a coleção de fragrâncias MADRI: femininos, masculinos e unissex.',
 }
 
+export const revalidate = 3600
+
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 const displayFont = 'var(--font-display), Cormorant Garamond, Georgia, serif'
 
@@ -27,7 +29,7 @@ export default async function ProdutosPage({
   searchParams: Promise<SearchParams>
 }) {
   const params = await searchParams
-  const all = getAllPerfumes()
+  const all = await getAllPerfumes()
   const filtered = filterPerfumes(all, params)
 
   const activeLabel = params.familia

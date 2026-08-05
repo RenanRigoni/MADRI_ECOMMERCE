@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ShoppingBag, Menu, X, Search, ChevronDown } from 'lucide-react'
 import SearchOverlay from './SearchOverlay'
+import { useCart } from '@/lib/cart/store'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 
@@ -107,6 +108,7 @@ const megaNav: NavItem[] = [
 ]
 
 export default function Header() {
+  const { count } = useCart()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -321,7 +323,7 @@ export default function Header() {
                   className="absolute top-0.5 right-0.5 bg-[#C4A55C] text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold leading-none"
                   style={{ fontFamily: bodyFont }}
                 >
-                  0
+                  {count > 99 ? '99+' : count}
                 </span>
               </Link>
             </div>

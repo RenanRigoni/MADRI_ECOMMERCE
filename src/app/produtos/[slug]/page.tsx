@@ -9,8 +9,11 @@ import { getAllPerfumes, getPerfumeBySlug, volumeLabel, cardTitle, primaryImage 
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 
-export function generateStaticParams() {
-  return getAllPerfumes().map((p) => ({ slug: p.slug }))
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const all = await getAllPerfumes()
+  return all.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
@@ -19,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const perfume = getPerfumeBySlug(slug)
+  const perfume = await getPerfumeBySlug(slug)
   if (!perfume) return {}
 
   return {
@@ -38,13 +41,13 @@ export default async function ProdutoPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const perfume = getPerfumeBySlug(slug)
+  const perfume = await getPerfumeBySlug(slug)
 
   if (!perfume) {
     notFound()
   }
 
-  const related = getAllPerfumes()
+  const related = (await getAllPerfumes())
     .filter((p) => p.marca === perfume.marca && p.id !== perfume.id)
     .slice(0, 4)
 

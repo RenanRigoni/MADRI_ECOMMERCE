@@ -1,66 +1,121 @@
-import perfumesData from '@/data/perfumes.json'
-import type { FragranceFamily, Occasion, Profile, Intensity } from '@/lib/products'
+import 'server-only'
 
-export type TipoProduto = 'Perfume' | 'Body Splash' | 'Hidratante' | 'Perfume Mist'
+import { cache } from 'react'
+import { createClient } from '@supabase/supabase-js'
+import { readSupabasePublicConfig } from '@/lib/supabase/env'
+import type { FragranceFamily, Profile, Intensity } from '@/lib/products'
+import { type Perfume, type TipoProduto } from '@/lib/perfumes-shared'
 
-export interface Perfume {
+export type { Perfume, TipoProduto, PerfumeFilters } from '@/lib/perfumes-shared'
+export { volumeLabel, cardTitle, primaryImage, filterPerfumes } from '@/lib/perfumes-shared'
+
+const CATALOG_COLUMNS = `
+  id, slug, brand, product_name, product_line, version, concentration, volume_ml,
+  gender, product_type, name, price_cents, discount_percent, stock_on_hand,
+  is_new, is_best_seller, is_giftable, fragrance_family, fragrance_family_label,
+  notes_top, notes_heart, notes_base, style_tags, intensity, occasion,
+  short_description, description, meta_title, meta_description, images, research_verified
+`
+
+interface ProductRow {
   id: string
-  slug: string
-  marca: string
-  nome: string
-  linha: string | null
-  versao: string | null
-  concentracao: string | null
-  volumeMl: number | null
-  genero: Profile
-  tipoProduto: TipoProduto
+  slug: string | null
+  brand: string | null
+  product_name: string | null
+  product_line: string | null
+  version: string | null
+  concentration: string | null
+  volume_ml: number | null
+  gender: Profile | null
+  product_type: TipoProduto
   name: string
-  price: number
-  discount: number | null
-  stock: number
-  isNew: boolean
-  isBestSeller: boolean
-  isGiftable: boolean
-  fragranceFamily: FragranceFamily
-  fragranceFamilyLabel: string | null
-  notesTop: string[]
-  notesHeart: string[]
-  notesBase: string[]
-  profile: string[]
-  intensity: Intensity
-  occasion: Occasion[]
-  shortDescription: string | null
+  price_cents: number | null
+  discount_percent: number | null
+  stock_on_hand: number
+  is_new: boolean
+  is_best_seller: boolean
+  is_giftable: boolean
+  fragrance_family: FragranceFamily | null
+  fragrance_family_label: string | null
+  notes_top: string[]
+  notes_heart: string[]
+  notes_base: string[]
+  style_tags: string[]
+  intensity: Intensity | null
+  occasion: string[]
+  short_description: string | null
   description: string | null
-  metaTitle: string | null
-  metaDescription: string | null
-  confiancaIdentificacao: string | null
-  pesquisaConfirmada: boolean
-  observacoes: string | null
-  imagens: string[]
-  imagePlaceholder: boolean
+  meta_title: string | null
+  meta_description: string | null
+  images: string[]
+  research_verified: boolean
 }
 
-export const perfumes = perfumesData as Perfume[]
-
-export function getAllPerfumes(): Perfume[] {
-  return perfumes
+function toPerfume(row: ProductRow): Perfume {
+  return {
+    id: row.id,
+    slug: row.slug ?? row.id,
+    marca: row.brand ?? '',
+    nome: row.product_name ?? row.name,
+    linha: row.product_line,
+    versao: row.version,
+    concentracao: row.concentration,
+    volumeMl: row.volume_ml,
+    genero: row.gender ?? 'unissex',
+    tipoProduto: row.product_type,
+    name: row.name,
+    price: (row.price_cents ?? 0) / 100,
+    discount: row.discount_percent,
+    stock: row.stock_on_hand,
+    isNew: row.is_new,
+    isBestSeller: row.is_best_seller,
+    isGiftable: row.is_giftable,
+    fragranceFamily: row.fragrance_family ?? 'floral',
+    fragranceFamilyLabel: row.fragrance_family_label,
+    notesTop: row.notes_top,
+    notesHeart: row.notes_heart,
+    notesBase: row.notes_base,
+    profile: row.style_tags,
+    intensity: row.intensity ?? 'moderada',
+    occasion: row.occasion as Perfume['occasion'],
+    shortDescription: row.short_description,
+    description: row.description,
+    metaTitle: row.meta_title,
+    metaDescription: row.meta_description,
+    imagens: row.images,
+    researchVerified: row.research_verified,
+  }
 }
 
-export function getPerfumeBySlug(slug: string): Perfume | undefined {
-  return perfumes.find((p) => p.slug === slug)
+function publicCatalogClient() {
+  const { url, anonKey } = readSupabasePublicConfig()
+  return createClient(url, anonKey, { auth: { persistSession: false } })
 }
 
-export function volumeLabel(p: Perfume): string {
-  return p.volumeMl ? `${p.volumeMl}ml` : ''
+/** All published (active) products. Memoized per request. */
+export const getAllPerfumes = cache(async (): Promise<Perfume[]> => {
+  try {
+    const supabase = publicCatalogClient()
+    const { data, error } = await supabase
+      .from('products')
+      .select(CATALOG_COLUMNS)
+      .eq('active', true)
+      .order('created_at', { ascending: false })
+    if (error || !data) return []
+    return (data as unknown as ProductRow[]).map(toPerfume)
+  } catch {
+    return []
+  }
+})
+
+export async function getPerfumeBySlug(slug: string): Promise<Perfume | undefined> {
+  const all = await getAllPerfumes()
+  return all.find((p) => p.slug === slug)
 }
 
-/** Nome curto pra card (marca + nome + versão) — o titulo_site completo (SEO) é longo demais pra caber legível num card. */
-export function cardTitle(p: Perfume): string {
-  return `${p.marca} ${p.nome}${p.versao ? ' ' + p.versao : ''}`
-}
-
-export function primaryImage(p: Perfume): string | undefined {
-  return p.imagens[0]
+export async function getPerfumeById(id: string): Promise<Perfume | undefined> {
+  const all = await getAllPerfumes()
+  return all.find((p) => p.id === id)
 }
 
 /**
@@ -73,7 +128,7 @@ export function primaryImage(p: Perfume): string | undefined {
 function curatedDiverse(items: Perfume[], count: number, skipIds: Set<string>): Perfume[] {
   const seenMarcas = new Set<string>()
   const picked: Perfume[] = []
-  const pool = items.filter((p) => p.pesquisaConfirmada && p.notesTop.length > 0 && !skipIds.has(p.id))
+  const pool = items.filter((p) => p.researchVerified && p.notesTop.length > 0 && !skipIds.has(p.id))
   for (const p of pool) {
     if (seenMarcas.has(p.marca)) continue
     seenMarcas.add(p.marca)
@@ -83,38 +138,12 @@ function curatedDiverse(items: Perfume[], count: number, skipIds: Set<string>): 
   return picked
 }
 
-export function getHomepageNewArrivals(count = 8): Perfume[] {
-  return curatedDiverse(perfumes, count, new Set())
+export async function getHomepageNewArrivals(count = 8): Promise<Perfume[]> {
+  return curatedDiverse(await getAllPerfumes(), count, new Set())
 }
 
-export function getHomepageBestSellers(count = 4): Perfume[] {
-  const skip = new Set(getHomepageNewArrivals(8).map((p) => p.id))
-  return curatedDiverse(perfumes, count, skip)
-}
-
-export interface PerfumeFilters {
-  familia?: string
-  perfil?: string
-  momento?: string
-  volume?: string
-  tipo?: string
-  marca?: string
-  q?: string
-}
-
-export function filterPerfumes(items: Perfume[], filters: PerfumeFilters): Perfume[] {
-  return items.filter((p) => {
-    if (filters.familia && p.fragranceFamily !== filters.familia) return false
-    if (filters.perfil && p.genero !== filters.perfil) return false
-    if (filters.momento && !p.occasion.includes(filters.momento as Occasion)) return false
-    if (filters.volume && volumeLabel(p) !== filters.volume) return false
-    if (filters.tipo && p.tipoProduto !== filters.tipo) return false
-    if (filters.marca && p.marca.toLowerCase() !== filters.marca.toLowerCase()) return false
-    if (filters.q) {
-      const needle = filters.q.toLowerCase()
-      const haystack = `${p.marca} ${p.nome} ${p.versao ?? ''}`.toLowerCase()
-      if (!haystack.includes(needle)) return false
-    }
-    return true
-  })
+export async function getHomepageBestSellers(count = 4): Promise<Perfume[]> {
+  const newArrivals = await getHomepageNewArrivals(8)
+  const skip = new Set(newArrivals.map((p) => p.id))
+  return curatedDiverse(await getAllPerfumes(), count, skip)
 }

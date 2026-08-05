@@ -8,7 +8,7 @@ import FragranceFinderSection from '@/components/sections/FragranceFinderSection
 import GiftSection from '@/components/sections/GiftSection'
 import HeroSearchTrigger from '@/components/hero/HeroSearchTrigger'
 import HeroCarousel from '@/components/hero/HeroCarousel'
-import { getHomepageBestSellers, getHomepageNewArrivals, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
+import { getAllPerfumes, getHomepageBestSellers, getHomepageNewArrivals, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
 
 /* ── Hero images — mantenha 4-6 imagens para ritmo ideal ── */
 const heroImages: string[] = [
@@ -82,10 +82,13 @@ const momentos = [
 ]
 
 /* ── Page ──────────────────────────────────────────────── */
-export default function Home() {
+export const revalidate = 3600
+
+export default async function Home() {
   /* Curadoria automática (sem dado real de vendas/lançamento ainda) — ver getHomepageBestSellers/getHomepageNewArrivals em lib/perfumes.ts */
-  const maisVendidos = getHomepageBestSellers(4)
-  const novidades = getHomepageNewArrivals(8)
+  const maisVendidos = await getHomepageBestSellers(4)
+  const novidades = await getHomepageNewArrivals(8)
+  const allPerfumes = await getAllPerfumes()
 
   return (
     <>
@@ -294,7 +297,7 @@ export default function Home() {
 
       {/* ━━━ 6. FRAGRANCE FINDER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div id="finder">
-        <FragranceFinderSection />
+        <FragranceFinderSection perfumes={allPerfumes} />
       </div>
 
       {/* ━━━ 7. ESCOLHA PELO SEU MOMENTO ━━━━━━━━━━━━━━━━━━━━━ */}

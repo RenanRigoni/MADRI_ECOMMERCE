@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { familyLabels, type FragranceFamily, type Intensity } from '@/lib/products'
-import { perfumes, volumeLabel, cardTitle, primaryImage } from '@/lib/perfumes'
+import { volumeLabel, cardTitle, primaryImage, type Perfume } from '@/lib/perfumes-shared'
 import ProductCard from '@/components/produto/ProductCard'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
@@ -63,7 +63,7 @@ function Chip({
   )
 }
 
-export default function FragranceFinderSection() {
+export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume[] }) {
   const [recipient, setRecipient] = useState<Recipient>(null)
   const [moment, setMoment] = useState<Moment>(null)
   const [intensity, setIntensity] = useState<Intensity | null>(null)

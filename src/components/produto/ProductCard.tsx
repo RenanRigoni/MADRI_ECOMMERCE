@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Heart } from 'lucide-react'
 import { familyLabels, intensityLabel, type FragranceFamily, type Intensity } from '@/lib/products'
+import { useCart } from '@/lib/cart/store'
 
 export interface ProductCardProps {
   id: string
@@ -72,6 +73,7 @@ function CardPlaceholder({ large = false }: { large?: boolean }) {
 }
 
 export default function ProductCard({
+  id,
   slug,
   name,
   volume,
@@ -87,13 +89,16 @@ export default function ProductCard({
   intensity,
   shortDescription,
 }: ProductCardProps) {
+  const cart = useCart()
   const finalPrice = discount ? price * (1 - discount / 100) : price
   const pixPrice = finalPrice * 0.95
   const outOfStock = stock === 0
+  const unavailable = outOfStock || finalPrice <= 0
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
+    if (!unavailable) cart.add(id)
   }
 
   /* ── Featured (horizontal) card ── */
@@ -126,7 +131,7 @@ export default function ProductCard({
                 Mais Vendido
               </span>
             )}
-            {discount && (
+            {discount && finalPrice > 0 && (
               <span
                 className="bg-[#B5363A] text-white text-[8px] md:text-[9px] tracking-[0.12em] uppercase px-2.5 py-0.5 md:px-3 md:py-1 font-semibold"
                 style={{ fontFamily: bodyFont }}
@@ -195,20 +200,22 @@ export default function ProductCard({
           )}
 
           <div className="flex flex-col gap-0.5 md:gap-1">
-            {discount && (
+            {discount && finalPrice > 0 && (
               <p className="text-[11px] text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
                 {formatPrice(price)}
               </p>
             )}
-            <p className="text-xl md:text-2xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
-              {formatPrice(finalPrice)}
-            </p>
-            <p className="text-[11px] md:text-xs text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
-              Pix: {formatPrice(pixPrice)}
-            </p>
+            {finalPrice > 0 ? <>
+              <p className="text-xl md:text-2xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
+                {formatPrice(finalPrice)}
+              </p>
+              <p className="text-[11px] md:text-xs text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
+                Pix: {formatPrice(pixPrice)}
+              </p>
+            </> : <p className="text-sm font-semibold text-[#6B7280]">Preço indisponível</p>}
           </div>
 
-          {!outOfStock && (
+          {!unavailable && (
             <button
               onClick={handleAddToCart}
               className="cursor-pointer mt-1 w-full md:w-auto md:px-10 py-3 md:py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
@@ -252,7 +259,7 @@ export default function ProductCard({
               Novo
             </span>
           )}
-          {discount && (
+          {discount && finalPrice > 0 && (
             <span
               className="bg-[#B5363A] text-white text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 font-semibold"
               style={{ fontFamily: bodyFont }}
@@ -284,7 +291,7 @@ export default function ProductCard({
         )}
 
         {/* Desktop hover CTA */}
-        {!outOfStock && (
+        {!unavailable && (
           <div
             className="absolute bottom-0 left-0 right-0 hidden md:flex items-center justify-center bg-[#0A0A0A]/90 py-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
             onClick={handleAddToCart}
@@ -351,21 +358,23 @@ export default function ProductCard({
         )}
 
         <div className="mt-auto pt-2 flex flex-col gap-0.5">
-          {discount && (
+          {discount && finalPrice > 0 && (
             <p className="text-[11px] text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
               {formatPrice(price)}
             </p>
           )}
-          <p className="text-sm font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
-            {formatPrice(finalPrice)}
-          </p>
-          <p className="text-[11px] text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
-            Pix: {formatPrice(pixPrice)}
-          </p>
+          {finalPrice > 0 ? <>
+            <p className="text-sm font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
+              {formatPrice(finalPrice)}
+            </p>
+            <p className="text-[11px] text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
+              Pix: {formatPrice(pixPrice)}
+            </p>
+          </> : <p className="text-xs font-semibold text-[#6B7280]">Preço indisponível</p>}
         </div>
 
         {/* Mobile CTA */}
-        {!outOfStock && (
+        {!unavailable && (
           <button
             className="cursor-pointer md:hidden mt-2 w-full py-2.5 border border-[#0A0A0A] text-[10px] tracking-[0.2em] uppercase text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white active:scale-[0.98] transition-all duration-200"
             style={{ fontFamily: bodyFont, fontWeight: 500 }}

@@ -2,8 +2,8 @@
 
 import { MessageCircle } from 'lucide-react'
 import { familyLabels, type FragranceFamily } from '@/lib/products'
-import type { Perfume } from '@/lib/perfumes'
-import { volumeLabel } from '@/lib/perfumes'
+import { volumeLabel, type Perfume } from '@/lib/perfumes-shared'
+import { useCart } from '@/lib/cart/store'
 
 const bodyFont = 'var(--font-body), Montserrat, sans-serif'
 const displayFont = 'var(--font-display), Cormorant Garamond, Georgia, serif'
@@ -44,9 +44,11 @@ function NoteRow({ label, notes }: { label: string; notes: string[] }) {
 }
 
 export default function ProductInfo({ perfume }: { perfume: Perfume }) {
+  const cart = useCart()
   const outOfStock = perfume.stock === 0
   const finalPrice = perfume.discount ? perfume.price * (1 - perfume.discount / 100) : perfume.price
   const pixPrice = finalPrice * 0.95
+  const unavailable = outOfStock || finalPrice <= 0
   const whatsappHref = `https://wa.me/?text=${encodeURIComponent(
     `Olá! Tenho interesse no perfume ${perfume.name}.`
   )}`
@@ -122,23 +124,26 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
 
       {/* Price block */}
       <div className="flex flex-col gap-1 pt-2 border-t border-[#E8E0D4]">
-        {perfume.discount && (
+        {perfume.discount && finalPrice > 0 && (
           <p className="text-sm text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
             {formatPrice(perfume.price)}
           </p>
         )}
-        <p className="text-3xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
-          {formatPrice(finalPrice)}
-        </p>
-        <p className="text-sm text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
-          Pix: {formatPrice(pixPrice)}
-        </p>
+        {finalPrice > 0 ? <>
+          <p className="text-3xl font-semibold text-[#0A0A0A]" style={{ fontFamily: bodyFont }}>
+            {formatPrice(finalPrice)}
+          </p>
+          <p className="text-sm text-[#2D6A4F]" style={{ fontFamily: bodyFont }}>
+            Pix: {formatPrice(pixPrice)}
+          </p>
+        </> : <p className="text-base font-semibold text-[#6B7280]">Preço indisponível</p>}
       </div>
 
       {/* CTA */}
       <div className="flex flex-col sm:flex-row gap-3">
-        {!outOfStock ? (
+        {!unavailable ? (
           <button
+            onClick={() => cart.add(perfume.id)}
             className="cursor-pointer flex-1 px-8 py-4 bg-[#0A0A0A] text-white text-[11px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
             style={{ fontFamily: bodyFont }}
           >
@@ -149,7 +154,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
             className="flex-1 text-center px-8 py-4 border border-[#E8E0D4] text-[#9CA3AF] text-[11px] tracking-[0.25em] uppercase"
             style={{ fontFamily: bodyFont }}
           >
-            Esgotado
+            {outOfStock ? 'Esgotado' : 'Indisponível para compra'}
           </span>
         )}
         <a
