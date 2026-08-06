@@ -5,17 +5,17 @@
 ## Status geral
 
 Pagamento é criado e aprovado de verdade no Mercado Pago (confirmado múltiplas vezes,
-`status: processed`, `status_detail: accredited`). **Bug #1 (o crítico, que impedia o
-pedido pago de ficar registrado no banco) foi encontrado, corrigido e validado
-ponta a ponta nesta sessão — pagamento síncrono agora reconcilia corretamente.**
-Bug #2 tem mitigação manual mas ainda falta o fix definitivo (expiração automática).
-Bug #3 (webhook) segue sem solução do nosso lado — mas não bloqueia o fluxo feliz,
-já que a reconciliação síncrona (Bug #1) é quem realmente grava o pagamento como PAID.
+`status: processed`, `status_detail: accredited`). **Bug #1 (crítico, impedia o pedido
+pago de ficar registrado no banco) e Bug #2 (reserva de estoque travando pra sempre)
+foram encontrados, corrigidos e validados nesta sessão.** Só falta Bug #3 (webhook),
+que não bloqueia o fluxo feliz — a reconciliação síncrona (Bug #1) é quem realmente
+grava o pagamento como PAID; o webhook seria só uma camada extra de segurança para
+eventos assíncronos (chargeback, etc).
 
-`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false`. Com Bug #1 resolvido e validado,
-o principal bloqueio de segurança para vendas reais está removido — decisão de ligar
-fica a critério do usuário, idealmente após decidir o que fazer com Bug #2 (reservas
-de estoque travando por falta de expiração automática).
+`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false`. Com Bug #1 e Bug #2 resolvidos e
+validados, não há mais bloqueio técnico conhecido para vendas reais — ligar produção
+é decisão do usuário (troca de credenciais teste → produção, ver checklist no fim
+deste arquivo).
 
 ---
 
@@ -96,25 +96,36 @@ está resolvido de ponta a ponta.
 
 ---
 
-## Bug #2 — Reserva de estoque nunca expira/libera automaticamente (CONFIRMADO, mitigado manualmente)
+## Bug #2 — Reserva de estoque nunca expirava/liberava automaticamente (RESOLVIDO 2026-08-06)
 
 **Sintoma:** toda tentativa de pagamento que falha/trava no meio do caminho deixa a
 reserva de estoque (`inventory_reservations.status = 'RESERVED'`) presa para sempre.
 `products.stock_reserved` nunca volta a diminuir, produto fica "sem estoque disponível"
 mesmo tendo unidades físicas livres.
 
-**Causa:** não existe função de release automático nem cron/expiração. A única forma de
-uma reserva sair de `RESERVED` é o fluxo feliz completo (`apply_mercado_pago_order`
-marcando como `CONSUMED`) ou uma rejeição explícita tratada (`RELEASED`). Se a request
-trava/morre no meio (como no Bug #1), a reserva fica órfã.
+**Causa:** não existia função de release automático nem cron/expiração. A única forma de
+uma reserva sair de `RESERVED` era o fluxo feliz completo (`apply_mercado_pago_order`
+marcando como `CONSUMED`) ou uma rejeição explícita tratada (`RELEASED`, confirmado que
+esse caminho já funcionava certo mesmo antes do fix — testado com cartão de recusa
+`OTHE`, reserva liberou e estoque voltou imediatamente). O buraco real era só o caso de
+checkout abandonado: cliente clica "Pagar" e fecha a aba, cai a conexão, ou qualquer
+cenário em que a request nunca recebe resposta — a reserva feita em `start_payment_attempt`
+fica órfã pra sempre.
 
-**Mitigação aplicada hoje (manual, via SQL):** liberadas manualmente as reservas órfãs
-de ids 3, 4, 5, 6 e recalculado `stock_reserved` dos 3 produtos ativos.
+**Fix aplicado:** `supabase/migrations/20260806193000_expire_stale_inventory_reservations.sql`
+— função `release_expired_inventory_reservations()` que libera reservas `RESERVED` de
+pedidos cujo `orders.expires_at` (validade da cotação, já existia) passou sem o
+pagamento completar, restaura `stock_reserved` e marca o pedido como `EXPIRED`.
+Agendada via `pg_cron` a cada 5 minutos (`cron.schedule('release-expired-inventory-reservations', '*/5 * * * *', ...)`).
 
-**Fix real ainda não implementado:** precisa de uma expiração (ex.: reserva expira depois
-de N minutos sem confirmação) rodando via cron/Edge Function, ou um mecanismo de
-liberação no próprio `startAttempt`/checkout quando detecta reserva antiga do mesmo
-carrinho/sessão.
+**Validação:** criada uma reserva real via `start_payment_attempt` (simulando "Confirmar
+pedido" sem completar o pagamento), forçado `expires_at` pro passado, rodada a função
+manualmente — resultado: `stock_reserved` voltou a 0, pedido virou `EXPIRED`, reserva
+virou `RELEASED`. Job `cron.job` confirmado ativo (`schedule: */5 * * * *`).
+
+**Mitigação manual anterior (histórico, já resolvida pelo fix):** em sessões anteriores
+foram liberadas manualmente reservas órfãs (ids 3, 4, 5, 6, 7) enquanto o fix definitivo
+não existia — não é mais necessário repetir esse processo.
 
 **Arquivos relevantes:**
 - Tabela `inventory_reservations` (colunas: `id`, `payment_attempt_id`, `order_item_id`,
@@ -181,6 +192,15 @@ como reconciliação de segurança para eventos assíncronos futuros (chargeback
 - [x] Remover checkpoints `checkpoint_order_created`/`checkpoint_status_mapped`/
       `checkpoint_order_applied` de `src/app/api/payments/mercadopago/route.ts` —
       removidos ao resolver Bug #1 (2026-08-06).
-- [ ] Rodar mais um teste E2E completo pela rota real (não RPC manual) para validar
-      o fix do Bug #1 de ponta a ponta antes de considerar produção.
-- [ ] Implementar expiração/liberação automática de reservas de estoque (Bug #2).
+- [x] Rodar mais um teste E2E completo pela rota real (não RPC manual) para validar
+      o fix do Bug #1 de ponta a ponta — feito (2026-08-06), resposta 200 limpa,
+      `order_reconciled`/`PAID`.
+- [x] Implementar expiração/liberação automática de reservas de estoque (Bug #2) —
+      feito e validado (2026-08-06), `pg_cron` a cada 5 minutos.
+- [ ] Testado também o caminho de recusa (`OTHE`) — reserva já liberava certo antes
+      do fix; não precisa de ação adicional, só documentado aqui como confirmado.
+- [ ] Antes de ligar `MERCADO_PAGO_ENABLE_PRODUCTION=true`: trocar
+      `MERCADO_PAGO_ACCESS_TOKEN` e `MERCADO_PAGO_WEBHOOK_SECRET` de teste para
+      produção, e rodar uma compra real de baixo valor pra confirmar.
+- [ ] Abrir chamado com suporte Mercado Pago sobre Bug #3 (webhook), usando a
+      evidência já documentada acima — ação do usuário, precisa acesso à conta MP.
