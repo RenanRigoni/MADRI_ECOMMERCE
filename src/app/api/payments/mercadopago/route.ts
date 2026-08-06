@@ -81,8 +81,11 @@ export async function POST(request: NextRequest) {
         payer: { ...input.payment.payer, email: attempt.payer_email },
       },
     })
+    logPaymentEvent('warn', 'checkpoint_order_created', { providerOrderId: authoritative.id, status: authoritative.status })
     const status = mapMercadoPagoStatus(authoritative.status, authoritative.statusDetail)
+    logPaymentEvent('warn', 'checkpoint_status_mapped', { status })
     const applied = await repository.applyProviderOrder(authoritative, status)
+    logPaymentEvent('warn', 'checkpoint_order_applied', { publicOrderId: applied.public_order_id })
     logPaymentEvent('info', 'order_reconciled', {
       publicOrderId: applied.public_order_id,
       status: applied.status,
