@@ -6,13 +6,16 @@
 
 Pagamento é criado e aprovado de verdade no Mercado Pago (confirmado múltiplas vezes,
 `status: processed`, `status_detail: accredited`). **Bug #1 (o crítico, que impedia o
-pedido pago de ficar registrado no banco) foi encontrado e corrigido nesta sessão.**
+pedido pago de ficar registrado no banco) foi encontrado, corrigido e validado
+ponta a ponta nesta sessão — pagamento síncrono agora reconcilia corretamente.**
 Bug #2 tem mitigação manual mas ainda falta o fix definitivo (expiração automática).
-Bug #3 (webhook) segue sem solução do nosso lado.
+Bug #3 (webhook) segue sem solução do nosso lado — mas não bloqueia o fluxo feliz,
+já que a reconciliação síncrona (Bug #1) é quem realmente grava o pagamento como PAID.
 
-`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false` — só deve ser ligado depois de rodar
-mais uma compra E2E real do zero (não reconciliação manual) pra validar o fluxo completo
-com o fix aplicado, e idealmente depois de decidir o que fazer com Bug #2/#3.
+`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false`. Com Bug #1 resolvido e validado,
+o principal bloqueio de segurança para vendas reais está removido — decisão de ligar
+fica a critério do usuário, idealmente após decidir o que fazer com Bug #2 (reservas
+de estoque travando por falta de expiração automática).
 
 ---
 
@@ -77,11 +80,14 @@ com os dados reais obtidos direto da API do Mercado Pago. Resultado:
 Armaf Club de Nuit decrementado corretamente (`stock_on_hand: 0`), reserva marcada
 `CONSUMED`, pedido com `paid_at`/`inventory_applied_at` preenchidos.
 
-**Ainda pendente:** essa validação usou uma chamada direta à RPC (via SQL), não uma
-compra nova de ponta a ponta pela rota real. Recomendado rodar mais um teste E2E
-completo (Playwright, cartão de teste, produto com estoque disponível) para confirmar
-que o caminho da aplicação inteiro (`POST /api/payments/mercadopago` → `applyProviderOrder`)
-funciona sem intervenção manual antes de considerar ligar `MERCADO_PAGO_ENABLE_PRODUCTION`.
+**Validação final (E2E real, sem intervenção manual):** rodada uma segunda compra
+completa via Playwright (Rabanne 1 Million Elixir, R$ 220,00) direto pela rota real após
+o deploy do fix. Resultado: `POST /api/payments/mercadopago` retornou `200`, log
+`order_reconciled` com `status: PAID, transitionedToPaid: true`, página de status do
+pedido mostrou "Pagamento confirmado" / `Status: PAID` imediatamente (sem 503, sem
+travar). Confirmado também no banco: `orders.status = PAID`,
+`fulfillment_status = READY`, `payment_attempts.request_state = COMPLETED`. Bug #1
+está resolvido de ponta a ponta.
 
 **Arquivos relevantes:**
 - `supabase/migrations/20260806190000_fix_apply_mercado_pago_order_ambiguous_status.sql`
