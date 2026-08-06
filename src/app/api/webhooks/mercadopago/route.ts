@@ -21,11 +21,20 @@ const notificationSchema = z.object({
 export async function POST(request: NextRequest) {
   const dataId = request.nextUrl.searchParams.get('data.id')
   const requestId = request.headers.get('x-request-id')
+  const xSignature = request.headers.get('x-signature')
+
+  logPaymentEvent('warn', 'webhook_debug_diagnostic', {
+    dataId,
+    requestId,
+    xSignaturePresent: Boolean(xSignature),
+    xSignatureShape: xSignature,
+    search: request.nextUrl.search,
+  })
 
   try {
     const config = readMercadoPagoConfig(process.env, 'webhook')
     validateMercadoPagoWebhookSignature({
-      xSignature: request.headers.get('x-signature'),
+      xSignature,
       xRequestId: requestId,
       dataId,
       secret: config.webhookSecret ?? '',
