@@ -41,9 +41,9 @@ export function volumeLabel(p: Perfume): string {
   return p.volumeMl ? `${p.volumeMl}ml` : ''
 }
 
-/** Nome curto pra card (marca + nome + versão) — o titulo_site completo (SEO) é longo demais pra caber legível num card. */
+/** Nome curto pra card (marca | nome | versão) — o titulo_site completo (SEO) é longo demais pra caber legível num card. */
 export function cardTitle(p: Perfume): string {
-  return `${p.marca} ${p.nome}${p.versao ? ' ' + p.versao : ''}`
+  return [p.marca, p.nome, p.versao].filter((part): part is string => Boolean(part)).join(' | ')
 }
 
 export function primaryImage(p: Perfume): string | undefined {

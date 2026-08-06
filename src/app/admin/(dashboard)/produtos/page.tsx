@@ -53,20 +53,34 @@ function applyFilters(products: AdminProductRow[], params: SearchParams): AdminP
   })
 }
 
-function applySort(products: AdminProductRow[], sort: SortOption | undefined): AdminProductRow[] {
-  const sorted = [...products]
+/** 0 = ativo (mostra "Desativar"), 1 = pronto mas inativo (mostra "Ativar"), 2 = incompleto (sem botão) */
+function statusRank(product: AdminProductRow): number {
+  if (product.active) return 0
+  if (readyToActivate(product)) return 1
+  return 2
+}
+
+function secondaryCompare(sort: SortOption | undefined, a: AdminProductRow, b: AdminProductRow): number {
   switch (sort) {
     case 'preco-asc':
-      return sorted.sort((a, b) => (a.price_cents ?? Infinity) - (b.price_cents ?? Infinity))
+      return (a.price_cents ?? Infinity) - (b.price_cents ?? Infinity)
     case 'preco-desc':
-      return sorted.sort((a, b) => (b.price_cents ?? -Infinity) - (a.price_cents ?? -Infinity))
+      return (b.price_cents ?? -Infinity) - (a.price_cents ?? -Infinity)
     case 'estoque-asc':
-      return sorted.sort((a, b) => a.stock_on_hand - b.stock_on_hand)
+      return a.stock_on_hand - b.stock_on_hand
     case 'estoque-desc':
-      return sorted.sort((a, b) => b.stock_on_hand - a.stock_on_hand)
+      return b.stock_on_hand - a.stock_on_hand
     default:
-      return sorted
+      return 0
   }
+}
+
+function applySort(products: AdminProductRow[], sort: SortOption | undefined): AdminProductRow[] {
+  return [...products].sort((a, b) => {
+    const statusDiff = statusRank(a) - statusRank(b)
+    if (statusDiff !== 0) return statusDiff
+    return secondaryCompare(sort, a, b)
+  })
 }
 
 export default async function AdminProductsPage({
