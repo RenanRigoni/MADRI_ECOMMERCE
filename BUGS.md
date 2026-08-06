@@ -5,73 +5,88 @@
 ## Status geral
 
 Pagamento é criado e aprovado de verdade no Mercado Pago (confirmado múltiplas vezes,
-`status: processed`, `status_detail: accredited`). Os dois caminhos que deveriam marcar
-o pedido como PAGO no nosso banco têm problema, então **não há garantia hoje de que um
-pedido pago fique refletido no sistema**. Por isso `MERCADO_PAGO_ENABLE_PRODUCTION=false`
-e não deve ser ligado até o Bug #1 ser resolvido.
+`status: processed`, `status_detail: accredited`). **Bug #1 (o crítico, que impedia o
+pedido pago de ficar registrado no banco) foi encontrado e corrigido nesta sessão.**
+Bug #2 tem mitigação manual mas ainda falta o fix definitivo (expiração automática).
+Bug #3 (webhook) segue sem solução do nosso lado.
+
+`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false` — só deve ser ligado depois de rodar
+mais uma compra E2E real do zero (não reconciliação manual) pra validar o fluxo completo
+com o fix aplicado, e idealmente depois de decidir o que fazer com Bug #2/#3.
 
 ---
 
-## Bug #1 — Reconciliação síncrona trava intermitentemente (CRÍTICO, em investigação)
+## Bug #1 — RPC `apply_mercado_pago_order` sempre falhava por coluna ambígua (RESOLVIDO 2026-08-06)
 
-**Sintoma:** cliente recebe "Serviço temporariamente indisponível" (503) mesmo com o
-pagamento aprovado no Mercado Pago. Pedido fica com `status: PROCESSING`,
-`provider_order_id: null` no nosso banco — órfão, sem saber que foi pago.
+**Sintoma:** cliente recebia "Serviço temporariamente indisponível" (503) mesmo com o
+pagamento aprovado no Mercado Pago. Pedido ficava com `status: PROCESSING`,
+`provider_order_id: null` no nosso banco — órfão, sem saber que foi pago. Acontecia
+em **100% das vezes** que um pagamento chegava a `PAID` (não era intermitente, e nunca
+foi — só parecia intermitente porque a maioria dos testes anteriores falhava antes
+disso por outros motivos, como `out_of_stock` ou email inválido).
 
-**Onde:** `src/app/api/payments/mercadopago/route.ts`, função `POST`.
+**Causa raiz real:** a função `apply_mercado_pago_order` é declarada como
+`RETURNS TABLE(public_order_id uuid, status payment_status, fulfillment_status fulfillment_status, transitioned_to_paid boolean)`.
+Em PL/pgSQL, os nomes de colunas de `RETURNS TABLE` viram variáveis automáticas no
+escopo da função. O corpo da função tinha referências **não qualificadas** a `status` e
+`fulfillment_status` que colidiam com essas variáveis:
+- três queries em `inventory_reservations` com `where ... and status = 'RESERVED'`
+  (sem alias de tabela) — Postgres não sabia se `status` era a variável de saída ou a
+  coluna da tabela → `ERROR: column reference "status" is ambiguous`.
+- um `else fulfillment_status` dentro de um `CASE` no `UPDATE public.orders` — mesmo
+  problema com `fulfillment_status`.
 
-**Evidência (checkpoints de diagnóstico já commitados):**
-```
-event: checkpoint_order_created   -> dispara, providerOrderId presente, status: 'processed'
-event: checkpoint_status_mapped   -> dispara, status: 'PAID'
-event: checkpoint_order_applied   -> NUNCA dispara
-```
-Ou seja, trava dentro de `repository.applyProviderOrder(authoritative, status)`
-(`src/lib/payments/repository.ts:178`), que chama a RPC `apply_mercado_pago_order`
-no Postgres. Nenhum log de erro nosso dispara (nem `provider_request_failed` nem
-`payment_route_failed`) — sugere que a função Vercel foi encerrada pela plataforma
-enquanto ainda aguardava a RPC (await nunca resolve nem rejeita a tempo), não uma
-exceção tratada pelo nosso `catch`.
+Como é uma exceção do Postgres levantada dentro de uma transação de RPC, **a transação
+inteira sofria rollback** — nada era persistido, nem o `provider_order_id` no
+`payment_attempts`. O erro não batia com nenhum código conhecido em
+`PERSISTENCE_CODES` (`src/lib/payments/repository.ts`), então virava
+`PaymentPersistenceError('persistence_failure')`, e a função `persistenceFailure()` em
+`src/app/api/payments/mercadopago/route.ts` só loga para 4 códigos específicos — para
+qualquer outro código (incluindo `persistence_failure`), ela retornava `503` **sem
+logar nada**. Foi por isso que nenhum log de erro nosso aparecia — não era hang nem
+timeout, era um erro real do Postgres sendo engolido silenciosamente por design.
 
-**Hipóteses ainda não confirmadas:**
-1. Lock/contenção no Postgres — descartado parcialmente: `pg_stat_activity` checado
-   logo após reproduzir mostrou 0 queries ativas e só 13 conexões totais (não parece
-   esgotamento de pool no momento verificado, mas pool poderia ter estado saturado
-   *durante* o request e já ter liberado quando chequei).
-2. RPC realmente lenta por causa de volume de queries manuais rodadas durante a sessão
-   de debug (auto-inflingido, não bug de produção real) — precisa reproduzir em
-   ambiente "limpo" (sem MCP rodando queries em paralelo) pra confirmar/descartar.
-3. Algum caminho dentro da função `apply_mercado_pago_order` (ver definição completa
-   abaixo) que pode demorar mais que o esperado sob certas condições de estoque/lock.
+**Como foi encontrado:** os checkpoints de diagnóstico mostravam que a execução parava
+entre `checkpoint_status_mapped` e `checkpoint_order_applied`, mas a query de logs do
+Vercel só buscava por `"checkpoint"` — mascarando qualquer outro log na mesma
+invocação. Ao buscar os logs da rota sem filtro, nada adicional apareceu (confirmando
+o "silêncio" do `persistenceFailure`). A pista real veio de `get_logs` do Supabase
+(`service: postgres`), que mostrava `ERROR: column reference "status" is ambiguous`
+recorrente há dias, em vários horários — sempre que uma tentativa de pagamento
+alcançava `PAID`.
 
-**Definição atual da RPC** (`apply_mercado_pago_order`, Postgres, `SECURITY DEFINER`):
-- Faz `select ... for update` em `orders` (por `external_reference`) e em
-  `payment_attempts` (por `order_id`, mais recente) — locks de linha únicos por
-  tentativa, não deveriam colidir entre tentativas diferentes.
-- Valida valores (amount, currency, provider_order_id, provider_payment_id).
-- Se `PAID` e inventário ainda não aplicado: confere se as reservas (`inventory_reservations`,
-  status `RESERVED`) batem com os itens do pedido antes de decrementar estoque.
-- Decrementa `products.stock_on_hand`/`stock_reserved`, marca reserva como `CONSUMED`,
-  grava em `inventory_movements`.
-- Insere em `fulfillment_outbox` quando aplicável.
+**Fix aplicado:**
+1. Migração `supabase/migrations/20260806190000_fix_apply_mercado_pago_order_ambiguous_status.sql`
+   — recria a função com `inventory_reservations` aliasada (`ir`) e todas as referências
+   a `status`/`quantity`/`product_id` qualificadas via `ir.`, e `fulfillment_status`
+   qualificado como `public.orders.fulfillment_status` no `CASE`.
+2. `src/app/api/payments/mercadopago/route.ts`: `persistenceFailure()` agora loga
+   `payment_persistence_failed` com o `code` para **qualquer** código não tratado
+   explicitamente, antes de cair no 503 genérico — para nunca mais termos um erro de
+   pagamento 100% silencioso, seja qual for a causa futura.
+3. Checkpoints de diagnóstico temporários (`checkpoint_order_created`,
+   `checkpoint_status_mapped`, `checkpoint_order_applied`) removidos — cumpriram o
+   papel de isolar o problema.
 
-**Próximos passos sugeridos:**
-- Reproduzir o teste de compra em um momento SEM nenhuma query manual concorrente via
-  MCP, pra isolar se é sobrecarga da sessão de debug ou bug real.
-- Adicionar timing/instrumentação dentro da própria função SQL (ou logar
-  `NOW()` antes/depois de cada bloco) pra ver qual trecho está lento.
-- Considerar adicionar `export const maxDuration = 30` (ou mais) na rota, como rede de
-  segurança — não resolve a causa raiz mas evita truncamento silencioso pela plataforma.
-- Verificar limite de conexões do plano Supabase atual (free tier costuma ser baixo)
-  e se o app usa um client novo por request sem pooling adequado
-  (`createSupabaseAdmin` — checar se reaproveita conexão ou abre nova toda vez).
+**Validação:** o pedido real que ficou órfão durante o teste desta sessão
+(`external_reference: ord_2f52b3713c882a3d43c200f0426704f3`, Mercado Pago
+`ORDTST01KZC4NS4HWSMZK6QV41K0C2PP`, pagamento `PAY01KZC4NS52YWHWSDB99M9002NS`,
+R$ 221,90, `accredited`) foi reconciliado manualmente chamando a RPC corrigida
+com os dados reais obtidos direto da API do Mercado Pago. Resultado:
+`status: PAID`, `fulfillment_status: READY`, `transitioned_to_paid: true` — estoque do
+Armaf Club de Nuit decrementado corretamente (`stock_on_hand: 0`), reserva marcada
+`CONSUMED`, pedido com `paid_at`/`inventory_applied_at` preenchidos.
+
+**Ainda pendente:** essa validação usou uma chamada direta à RPC (via SQL), não uma
+compra nova de ponta a ponta pela rota real. Recomendado rodar mais um teste E2E
+completo (Playwright, cartão de teste, produto com estoque disponível) para confirmar
+que o caminho da aplicação inteiro (`POST /api/payments/mercadopago` → `applyProviderOrder`)
+funciona sem intervenção manual antes de considerar ligar `MERCADO_PAGO_ENABLE_PRODUCTION`.
 
 **Arquivos relevantes:**
-- `src/app/api/payments/mercadopago/route.ts` (checkpoints de diagnóstico já adicionados,
-  linhas com `checkpoint_order_created`/`checkpoint_status_mapped`/`checkpoint_order_applied`)
+- `supabase/migrations/20260806190000_fix_apply_mercado_pago_order_ambiguous_status.sql`
+- `src/app/api/payments/mercadopago/route.ts` (`persistenceFailure`)
 - `src/lib/payments/repository.ts:178` (`applyProviderOrder`)
-- `src/lib/server/supabase-admin.ts` (como o client é criado por request)
-- Migração original da função `apply_mercado_pago_order` em `supabase/migrations/`
 
 ---
 
@@ -157,8 +172,9 @@ como reconciliação de segurança para eventos assíncronos futuros (chargeback
 - [ ] Remover log de diagnóstico `webhook_debug_diagnostic` de
       `src/app/api/webhooks/mercadopago/route.ts` (linha ~24) depois de resolver Bug #3
       ou de ter evidência suficiente pro chamado da MP.
-- [ ] Remover checkpoints `checkpoint_order_created`/`checkpoint_status_mapped`/
-      `checkpoint_order_applied` de `src/app/api/payments/mercadopago/route.ts` depois
-      de resolver Bug #1 (ou promovê-los a logging permanente se fizer sentido manter
-      visibilidade nesse trecho).
+- [x] Remover checkpoints `checkpoint_order_created`/`checkpoint_status_mapped`/
+      `checkpoint_order_applied` de `src/app/api/payments/mercadopago/route.ts` —
+      removidos ao resolver Bug #1 (2026-08-06).
+- [ ] Rodar mais um teste E2E completo pela rota real (não RPC manual) para validar
+      o fix do Bug #1 de ponta a ponta antes de considerar produção.
 - [ ] Implementar expiração/liberação automática de reservas de estoque (Bug #2).
