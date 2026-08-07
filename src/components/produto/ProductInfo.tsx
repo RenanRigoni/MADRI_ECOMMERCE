@@ -178,7 +178,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
           >
             Sobre a fragrância
           </p>
-          <p className="text-sm leading-relaxed text-[#4A4A4A]" style={{ fontFamily: bodyFont }}>
+          <p className="text-sm leading-relaxed text-[#4A4A4A] whitespace-pre-line" style={{ fontFamily: bodyFont }}>
             {perfume.description}
           </p>
         </div>
