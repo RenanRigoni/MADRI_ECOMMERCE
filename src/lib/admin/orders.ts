@@ -149,6 +149,12 @@ export async function listAdminOrders(client: SupabaseClient, limit = 200): Prom
   return ((data ?? []) as unknown as RawOrder[]).map(toRow)
 }
 
+export async function getAdminOrder(client: SupabaseClient, id: number): Promise<AdminOrderRow | null> {
+  const { data, error } = await client.from('orders').select(ADMIN_ORDER_COLUMNS).eq('id', id).maybeSingle()
+  if (error) throw new AdminOrderError('persistence_failure')
+  return data ? toRow(data as unknown as RawOrder) : null
+}
+
 export async function setAdminOrderFulfilled(client: SupabaseClient, id: number): Promise<void> {
   const { error, count } = await client
     .from('orders')

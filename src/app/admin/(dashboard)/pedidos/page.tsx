@@ -166,15 +166,26 @@ export default async function AdminOrdersPage({
                     Subtotal {money(order.subtotalCents)} · Frete {order.shippingCents === 0 ? 'Grátis' : money(order.shippingCents)}
                     <strong className="ml-2">Total {money(order.totalCents)}</strong>
                   </p>
-                  {canFulfill ? (
-                    <form action={markOrderFulfilled.bind(null, order.id)}>
-                      <button type="submit" className="text-sm px-3 py-1.5 border border-[#2D6A4F] text-[#2D6A4F]">
-                        Marcar como enviado
-                      </button>
-                    </form>
-                  ) : order.fulfillmentStatus === 'FULFILLED' ? (
-                    <span className="text-sm text-[#2D6A4F]">Enviado</span>
-                  ) : null}
+                  <div className="flex items-center gap-2">
+                    {order.status === 'PAID' ? (
+                      <Link
+                        href={`/admin/pedidos/${order.id}/etiqueta`}
+                        target="_blank"
+                        className="text-sm px-3 py-1.5 border border-[#D7CFC0] text-[#4A4A4A]"
+                      >
+                        Imprimir etiqueta
+                      </Link>
+                    ) : null}
+                    {canFulfill ? (
+                      <form action={markOrderFulfilled.bind(null, order.id)}>
+                        <button type="submit" className="text-sm px-3 py-1.5 border border-[#2D6A4F] text-[#2D6A4F]">
+                          Marcar como enviado
+                        </button>
+                      </form>
+                    ) : order.fulfillmentStatus === 'FULFILLED' ? (
+                      <span className="text-sm text-[#2D6A4F]">Enviado</span>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             )
