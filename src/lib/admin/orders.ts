@@ -48,19 +48,6 @@ export class AdminOrderError extends Error {
   }
 }
 
-interface RawOrderItem {
-  product_id: string
-  product_name: string
-  quantity: number
-  unit_price_cents: number
-  line_total_cents: number
-}
-
-interface RawPaymentAttempt {
-  payment_type_id: string
-  created_at: string
-}
-
 interface RawOrder {
   id: number
   public_id: string
@@ -78,18 +65,9 @@ interface RawOrder {
   created_at: string
   paid_at: string | null
   provider_order_id: string | null
-  order_items: RawOrderItem[]
-  payment_attempts: RawPaymentAttempt[]
+  payment_method: string | null
+  items: AdminOrderItem[]
 }
-
-const ADMIN_ORDER_COLUMNS = `
-  id, public_id, external_reference, status, fulfillment_status,
-  subtotal_cents, shipping_cents, total_cents, currency,
-  customer_name, customer_email, customer_phone, shipping_address,
-  created_at, paid_at, provider_order_id,
-  order_items ( product_id, product_name, quantity, unit_price_cents, line_total_cents ),
-  payment_attempts ( payment_type_id, created_at )
-`
 
 function parseAddress(value: Record<string, unknown> | null): AdminOrderAddress | null {
   if (!value) return null
@@ -102,12 +80,6 @@ function parseAddress(value: Record<string, unknown> | null): AdminOrderAddress 
     city: String(value.city ?? ''),
     state: String(value.state ?? ''),
   }
-}
-
-function latestPaymentMethod(attempts: RawPaymentAttempt[]): 'pix' | 'card' | null {
-  if (attempts.length === 0) return null
-  const latest = [...attempts].sort((a, b) => b.created_at.localeCompare(a.created_at))[0]
-  return latest.payment_type_id === 'bank_transfer' ? 'pix' : 'card'
 }
 
 function toRow(raw: RawOrder): AdminOrderRow {
@@ -128,39 +100,30 @@ function toRow(raw: RawOrder): AdminOrderRow {
     createdAt: raw.created_at,
     paidAt: raw.paid_at,
     providerOrderId: raw.provider_order_id,
-    paymentMethod: latestPaymentMethod(raw.payment_attempts ?? []),
-    items: (raw.order_items ?? []).map((item) => ({
-      productId: item.product_id,
-      productName: item.product_name,
-      quantity: item.quantity,
-      unitPriceCents: item.unit_price_cents,
-      lineTotalCents: item.line_total_cents,
-    })),
+    paymentMethod: raw.payment_method === 'pix' ? 'pix' : raw.payment_method === 'card' ? 'card' : null,
+    items: raw.items ?? [],
   }
 }
 
+// orders/order_items/payment_attempts have direct table access revoked even from
+// service_role — all reads/writes go through security definer RPCs
+// (supabase/migrations/20260807130000_admin_orders_rpc.sql), same pattern as the
+// rest of the payments schema.
 export async function listAdminOrders(client: SupabaseClient, limit = 200): Promise<AdminOrderRow[]> {
-  const { data, error } = await client
-    .from('orders')
-    .select(ADMIN_ORDER_COLUMNS)
-    .order('created_at', { ascending: false })
-    .limit(limit)
+  const { data, error } = await client.rpc('admin_list_orders', { p_limit: limit })
   if (error) throw new AdminOrderError('persistence_failure')
-  return ((data ?? []) as unknown as RawOrder[]).map(toRow)
+  return ((data ?? []) as RawOrder[]).map(toRow)
 }
 
 export async function getAdminOrder(client: SupabaseClient, id: number): Promise<AdminOrderRow | null> {
-  const { data, error } = await client.from('orders').select(ADMIN_ORDER_COLUMNS).eq('id', id).maybeSingle()
+  const { data, error } = await client.rpc('admin_get_order', { p_id: id })
   if (error) throw new AdminOrderError('persistence_failure')
-  return data ? toRow(data as unknown as RawOrder) : null
+  const row = Array.isArray(data) ? data[0] : data
+  return row ? toRow(row as RawOrder) : null
 }
 
 export async function setAdminOrderFulfilled(client: SupabaseClient, id: number): Promise<void> {
-  const { error, count } = await client
-    .from('orders')
-    .update({ fulfillment_status: 'FULFILLED', updated_at: new Date().toISOString() }, { count: 'exact' })
-    .eq('id', id)
-    .eq('fulfillment_status', 'READY')
+  const { data, error } = await client.rpc('admin_mark_order_fulfilled', { p_id: id })
   if (error) throw new AdminOrderError('persistence_failure')
-  if (!count) throw new AdminOrderError('not_found')
+  if (!data) throw new AdminOrderError('not_found')
 }
