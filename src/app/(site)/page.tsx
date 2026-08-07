@@ -124,7 +124,7 @@ export default async function Home() {
               <div className="flex items-center gap-3">
                 <div className="w-8 h-px bg-[#C4A55C]" aria-hidden />
                 <p
-                  className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                  className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
                   style={{ fontFamily: bodyFont }}
                 >
                   Coleção exclusiva
@@ -137,7 +137,7 @@ export default async function Home() {
                 style={{ fontFamily: displayFont, fontWeight: 500 }}
               >
                 A essência<br />
-                <span style={{ color: '#C4A55C' }}>do seu</span><br />
+                <span style={{ color: '#8A6A2F' }}>do seu</span><br />
                 momento.
               </h1>
 
@@ -156,7 +156,7 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row gap-3 pt-1 animate-fade-up-delay-2">
                 <Link
                   href="/produtos"
-                  className="cursor-pointer inline-flex items-center justify-center px-8 py-4 bg-[#0A0A0A] text-white text-[11px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+                  className="cursor-pointer inline-flex items-center justify-center px-8 py-4 bg-[#0A0A0A] text-white text-[11px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] hover:text-[#0A0A0A] active:scale-[0.98] transition-all duration-300"
                   style={{ fontFamily: bodyFont }}
                 >
                   Comprar agora
@@ -196,16 +196,16 @@ export default async function Home() {
             {benefits.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="flex flex-col sm:flex-row items-center sm:items-start gap-3 py-5 px-4 md:px-6 text-center sm:text-left"
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 py-5 px-4 md:px-6 text-center sm:text-left"
               >
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#FAF6F0] flex items-center justify-center">
-                  <Icon size={15} strokeWidth={1.25} className="text-[#C4A55C]" />
+                  <Icon size={15} strokeWidth={1.25} className="text-[#8A6A2F]" />
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold text-[#0A0A0A] mb-0.5" style={{ fontFamily: bodyFont }}>
+                  <p className="text-[13px] font-semibold text-[#0A0A0A] mb-0.5" style={{ fontFamily: bodyFont }}>
                     {title}
                   </p>
-                  <p className="text-[11px] text-[#9CA3AF] leading-snug" style={{ fontFamily: bodyFont }}>
+                  <p className="text-[12px] text-[#6B7280] leading-snug" style={{ fontFamily: bodyFont }}>
                     {desc}
                   </p>
                 </div>
@@ -226,7 +226,7 @@ export default async function Home() {
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
                 <p
-                  className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                  className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
                   style={{ fontFamily: bodyFont }}
                 >
                   Seleção da loja
@@ -269,7 +269,7 @@ export default async function Home() {
             <div className="flex items-center gap-4 mb-3">
               <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
               <p
-                className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
                 style={{ fontFamily: bodyFont }}
               >
                 Os favoritos
@@ -284,7 +284,7 @@ export default async function Home() {
               </h2>
               <Link
                 href="/produtos?sort=mais-vendidos"
-                className="cursor-pointer hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#C4A55C] hover:border-[#C4A55C] transition-colors"
+                className="cursor-pointer hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#8A6A2F] hover:border-[#8A6A2F] transition-colors"
                 style={{ fontFamily: bodyFont, fontWeight: 500 }}
               >
                 Ver mais vendidos
@@ -352,7 +352,7 @@ export default async function Home() {
             <div className="flex items-center gap-4 mb-3">
               <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
               <p
-                className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
                 style={{ fontFamily: bodyFont }}
               >
                 Navegue por ocasião
@@ -432,7 +432,7 @@ export default async function Home() {
           <div className="flex items-end justify-between mb-7 md:mb-12">
             <div>
               <p
-                className="text-[10px] tracking-[0.35em] uppercase text-[#C4A55C] font-medium mb-2"
+                className="text-[10px] tracking-[0.35em] uppercase text-[#8A6A2F] font-medium mb-2"
                 style={{ fontFamily: bodyFont }}
               >
                 Acabou de chegar
@@ -446,7 +446,7 @@ export default async function Home() {
             </div>
             <Link
               href="/produtos?filter=novo"
-              className="cursor-pointer text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#C4A55C] hover:border-[#C4A55C] transition-colors flex-shrink-0 ml-4"
+              className="cursor-pointer text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#8A6A2F] hover:border-[#8A6A2F] transition-colors flex-shrink-0 ml-4"
               style={{ fontFamily: bodyFont, fontWeight: 500 }}
             >
               Ver todas
@@ -541,7 +541,7 @@ export default async function Home() {
 
           <p
             className="text-[10px] tracking-[0.4em] uppercase font-medium"
-            style={{ fontFamily: bodyFont, color: 'rgba(196,165,92,0.60)' }}
+            style={{ fontFamily: bodyFont, color: '#C4A55C' }}
           >
             Nossa essência
           </p>

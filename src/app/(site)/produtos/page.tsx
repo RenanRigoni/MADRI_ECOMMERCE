@@ -47,7 +47,7 @@ export default async function ProdutosPage({
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-px bg-[#C4A55C]" aria-hidden />
             <p
-              className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+              className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
               style={{ fontFamily: bodyFont }}
             >
               Coleção completa

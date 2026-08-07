@@ -21,7 +21,7 @@ export default function Footer() {
                 Receba novidades exclusivas
               </p>
               <p
-                className="text-[11px] text-gray-500 mt-0.5 tracking-wide"
+                className="text-[11px] text-gray-400 mt-0.5 tracking-wide"
                 style={{ fontFamily: bodyFont }}
               >
                 Lançamentos e fragrâncias direto no seu e-mail
@@ -149,7 +149,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/[0.06] py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-400">
           <span style={{ fontFamily: bodyFont }}>
             © {new Date().getFullYear()} MADRI Perfumes. Todos os direitos reservados.
           </span>

@@ -34,7 +34,7 @@ export default function GiftSection() {
             <div className="flex items-center gap-3">
               <div className="w-8 h-px bg-[#C4A55C]" aria-hidden />
               <p
-                className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+                className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
                 style={{ fontFamily: bodyFont }}
               >
                 Para presentear
@@ -46,7 +46,7 @@ export default function GiftSection() {
               style={{ fontFamily: displayFont, fontWeight: 500 }}
             >
               Presenteie<br />
-              <span style={{ color: '#C4A55C' }}>com intenção</span>
+              <span style={{ color: '#8A6A2F' }}>com intenção</span>
             </h2>
 
             <p className="text-sm text-[#6B7280] leading-relaxed max-w-sm" style={{ fontFamily: bodyFont }}>
@@ -57,7 +57,7 @@ export default function GiftSection() {
               {pillars.map(({ Icon, title, desc }) => (
                 <div key={title} className="flex items-start gap-4">
                   <div className="w-9 h-9 rounded-full bg-white border border-[#E8E0D4] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon size={16} strokeWidth={1.25} className="text-[#C4A55C]" />
+                    <Icon size={16} strokeWidth={1.25} className="text-[#8A6A2F]" />
                   </div>
                   <div>
                     <p
@@ -76,7 +76,7 @@ export default function GiftSection() {
 
             <Link
               href="/produtos?filter=giftable"
-              className="cursor-pointer mt-2 inline-flex items-center gap-2 w-fit px-8 py-4 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+              className="cursor-pointer mt-2 inline-flex items-center gap-2 w-fit px-8 py-4 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] hover:text-[#0A0A0A] active:scale-[0.98] transition-all duration-300"
               style={{ fontFamily: bodyFont }}
             >
               <Gift size={14} strokeWidth={1.5} />
@@ -98,7 +98,7 @@ export default function GiftSection() {
               {/* Centered content */}
               <div className="flex flex-col items-center gap-5 text-center">
                 <div className="w-16 h-16 rounded-full bg-[#FAF6F0] border border-[#E8E0D4] flex items-center justify-center">
-                  <Gift size={26} strokeWidth={1} className="text-[#C4A55C]" />
+                  <Gift size={26} strokeWidth={1} className="text-[#8A6A2F]" />
                 </div>
                 <div>
                   <p
@@ -107,7 +107,7 @@ export default function GiftSection() {
                   >
                     Embalagem<br />premium
                   </p>
-                  <p className="text-[12px] text-[#9CA3AF]" style={{ fontFamily: bodyFont }}>
+                  <p className="text-[12px] text-[#6B7280]" style={{ fontFamily: bodyFont }}>
                     em cada pedido
                   </p>
                 </div>

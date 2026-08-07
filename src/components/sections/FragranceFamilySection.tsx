@@ -65,7 +65,7 @@ export default function FragranceFamilySection() {
           <div className="flex items-center gap-4 mb-3">
             <div className="w-10 h-px bg-[#C4A55C]" aria-hidden />
             <p
-              className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium"
+              className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium"
               style={{ fontFamily: bodyFont }}
             >
               Descubra
@@ -80,7 +80,7 @@ export default function FragranceFamilySection() {
             </h2>
             <Link
               href="/produtos"
-              className="cursor-pointer hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#C4A55C] hover:border-[#C4A55C] transition-colors"
+              className="cursor-pointer hidden sm:inline text-[10px] tracking-[0.2em] uppercase text-[#4A4A4A] border-b border-[#E8E0D4] pb-0.5 hover:text-[#8A6A2F] hover:border-[#8A6A2F] transition-colors"
               style={{ fontFamily: bodyFont, fontWeight: 500 }}
             >
               Ver todos

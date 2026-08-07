@@ -23,7 +23,7 @@ function NoteRow({ label, notes }: { label: string; notes: string[] }) {
   return (
     <div className="flex flex-col gap-1.5">
       <p
-        className="text-[9px] tracking-[0.3em] uppercase text-[#C4A55C] font-medium"
+        className="text-[9px] tracking-[0.3em] uppercase text-[#8A6A2F] font-medium"
         style={{ fontFamily: bodyFont }}
       >
         {label}
@@ -58,14 +58,14 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
       {/* Eyebrow: brand + family */}
       <div className="flex items-center gap-3 flex-wrap">
         <p
-          className="text-[10px] tracking-[0.35em] uppercase text-[#9CA3AF] font-medium"
+          className="text-[10px] tracking-[0.35em] uppercase text-[#6B7280] font-medium"
           style={{ fontFamily: bodyFont }}
         >
           {perfume.marca}
         </p>
         <span className="w-1 h-1 rounded-full bg-[#E8E0D4]" aria-hidden />
         <p
-          className="text-[10px] tracking-[0.3em] uppercase text-[#C4A55C] font-semibold"
+          className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A2F] font-semibold"
           style={{ fontFamily: bodyFont }}
         >
           {familyLabels[perfume.fragranceFamily as FragranceFamily]}
@@ -78,7 +78,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
         style={{ fontFamily: displayFont, fontWeight: 500 }}
       >
         {perfume.nome}
-        {perfume.versao ? <span className="text-[#C4A55C] italic"> {perfume.versao}</span> : null}
+        {perfume.versao ? <span className="text-[#8A6A2F] italic"> {perfume.versao}</span> : null}
       </h1>
 
       {/* Meta chips: concentracao, genero, volume, tipo */}
@@ -125,7 +125,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
       {/* Price block */}
       <div className="flex flex-col gap-1 pt-2 border-t border-[#E8E0D4]">
         {perfume.discount && finalPrice > 0 && (
-          <p className="text-sm text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
+          <p className="text-sm text-[#6B7280] line-through" style={{ fontFamily: bodyFont }}>
             {formatPrice(perfume.price)}
           </p>
         )}
@@ -144,14 +144,14 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
         {!unavailable ? (
           <button
             onClick={() => cart.add(perfume.id)}
-            className="cursor-pointer flex-1 px-8 py-4 bg-[#0A0A0A] text-white text-[11px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+            className="cursor-pointer flex-1 px-8 py-4 bg-[#0A0A0A] text-white text-[11px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] hover:text-[#0A0A0A] active:scale-[0.98] transition-all duration-300"
             style={{ fontFamily: bodyFont }}
           >
             Adicionar ao carrinho
           </button>
         ) : (
           <span
-            className="flex-1 text-center px-8 py-4 border border-[#E8E0D4] text-[#9CA3AF] text-[11px] tracking-[0.25em] uppercase"
+            className="flex-1 text-center px-8 py-4 border border-[#E8E0D4] text-[#6B7280] text-[11px] tracking-[0.25em] uppercase"
             style={{ fontFamily: bodyFont }}
           >
             {outOfStock ? 'Esgotado' : 'Indisponível para compra'}
@@ -173,7 +173,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
       {perfume.description && (
         <div className="pt-6 border-t border-[#E8E0D4] flex flex-col gap-3">
           <p
-            className="text-[10px] tracking-[0.3em] uppercase text-[#C4A55C] font-medium"
+            className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A2F] font-medium"
             style={{ fontFamily: bodyFont }}
           >
             Sobre a fragrância
@@ -197,7 +197,7 @@ export default function ProductInfo({ perfume }: { perfume: Perfume }) {
       {perfume.occasion.length > 0 && (
         <div className="pt-6 border-t border-[#E8E0D4] flex flex-col gap-2">
           <p
-            className="text-[9px] tracking-[0.3em] uppercase text-[#C4A55C] font-medium"
+            className="text-[9px] tracking-[0.3em] uppercase text-[#8A6A2F] font-medium"
             style={{ fontFamily: bodyFont }}
           >
             Combina com

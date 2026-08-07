@@ -50,7 +50,7 @@ export default function OrderStatus({ publicOrderId }: { publicOrderId: string }
     <section className="max-w-3xl mx-auto px-4 py-16">
       <div className="border border-[#E8E0D4] bg-[#FAF6F0] p-6 md:p-10">
         {error ? <><h1 className="text-3xl font-[family-name:var(--font-display)]">Não foi possível consultar o pedido</h1><p role="alert" className="mt-4 text-[#B5363A]">{error}</p></> : order ? <>
-          <p className="text-xs uppercase tracking-[0.25em] text-[#C4A55C]">Pedido {order.publicOrderId.slice(0, 8).toUpperCase()}</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-[#8A6A2F]">Pedido {order.publicOrderId.slice(0, 8).toUpperCase()}</p>
           <h1 className="mt-3 text-4xl font-[family-name:var(--font-display)]">{heading(order.status)}</h1>
           <p role="status" className="mt-4 text-[#4A4A4A]">Status: <strong>{order.status}</strong></p>
           <ul className="mt-8 divide-y divide-[#E8E0D4] border-y border-[#E8E0D4]">

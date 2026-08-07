@@ -199,7 +199,7 @@ export default function ProductCard({
 
           <div className="flex flex-col gap-0.5 md:gap-1">
             {discount && finalPrice > 0 && (
-              <p className="text-[11px] text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
+              <p className="text-[11px] text-[#6B7280] line-through" style={{ fontFamily: bodyFont }}>
                 {formatPrice(price)}
               </p>
             )}
@@ -216,7 +216,7 @@ export default function ProductCard({
           {!unavailable && (
             <button
               onClick={handleAddToCart}
-              className="cursor-pointer mt-1 w-full md:w-auto md:px-10 py-3 md:py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+              className="cursor-pointer mt-1 w-full md:w-auto md:px-10 py-3 md:py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] hover:text-[#0A0A0A] active:scale-[0.98] transition-all duration-300"
               style={{ fontFamily: bodyFont }}
             >
               Adicionar ao carrinho
@@ -251,7 +251,7 @@ export default function ProductCard({
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {isNew && (
             <span
-              className="bg-[#C4A55C] text-white text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 font-semibold"
+              className="bg-[#C4A55C] text-[#0A0A0A] text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 font-semibold"
               style={{ fontFamily: bodyFont }}
             >
               Novo
@@ -346,7 +346,7 @@ export default function ProductCard({
 
         <div className="mt-auto pt-2 flex flex-col gap-0.5">
           {discount && finalPrice > 0 && (
-            <p className="text-[11px] text-[#9CA3AF] line-through" style={{ fontFamily: bodyFont }}>
+            <p className="text-[11px] text-[#6B7280] line-through" style={{ fontFamily: bodyFont }}>
               {formatPrice(price)}
             </p>
           )}

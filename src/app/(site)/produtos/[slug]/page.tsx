@@ -57,11 +57,11 @@ export default async function ProdutoPage({
       <div className="border-b border-[#E8E0D4] bg-[#FAF6F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <nav className="flex items-center gap-1.5 text-[11px]" style={{ fontFamily: bodyFont }}>
-            <Link href="/" className="text-[#9CA3AF] hover:text-[#C4A55C] transition-colors">
+            <Link href="/" className="text-[#6B7280] hover:text-[#8A6A2F] transition-colors">
               Início
             </Link>
             <ChevronRight size={11} className="text-[#D4CCBE]" />
-            <Link href="/produtos" className="text-[#9CA3AF] hover:text-[#C4A55C] transition-colors">
+            <Link href="/produtos" className="text-[#6B7280] hover:text-[#8A6A2F] transition-colors">
               Produtos
             </Link>
             <ChevronRight size={11} className="text-[#D4CCBE]" />

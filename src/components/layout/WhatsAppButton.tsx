@@ -5,7 +5,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.30)] hover:bg-[#1ebe5c] hover:shadow-[0_6px_28px_rgba(37,211,102,0.45)] hover:-translate-y-0.5 transition-all duration-300"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-[#0D7A3B] text-white px-4 py-3 rounded-full shadow-[0_4px_20px_rgba(13,122,59,0.35)] hover:bg-[#0A6430] hover:shadow-[0_6px_28px_rgba(13,122,59,0.5)] hover:-translate-y-0.5 transition-all duration-300"
       style={{ fontFamily: 'var(--font-body), Montserrat, sans-serif' }}
     >
       <svg

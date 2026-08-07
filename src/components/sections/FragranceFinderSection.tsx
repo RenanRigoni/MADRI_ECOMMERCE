@@ -53,7 +53,7 @@ function Chip({
       </span>
       {desc && (
         <span
-          className={`text-[9px] ${active ? 'text-white/60' : 'text-[#9CA3AF]'}`}
+          className={`text-[9px] ${active ? 'text-white/60' : 'text-[#6B7280]'}`}
           style={{ fontFamily: bodyFont }}
         >
           {desc}
@@ -94,7 +94,7 @@ export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume
         {/* Header */}
         <div className="text-center mb-10 md:mb-14">
           <p
-            className="text-[10px] tracking-[0.4em] uppercase text-[#C4A55C] font-medium mb-3"
+            className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A2F] font-medium mb-3"
             style={{ fontFamily: bodyFont }}
           >
             Guia de descoberta
@@ -210,7 +210,7 @@ export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume
                   ? `${recommendations.length} fragrância${recommendations.length !== 1 ? 's' : ''} para você`
                   : 'Explorando nossa coleção...'}
               </p>
-              <p className="text-[12px] text-[#9CA3AF]" style={{ fontFamily: bodyFont }}>
+              <p className="text-[12px] text-[#6B7280]" style={{ fontFamily: bodyFont }}>
                 {recipient === 'mim' ? 'Para você · ' : 'Para presentear · '}
                 {moment && momentLabels[moment]} · {intensity && intensity} · {family && familyLabels[family]}
               </p>
@@ -239,7 +239,7 @@ export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume
               </div>
             ) : (
               <div className="text-center py-8 mb-8">
-                <p className="text-[#9CA3AF] text-sm mb-2" style={{ fontFamily: bodyFont }}>
+                <p className="text-[#6B7280] text-sm mb-2" style={{ fontFamily: bodyFont }}>
                   Nenhuma fragrância encontrada com esses critérios.
                 </p>
                 <p className="text-[#B8B0A8] text-[12px]" style={{ fontFamily: bodyFont }}>
@@ -251,7 +251,7 @@ export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/produtos"
-                className="cursor-pointer inline-flex items-center justify-center px-8 py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] active:scale-[0.98] transition-all duration-300"
+                className="cursor-pointer inline-flex items-center justify-center px-8 py-3.5 bg-[#0A0A0A] text-white text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-[#C4A55C] hover:text-[#0A0A0A] active:scale-[0.98] transition-all duration-300"
                 style={{ fontFamily: bodyFont }}
               >
                 Ver todas as fragrâncias
@@ -272,7 +272,7 @@ export default function FragranceFinderSection({ perfumes }: { perfumes: Perfume
           <div className="text-center mt-6">
             <button
               onClick={reset}
-              className="cursor-pointer text-[11px] text-[#9CA3AF] hover:text-[#4A4A4A] transition-colors"
+              className="cursor-pointer text-[11px] text-[#6B7280] hover:text-[#4A4A4A] transition-colors"
               style={{ fontFamily: bodyFont }}
             >
               ← Recomeçar
