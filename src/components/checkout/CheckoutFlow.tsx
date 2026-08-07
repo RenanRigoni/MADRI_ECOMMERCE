@@ -1,6 +1,6 @@
 'use client'
 
-import { type FormEvent, useState } from 'react'
+import { type ChangeEvent, type FormEvent, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/lib/cart/store'
 import { checkoutQuoteSchema, type CheckoutQuoteResponse } from '@/lib/payments/schema'
@@ -10,12 +10,61 @@ function money(cents: number): string {
   return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
+interface ViaCepResponse {
+  erro?: boolean
+  logradouro?: string
+  bairro?: string
+  localidade?: string
+  uf?: string
+}
+
 export default function CheckoutFlow({ publicKey, paymentsEnabled }: { publicKey: string | null; paymentsEnabled: boolean }) {
   const cart = useCart()
   const [quote, setQuote] = useState<CheckoutQuoteResponse | null>(null)
   const [payerEmail, setPayerEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [cepLookupStatus, setCepLookupStatus] = useState<'idle' | 'loading' | 'not_found'>('idle')
+  const formRef = useRef<HTMLFormElement>(null)
+  const cepAbortRef = useRef<AbortController | null>(null)
+
+  async function handleCepChange(event: ChangeEvent<HTMLInputElement>) {
+    const digits = event.target.value.replace(/\D/g, '')
+    if (digits.length !== 8) {
+      setCepLookupStatus('idle')
+      return
+    }
+
+    cepAbortRef.current?.abort()
+    const controller = new AbortController()
+    cepAbortRef.current = controller
+    setCepLookupStatus('loading')
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${digits}/json/`, { signal: controller.signal })
+      const data: ViaCepResponse = await response.json()
+      if (!response.ok || data.erro) {
+        setCepLookupStatus('not_found')
+        return
+      }
+      setCepLookupStatus('idle')
+      const form = formRef.current
+      if (!form) return
+      const street = form.elements.namedItem('street')
+      const neighborhood = form.elements.namedItem('neighborhood')
+      const city = form.elements.namedItem('city')
+      const state = form.elements.namedItem('state')
+      if (street instanceof HTMLInputElement) street.value = data.logradouro ?? ''
+      if (neighborhood instanceof HTMLInputElement) neighborhood.value = data.bairro ?? ''
+      if (city instanceof HTMLInputElement) city.value = data.localidade ?? ''
+      if (state instanceof HTMLInputElement) state.value = data.uf ?? ''
+      const number = form.elements.namedItem('number')
+      if (number instanceof HTMLInputElement) number.focus()
+    } catch (caught) {
+      if (caught instanceof DOMException && caught.name === 'AbortError') return
+      setCepLookupStatus('not_found')
+    }
+  }
 
   async function handleQuote(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -76,14 +125,17 @@ export default function CheckoutFlow({ publicKey, paymentsEnabled }: { publicKey
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
       <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-display)]">Finalizar pedido</h1>
       {!quote ? (
-        <form onSubmit={handleQuote} className="mt-10 grid lg:grid-cols-[1fr_360px] gap-8">
+        <form ref={formRef} onSubmit={handleQuote} className="mt-10 grid lg:grid-cols-[1fr_360px] gap-8">
           <div className="border border-[#E8E0D4] p-5 md:p-8">
             <h2 className="text-xl font-semibold">Contato e entrega</h2>
             <div className="grid sm:grid-cols-2 gap-4 mt-6">
               <label className="sm:col-span-2 text-sm">Nome completo<input required name="name" autoComplete="name" minLength={3} maxLength={120} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">E-mail<input required type="email" name="email" autoComplete="email" maxLength={254} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">Telefone<input required name="phone" autoComplete="tel" inputMode="tel" maxLength={20} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
-              <label className="text-sm">CEP<input required name="postalCode" autoComplete="postal-code" inputMode="numeric" pattern="[0-9.\- ]{8,10}" maxLength={10} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
+              <label className="text-sm">CEP<input required name="postalCode" autoComplete="postal-code" inputMode="numeric" pattern="[0-9.\- ]{8,10}" maxLength={10} onChange={handleCepChange} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" />
+                {cepLookupStatus === 'loading' ? <span className="mt-1 block text-xs text-[#6B7280]">Buscando endereço…</span> : null}
+                {cepLookupStatus === 'not_found' ? <span className="mt-1 block text-xs text-[#B5363A]">CEP não encontrado, preencha manualmente.</span> : null}
+              </label>
               <label className="text-sm">Estado<input required name="state" autoComplete="address-level1" pattern="[A-Za-z]{2}" maxLength={2} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2 uppercase" /></label>
               <label className="sm:col-span-2 text-sm">Endereço<input required name="street" autoComplete="address-line1" maxLength={120} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
               <label className="text-sm">Número<input required name="number" maxLength={20} className="mt-1 w-full border border-[#D4CCBE] px-3 py-2" /></label>
