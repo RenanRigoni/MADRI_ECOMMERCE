@@ -1,21 +1,29 @@
 # Bugs em investigação — Integração Mercado Pago
 
-Última atualização: 2026-08-06
+Última atualização: 2026-08-07
 
 ## Status geral
 
-Pagamento é criado e aprovado de verdade no Mercado Pago (confirmado múltiplas vezes,
-`status: processed`, `status_detail: accredited`). **Bug #1 (crítico, impedia o pedido
-pago de ficar registrado no banco) e Bug #2 (reserva de estoque travando pra sempre)
-foram encontrados, corrigidos e validados nesta sessão.** Só falta Bug #3 (webhook),
-que não bloqueia o fluxo feliz — a reconciliação síncrona (Bug #1) é quem realmente
-grava o pagamento como PAID; o webhook seria só uma camada extra de segurança para
-eventos assíncronos (chargeback, etc).
+Bug #1 (crítico, impedia o pedido pago de ficar registrado no banco) e Bug #2 (reserva
+de estoque travando pra sempre) foram corrigidos e validados. `MERCADO_PAGO_ENABLE_PRODUCTION`
+foi ligado pelo usuário e as credenciais de produção já estão configuradas no Vercel —
+a loja está recebendo pagamentos reais via cartão. Só falta Bug #3 (webhook), que não
+bloqueia o fluxo feliz — a reconciliação síncrona (Bug #1) é quem realmente grava o
+pagamento como PAID.
 
-`MERCADO_PAGO_ENABLE_PRODUCTION` ainda está `false`. Com Bug #1 e Bug #2 resolvidos e
-validados, não há mais bloqueio técnico conhecido para vendas reais — ligar produção
-é decisão do usuário (troca de credenciais teste → produção, ver checklist no fim
-deste arquivo).
+**Pix foi adicionado em 2026-08-07** como segundo método de pagamento (ver seção
+"Pix — segundo método de pagamento" abaixo). Diferente do cartão, a confirmação do Pix
+é assíncrona (cliente paga minutos depois pelo banco) e **depende diretamente do Bug #3
+não estar resolvido**: como o webhook não funciona, o frontend faz polling na nossa
+própria rota de pagamento pra forçar reconciliação. Funciona, mas é uma mitigação —
+resolver o Bug #3 tornaria isso mais robusto (webhook confirmaria mesmo com a aba do
+cliente fechada).
+
+**Pré-requisito de produção para Pix:** o Mercado Pago exige uma **chave Pix cadastrada
+na conta do vendedor** pra oferecer Pix em produção. Isso não é algo que o código faz —
+precisa ser configurado manualmente no painel do Mercado Pago (Sua conta → Pix) antes do
+Pix funcionar de verdade com clientes reais. Sem isso, a geração de Pix em produção deve
+falhar mesmo com o código correto.
 
 ---
 
@@ -184,6 +192,62 @@ como reconciliação de segurança para eventos assíncronos futuros (chargeback
 
 ---
 
+## Pix — segundo método de pagamento (adicionado 2026-08-07)
+
+**O quê:** checkout só tinha Cartão. Adicionado Pix usando a mesma Orders API, mesma
+aplicação MP, mesmo access token, mesmo webhook — nada duplicado.
+
+**Como funciona:**
+1. Cliente escolhe aba "Pix" no checkout, informa CPF/CNPJ.
+2. `POST /api/payments/mercadopago` com `payment.paymentTypeId: 'bank_transfer'`,
+   `paymentMethodId: 'pix'` — sem token, sem installments (fixado em 1 só pra satisfazer
+   a constraint do banco, não representa parcelamento real).
+3. `createMercadoPagoOrder` monta o payload sem `token`, com `expiration_time: 'PT30M'`
+   (mesma janela dos 30 min de `orders.expires_at` já usada pelo cartão).
+4. Mercado Pago responde na hora com `qr_code`, `qr_code_base64` e `ticket_url` —
+   isso já vem na resposta síncrona do `POST /v1/orders`, não precisa esperar nada.
+5. Pedido fica `PROCESSING` (nunca `PAID` só por gerar o QR — só confirma quando o MP
+   confirma de verdade).
+6. Frontend (`MercadoPagoPixPayment.tsx`) mostra QR + copia-e-cola + `ticket_url`, e
+   faz polling a cada 15s **re-chamando `/api/payments/mercadopago`** (não
+   `GET /api/orders/[id]`) — isso força uma nova consulta autoritativa ao Mercado Pago
+   a cada tick, porque o webhook (Bug #3) não é confiável hoje. O intervalo de 15s foi
+   escolhido pra ficar dentro do rate limit de pagamento (5 requisições/60s).
+
+**Por que não deu pra usar só o webhook:** é o caminho "correto" de acordo com a
+arquitetura (webhook confirma mesmo com o cliente offline), mas como ele está quebrado
+(Bug #3), o polling ativo do frontend é o único jeito hoje de um Pix realmente pago virar
+`PAID` no nosso banco. Se o Bug #3 for resolvido, o polling deixa de ser estritamente
+necessário mas não faz mal manter como rede de segurança.
+
+**Idempotência:** mesma proteção do cartão — `attemptId` gerado uma vez por sessão de
+pagamento (`useRef`), reenviado em cada tick do polling. `start_payment_attempt`
+reconhece o `client_attempt_id` repetido e não cria nova tentativa nem nova reserva de
+estoque.
+
+**Testado (credenciais de teste, `test_user_...@testuser.com` + CPF `005.381.749-43`):**
+QR code real gerado, copia-e-cola real (`00020126...`), `ticket_url` funcional, pedido
+ficou `PROCESSING`/`waiting_transfer` (não foi marcado `PAID` incorretamente), e
+confirmado via `updated_at` do `payment_attempts` que o polling de fato re-consulta o
+Mercado Pago a cada tick (não é só leitura de cache local).
+
+**Não testado ainda:** confirmação completa (Pix realmente pago → `PAID`) — o sandbox
+do MP não auto-aprova Pix como aprova cartão de teste; precisaria simular o pagamento
+manualmente pela `ticket_url` ou aguardar teste real em produção.
+
+**Pré-requisito de produção:** chave Pix cadastrada na conta do vendedor no painel MP
+(ação manual do usuário, não é algo que o código resolve).
+
+**Arquivos:**
+- `supabase/migrations/20260807120000_add_pix_payment_type.sql`
+- `src/lib/payments/schema.ts` (`paymentRequestSchema` — union card/pix)
+- `src/lib/mercadopago/orders-client.ts` (payload pix + extração de QR)
+- `src/app/api/payments/mercadopago/route.ts` (branch card/pix)
+- `src/components/checkout/MercadoPagoPixPayment.tsx` (novo)
+- `src/components/checkout/CheckoutFlow.tsx` (seletor Cartão/Pix)
+
+---
+
 ## Débito técnico / limpeza pendente
 
 - [ ] Remover log de diagnóstico `webhook_debug_diagnostic` de
@@ -199,8 +263,13 @@ como reconciliação de segurança para eventos assíncronos futuros (chargeback
       feito e validado (2026-08-06), `pg_cron` a cada 5 minutos.
 - [ ] Testado também o caminho de recusa (`OTHE`) — reserva já liberava certo antes
       do fix; não precisa de ação adicional, só documentado aqui como confirmado.
-- [ ] Antes de ligar `MERCADO_PAGO_ENABLE_PRODUCTION=true`: trocar
-      `MERCADO_PAGO_ACCESS_TOKEN` e `MERCADO_PAGO_WEBHOOK_SECRET` de teste para
-      produção, e rodar uma compra real de baixo valor pra confirmar.
+- [x] Trocar `MERCADO_PAGO_ACCESS_TOKEN`/`MERCADO_PAGO_WEBHOOK_SECRET`/`NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY`
+      de teste para produção e ligar `MERCADO_PAGO_ENABLE_PRODUCTION=true` — feito
+      (2026-08-06), validado com compra real via cartão.
 - [ ] Abrir chamado com suporte Mercado Pago sobre Bug #3 (webhook), usando a
       evidência já documentada acima — ação do usuário, precisa acesso à conta MP.
+- [ ] Confirmar que a conta MP tem chave Pix cadastrada (pré-requisito de produção
+      pro Pix funcionar de verdade com clientes reais) — ação do usuário.
+- [ ] Testar confirmação completa de um Pix real em produção (gerar → pagar de
+      verdade → confirmar que polling marca `PAID`) — ainda não testado, sandbox
+      não auto-aprova Pix como aprova cartão de teste.
