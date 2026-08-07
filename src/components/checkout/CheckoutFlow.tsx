@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useCart } from '@/lib/cart/store'
 import { checkoutQuoteSchema, type CheckoutQuoteResponse } from '@/lib/payments/schema'
 import MercadoPagoCardBrick from './MercadoPagoCardBrick'
+import MercadoPagoPixPayment from './MercadoPagoPixPayment'
 
 function money(cents: number): string {
   return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -25,6 +26,7 @@ export default function CheckoutFlow({ publicKey, paymentsEnabled }: { publicKey
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [cepLookupStatus, setCepLookupStatus] = useState<'idle' | 'loading' | 'not_found'>('idle')
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix'>('card')
   const formRef = useRef<HTMLFormElement>(null)
   const cepAbortRef = useRef<AbortController | null>(null)
 
@@ -154,11 +156,39 @@ export default function CheckoutFlow({ publicKey, paymentsEnabled }: { publicKey
       ) : (
         <div className="mt-10 grid lg:grid-cols-[1fr_360px] gap-8 items-start">
           <div className="border border-[#E8E0D4] p-5 md:p-8">
-            <h2 className="text-xl font-semibold">Pagamento com cartão</h2>
-            <p className="mt-2 text-sm text-[#6B7280]">Os dados do cartão são coletados diretamente pelo ambiente seguro do Mercado Pago.</p>
+            <h2 className="text-xl font-semibold">Pagamento</h2>
+            <div role="tablist" aria-label="Método de pagamento" className="mt-4 flex gap-2">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={paymentMethod === 'card'}
+                onClick={() => setPaymentMethod('card')}
+                className={`px-5 py-2 text-xs uppercase tracking-[0.15em] border ${paymentMethod === 'card' ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]' : 'border-[#D4CCBE] text-[#4A4A4A]'}`}
+              >
+                Cartão
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={paymentMethod === 'pix'}
+                onClick={() => setPaymentMethod('pix')}
+                className={`px-5 py-2 text-xs uppercase tracking-[0.15em] border ${paymentMethod === 'pix' ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]' : 'border-[#D4CCBE] text-[#4A4A4A]'}`}
+              >
+                Pix
+              </button>
+            </div>
+            {paymentMethod === 'card' ? (
+              <p className="mt-4 text-sm text-[#6B7280]">Os dados do cartão são coletados diretamente pelo ambiente seguro do Mercado Pago.</p>
+            ) : (
+              <p className="mt-4 text-sm text-[#6B7280]">Gere o código Pix e pague pelo app do seu banco. A confirmação é automática.</p>
+            )}
             <div className="mt-6">
               {publicKey && paymentsEnabled ? (
-                <MercadoPagoCardBrick publicKey={publicKey} publicOrderId={quote.publicOrderId} totalCents={quote.totalCents} payerEmail={payerEmail} />
+                paymentMethod === 'card' ? (
+                  <MercadoPagoCardBrick publicKey={publicKey} publicOrderId={quote.publicOrderId} totalCents={quote.totalCents} payerEmail={payerEmail} />
+                ) : (
+                  <MercadoPagoPixPayment publicOrderId={quote.publicOrderId} totalCents={quote.totalCents} payerEmail={payerEmail} />
+                )
               ) : (
                 <p role="status" className="border border-[#E8E0D4] bg-[#FAF6F0] p-5 text-sm text-[#6B7280]">Pagamento temporariamente indisponível. A configuração de teste ainda não foi ativada.</p>
               )}

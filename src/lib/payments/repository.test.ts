@@ -63,6 +63,7 @@ describe('PaymentRepository', () => {
       id: 'provider-order', externalReference: 'order-ref', totalAmountCents: 12990,
       paymentAmountCents: 12990, status: 'processed', statusDetail: 'accredited',
       paymentId: 'payment-id', paymentMethodId: 'master', paymentTypeId: 'credit_card', installments: 1,
+      qrCode: null, qrCodeBase64: null, ticketUrl: null,
     }, 'PAID')).resolves.toMatchObject({ status: 'PAID', transitioned_to_paid: true })
   })
 

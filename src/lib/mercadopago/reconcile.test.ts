@@ -12,6 +12,9 @@ const order = {
   paymentMethodId: 'master',
   paymentTypeId: 'credit_card',
   installments: 1,
+  qrCode: null,
+  qrCodeBase64: null,
+  ticketUrl: null,
 }
 
 describe('authoritative Order reconciliation', () => {

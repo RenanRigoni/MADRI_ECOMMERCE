@@ -9,7 +9,7 @@ export function createPaymentFingerprint(request: PaymentRequest): string {
     attemptId: request.attemptId,
     paymentMethodId: request.payment.paymentMethodId,
     paymentTypeId: request.payment.paymentTypeId,
-    installments: request.payment.installments,
+    installments: 'installments' in request.payment ? request.payment.installments : 1,
   })
   return createHash('sha256').update(stableInput).digest('hex')
 }

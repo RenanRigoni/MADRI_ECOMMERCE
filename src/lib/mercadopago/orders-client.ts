@@ -18,6 +18,9 @@ const providerPaymentSchema = z
         id: z.string().optional(),
         type: z.string().optional(),
         installments: z.number().int().optional(),
+        qr_code: z.string().optional(),
+        qr_code_base64: z.string().optional(),
+        ticket_url: z.string().optional(),
       })
       .passthrough()
       .optional(),
@@ -68,6 +71,9 @@ export interface MercadoPagoOrderSnapshot {
   paymentMethodId: string | null
   paymentTypeId: string | null
   installments: number | null
+  qrCode: string | null
+  qrCodeBase64: string | null
+  ticketUrl: string | null
 }
 
 export interface MercadoPagoChargebackSnapshot {
@@ -78,22 +84,35 @@ export interface MercadoPagoChargebackSnapshot {
   statusDetail: string | null
 }
 
+interface OrderPayer {
+  email: string
+  identification: { type: 'CPF' | 'CNPJ'; number: string }
+}
+
 export interface CreateMercadoPagoOrderInput {
   accessToken: string
   idempotencyKey: string
   externalReference: string
   totalCents: number
-  payment: {
-    token: string
-    paymentMethodId: string
-    paymentTypeId: 'credit_card' | 'debit_card'
-    installments: number
-    payer: {
-      email: string
-      identification: { type: 'CPF' | 'CNPJ'; number: string }
-    }
-  }
+  payment:
+    | {
+        paymentTypeId: 'credit_card' | 'debit_card'
+        token: string
+        paymentMethodId: string
+        installments: number
+        payer: OrderPayer
+      }
+    | {
+        paymentTypeId: 'bank_transfer'
+        paymentMethodId: 'pix'
+        payer: OrderPayer
+      }
 }
+
+// Pix Orders never resolve synchronously (customer pays later via banking app), so we ask
+// Mercado Pago to expire the underlying Order at the same 30-minute window as our own
+// checkout quote (orders.expires_at) — see supabase/migrations/20260805110000_commerce_payments.sql.
+const PIX_EXPIRATION_ISO_DURATION = 'PT30M'
 
 export class MercadoPagoApiError extends Error {
   constructor(
@@ -123,6 +142,9 @@ function toSnapshot(value: unknown): MercadoPagoOrderSnapshot {
     paymentMethodId: payment?.payment_method?.id ?? null,
     paymentTypeId: payment?.payment_method?.type ?? null,
     installments: payment?.payment_method?.installments ?? null,
+    qrCode: payment?.payment_method?.qr_code ?? null,
+    qrCodeBase64: payment?.payment_method?.qr_code_base64 ?? null,
+    ticketUrl: payment?.payment_method?.ticket_url ?? null,
   }
 }
 
@@ -149,6 +171,17 @@ export async function createMercadoPagoOrder(
   fetchImplementation: typeof fetch = fetch,
 ): Promise<MercadoPagoOrderSnapshot> {
   const amount = centsToMercadoPagoAmount(input.totalCents)
+  const { payment } = input
+  const isPix = payment.paymentTypeId === 'bank_transfer'
+  const paymentMethod = payment.paymentTypeId === 'bank_transfer'
+    ? { id: payment.paymentMethodId, type: payment.paymentTypeId }
+    : {
+        id: payment.paymentMethodId,
+        type: payment.paymentTypeId,
+        token: payment.token,
+        installments: payment.installments,
+      }
+
   let response: Response
   try {
     response = await fetchImplementation(MERCADO_PAGO_ORDERS_URL, {
@@ -165,22 +198,13 @@ export async function createMercadoPagoOrder(
         processing_mode: 'automatic',
         total_amount: amount,
         external_reference: input.externalReference,
+        ...(isPix ? { expiration_time: PIX_EXPIRATION_ISO_DURATION } : {}),
         payer: {
           email: input.payment.payer.email,
           identification: input.payment.payer.identification,
         },
         transactions: {
-          payments: [
-            {
-              amount,
-              payment_method: {
-                id: input.payment.paymentMethodId,
-                type: input.payment.paymentTypeId,
-                token: input.payment.token,
-                installments: input.payment.installments,
-              },
-            },
-          ],
+          payments: [{ amount, payment_method: paymentMethod }],
         },
       }),
     })

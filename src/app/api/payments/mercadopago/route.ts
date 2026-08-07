@@ -18,6 +18,17 @@ function paymentStatusCode(status: string): number {
   return status === 'PENDING' || status === 'PROCESSING' || status === 'UNKNOWN' ? 202 : 200
 }
 
+function pixFields(authoritative: { qrCode: string | null; qrCodeBase64: string | null; ticketUrl: string | null }) {
+  if (!authoritative.qrCode && !authoritative.qrCodeBase64) return {}
+  return {
+    pix: {
+      qrCode: authoritative.qrCode,
+      qrCodeBase64: authoritative.qrCodeBase64,
+      ticketUrl: authoritative.ticketUrl,
+    },
+  }
+}
+
 function persistenceFailure(error: PaymentPersistenceError) {
   if (error.code === 'order_not_found') return apiJson({ error: 'Pedido não encontrado.' }, 404)
   if (error.code === 'quote_expired' || error.code === 'quote_changed') {
@@ -53,7 +64,7 @@ export async function POST(request: NextRequest) {
       requestFingerprint: createPaymentFingerprint(input),
       paymentMethodId: input.payment.paymentMethodId,
       paymentTypeId: input.payment.paymentTypeId,
-      installments: input.payment.installments,
+      installments: input.payment.paymentTypeId === 'bank_transfer' ? 1 : input.payment.installments,
     })
     attemptId = attempt.payment_attempt_id
 
@@ -62,7 +73,7 @@ export async function POST(request: NextRequest) {
       const status = mapMercadoPagoStatus(authoritative.status, authoritative.statusDetail)
       const applied = await repository.applyProviderOrder(authoritative, status)
       return apiJson(
-        { publicOrderId: applied.public_order_id, status: applied.status },
+        { publicOrderId: applied.public_order_id, status: applied.status, ...pixFields(authoritative) },
         paymentStatusCode(applied.status),
       )
     }
@@ -72,15 +83,26 @@ export async function POST(request: NextRequest) {
       return apiJson({ publicOrderId: input.publicOrderId, status: 'PROCESSING' }, 202)
     }
 
+    const payment = input.payment.paymentTypeId === 'bank_transfer'
+      ? {
+          paymentTypeId: 'bank_transfer' as const,
+          paymentMethodId: input.payment.paymentMethodId,
+          payer: { ...input.payment.payer, email: attempt.payer_email },
+        }
+      : {
+          paymentTypeId: input.payment.paymentTypeId,
+          paymentMethodId: input.payment.paymentMethodId,
+          token: input.payment.token,
+          installments: input.payment.installments,
+          payer: { ...input.payment.payer, email: attempt.payer_email },
+        }
+
     const authoritative = await createMercadoPagoOrder({
       accessToken: config.accessToken,
       idempotencyKey: attempt.idempotency_key,
       externalReference: attempt.external_reference,
       totalCents: attempt.total_cents,
-      payment: {
-        ...input.payment,
-        payer: { ...input.payment.payer, email: attempt.payer_email },
-      },
+      payment,
     })
     const status = mapMercadoPagoStatus(authoritative.status, authoritative.statusDetail)
     const applied = await repository.applyProviderOrder(authoritative, status)
@@ -90,7 +112,7 @@ export async function POST(request: NextRequest) {
       transitionedToPaid: applied.transitioned_to_paid,
     })
     return apiJson(
-      { publicOrderId: applied.public_order_id, status: applied.status },
+      { publicOrderId: applied.public_order_id, status: applied.status, ...pixFields(authoritative) },
       paymentStatusCode(applied.status),
     )
   } catch (error) {

@@ -49,15 +49,25 @@ const payerSchema = z
   })
   .strict()
 
-const tokenizedPaymentSchema = z
+const cardPaymentSchema = z
   .object({
+    paymentTypeId: z.enum(['credit_card', 'debit_card']),
     token: z.string().min(1).max(512),
     paymentMethodId: z.string().min(1).max(64).regex(/^[A-Za-z0-9_-]+$/),
-    paymentTypeId: z.enum(['credit_card', 'debit_card']),
     installments: z.number().int().min(1).max(24),
     payer: payerSchema,
   })
   .strict()
+
+const pixPaymentSchema = z
+  .object({
+    paymentTypeId: z.literal('bank_transfer'),
+    paymentMethodId: z.literal('pix'),
+    payer: payerSchema,
+  })
+  .strict()
+
+const tokenizedPaymentSchema = z.discriminatedUnion('paymentTypeId', [cardPaymentSchema, pixPaymentSchema])
 
 export const paymentRequestSchema = z
   .object({

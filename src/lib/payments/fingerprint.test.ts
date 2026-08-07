@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createPaymentFingerprint } from './fingerprint'
 import type { PaymentRequest } from './schema'
 
-const request: PaymentRequest = {
+const request = {
   publicOrderId: '00000000-0000-4000-8000-000000000001',
   attemptId: '00000000-0000-4000-8000-000000000002',
   payment: {
@@ -12,7 +12,7 @@ const request: PaymentRequest = {
     installments: 2,
     payer: { identification: { type: 'CPF', number: '12345678909' } },
   },
-}
+} satisfies PaymentRequest
 
 describe('createPaymentFingerprint', () => {
   it('is stable and intentionally excludes the one-time token and document number', () => {
@@ -34,5 +34,18 @@ describe('createPaymentFingerprint', () => {
       ...request,
       payment: { ...request.payment, installments: 3 },
     })).not.toBe(createPaymentFingerprint(request))
+  })
+
+  it('is stable for pix payments, which have no token or installments', () => {
+    const pixRequest = {
+      publicOrderId: '00000000-0000-4000-8000-000000000001',
+      attemptId: '00000000-0000-4000-8000-000000000002',
+      payment: {
+        paymentTypeId: 'bank_transfer',
+        paymentMethodId: 'pix',
+        payer: { identification: { type: 'CPF', number: '12345678909' } },
+      },
+    } satisfies PaymentRequest
+    expect(createPaymentFingerprint(pixRequest)).toMatch(/^[a-f0-9]{64}$/)
   })
 })
