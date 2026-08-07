@@ -39,6 +39,11 @@ export function persistGuestSession(response: NextResponse, session: GuestSessio
 }
 
 export function rateLimitKey(request: NextRequest, sessionHash: string, scope: string): string {
-  const forwardedFor = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  // The platform's edge proxy appends the real client IP as the LAST entry of
+  // x-forwarded-for; every earlier entry can be forged by the client itself
+  // (send your own X-Forwarded-For header with a random value and the [0]
+  // entry becomes attacker-controlled, defeating the limiter entirely).
+  const parts = request.headers.get('x-forwarded-for')?.split(',').map((part) => part.trim()).filter(Boolean) ?? []
+  const forwardedFor = parts.length > 0 ? parts[parts.length - 1] : 'unknown'
   return sha256(`${scope}:${sessionHash}:${forwardedFor}`)
 }

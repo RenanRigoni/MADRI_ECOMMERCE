@@ -131,6 +131,12 @@ export default function MercadoPagoCardBrick({ publicKey, publicOrderId, totalCe
         return
       }
 
+      // Terminal failure (REJECTED/FAILED/CANCELLED/EXPIRED): this attempt is now
+      // permanently tied to that outcome in the DB (provider_order_id is set), so
+      // reusing attemptId.current on a resubmit would just re-fetch this same
+      // declined result instead of charging whatever card the customer retries
+      // with. Mint a fresh id so the Brick (which stays mounted) can actually retry.
+      attemptId.current = crypto.randomUUID()
       setRequiresNewQuote(true)
       throw new Error(resultMessage(nextStatus))
     } catch (error) {
